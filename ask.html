@@ -112,6 +112,8 @@ const UI = {
       "Is Zion doable as a day trip in winter?",
     ],
     errNet: "Couldn’t reach Claude. Check your connection and try again.",
+    errLong: "That question needed more research than one answer allows. Try splitting it into smaller questions.",
+    cutOff: "*(The answer was cut short — ask a follow-up for the rest.)*",
     searching: "Searching the web…", searchingFor: q => `Searching the web for “${q}”…`, sources: "Sources",
     errBusy: "Claude is busy right now. Try again in a minute.",
     errSetup: "Ask isn’t set up yet. The trip organizer still needs to finish the server settings.",
@@ -140,6 +142,8 @@ const UI = {
       "冬天锡安一日游可行吗？",
     ],
     errNet: "连不上Claude，请检查网络后重试。",
+    errLong: "这个问题需要查的内容太多，一次回答不完。试试拆成几个小问题。",
+    cutOff: "*（回答被截断了——可以继续追问剩下的部分。）*",
     searching: "正在搜索网络…", searchingFor: q => `正在搜索：“${q}”…`, sources: "来源",
     errBusy: "Claude现在有点忙，请过一分钟再试。",
     errSetup: "提问功能还没设置好，组织者还需要完成服务器设置。",
@@ -239,7 +243,7 @@ async function ask(question) {
       throw Object.assign(new Error("http"), { status: res.status, code: info.error });
     }
     const reader = res.body.getReader(), dec = new TextDecoder();
-    let buf = "", queryJson = "";
+    let buf = "", queryJson = "", afterSearch = false, stopReason = "";
     for (;;) {
       const { value, done } = await reader.read();
       if (done) break;
@@ -252,8 +256,9 @@ async function ask(question) {
           let d; try { d = JSON.parse(line.slice(5)); } catch (e) { continue; }
           if (d.type === "content_block_start" && d.content_block) {
             const b = d.content_block;
-            if (b.type === "server_tool_use") { answer.searching = true; answer.query = ""; queryJson = ""; updateLast(); }
-            else if (b.type === "text" && answer.content && !/\n\n$/.test(answer.content)) answer.content += "\n\n";
+            if (b.type === "server_tool_use") { answer.searching = true; answer.query = ""; queryJson = ""; afterSearch = true; updateLast(); }
+            // Text after a search starts a new paragraph; consecutive text blocks (split by citations) join up.
+            else if (b.type === "text" && afterSearch) { if (answer.content && !/\n\n$/.test(answer.content)) answer.content += "\n\n"; afterSearch = false; }
           } else if (d.type === "content_block_delta" && d.delta && d.delta.type === "input_json_delta") {
             queryJson += d.delta.partial_json || "";
             const q = queryJson.match(/"query"\s*:\s*"((?:[^"\\]|\\.)*)"/);
@@ -263,6 +268,8 @@ async function ask(question) {
             if (c.url && !(answer.sources ||= []).some(s => s.url === c.url)) answer.sources.push({ url: c.url, title: c.title });
           } else if (d.type === "content_block_delta" && d.delta && d.delta.type === "text_delta") {
             answer.content += d.delta.text; answer.pending = false; answer.searching = false; updateLast();
+          } else if (d.type === "message_delta" && d.delta && d.delta.stop_reason) {
+            stopReason = d.delta.stop_reason;
           } else if (d.type === "error") {
             throw Object.assign(new Error("stream"), { status: d.error && d.error.type === "overloaded_error" ? 503 : 500 });
           }
@@ -271,13 +278,17 @@ async function ask(question) {
     }
     answer.pending = false; answer.searching = false;
     answer.content = answer.content.replace(/^\s+/, "");
+    if (stopReason === "max_tokens" || stopReason === "pause_turn") {
+      if (!answer.content) throw Object.assign(new Error("long"), { status: 500, code: "too_long" });
+      answer.content += "\n\n" + T.cutOff;
+    }
     if (!answer.content) throw Object.assign(new Error("empty"), { status: 500 });
   } catch (e) {
     if (e.name === "AbortError") {
       answer.pending = false; answer.searching = false; answer.content = (answer.content ? answer.content + "\n\n" : "") + T.stopped;
     } else {
       answer.pending = false; answer.searching = false; answer.error = true;
-      answer.content = e.code === "weekly_cap" ? T.errCap : e.code === "rate_limited" ? T.errRate : e.status === 503 ? T.errBusy : e.code === "not_configured" ? T.errSetup : e.status ? T.errOther : T.errNet;
+      answer.content = e.code === "too_long" ? T.errLong : e.code === "weekly_cap" ? T.errCap : e.code === "rate_limited" ? T.errRate : e.status === 503 ? T.errBusy : e.code === "not_configured" ? T.errSetup : e.status ? T.errOther : T.errNet;
     }
   } finally {
     busy = false; controller = null; saveChat(); renderChat(); scrollDown();

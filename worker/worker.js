@@ -13,7 +13,7 @@
 const SITE = "https://xmiao8.github.io/vegas-trip-2026/";
 const ALLOWED_ORIGINS = ["https://xmiao8.github.io"];
 const MODEL = "claude-opus-5-5";
-const MAX_TOKENS = 1000;
+const MAX_TOKENS = 8000;      // room for searching and thinking before the answer (cost is still capped weekly)
 const MAX_TURNS = 20;          // messages kept per conversation
 const MAX_CHARS = 2000;        // per message
 const WEEKLY_CAP_USD = 100;    // stop answering once this week's spend reaches this (resets Monday, Las Vegas time)
@@ -146,7 +146,8 @@ function meter(env, week) {
   const usage = { input: 0, cacheWrite: 0, cacheRead: 0, output: 0, searches: 0 };
   const read = evt => {
     for (const line of evt.split("\n")) {
-      if (!line.startsWith("data:")) continue;
+      // Only message_start / message_delta carry usage; skip the big search-result events (saves CPU time).
+      if (!line.startsWith("data:") || !line.includes('"usage"') || line.length > 4000) continue;
       let d; try { d = JSON.parse(line.slice(5)); } catch { continue; }
       const u = d.type === "message_start" ? d.message && d.message.usage : d.type === "message_delta" ? d.usage : null;
       if (!u) continue;
