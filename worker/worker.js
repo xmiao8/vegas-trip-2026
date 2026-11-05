@@ -2,7 +2,8 @@
 //
 // Keeps the Anthropic API key off the public website. The page sends a question; this
 // worker adds the trip plan and a live cloud forecast, calls Claude, and streams the
-// answer back. It adds up what every answer costs and stops for the week at $100.
+// answer back. Claude can search the web. The worker adds up what every answer costs,
+// searches included, and stops for the week at $100.
 //
 // Settings (Cloudflare dashboard → this worker → Settings):
 //   ANTHROPIC_API_KEY  secret: your Anthropic API key
@@ -20,6 +21,16 @@ const PER_PERSON_HOURLY = 30;  // questions per hour from one IP address
 
 // Claude Opus 5.5 prices, USD per million tokens (platform.claude.com pricing, Nov 2026).
 const PRICE = { input: 4, cacheWrite: 5, cacheRead: 0.2, output: 20 };
+const SEARCH_USD = 0.01;       // web search: $10 per 1,000 searches
+const MAX_SEARCHES = 5;        // per question
+
+// Claude's built-in web search (runs on Anthropic's side), any website, results tuned to Las Vegas.
+const WEB_SEARCH = {
+  type: "web_search_20250305",
+  name: "web_search",
+  max_uses: MAX_SEARCHES,
+  user_location: { type: "approximate", city: "Las Vegas", region: "Nevada", country: "US", timezone: "America/Los_Angeles" },
+};
 
 const PLACES = {
   "Las Vegas Strip": [36.1147, -115.1728],
@@ -33,7 +44,9 @@ const INSTRUCTIONS = `You are the trip assistant on a website four friends from 
 How to answer:
 - Base answers on the trip plan first. Use your general knowledge for anything the plan doesn't cover, and say when you're doing that.
 - Prices, hours and closures in the plan were checked in early November 2026 and can change. Say so when it matters, and suggest where to check.
-- You can't browse the web, book anything or see anyone's reservations.
+- You can search the web. Search whenever current or specific information would help — opening hours, closures, road and trail conditions, weather alerts, events, prices, permits — or when the plan doesn't cover something. Prefer official sources (nps.gov, recreation.gov, venue and airline sites). Don't search for things the plan already answers well.
+- When you use search results, keep the answer short; the page lists your sources under it.
+- You can't book anything or see anyone's reservations.
 - Be concise and practical: short paragraphs or a few bullet points. Use **bold** sparingly. No tables or headings.
 - If asked to change the plan, suggest the change and explain the trade-offs; you can't edit the website.
 - Reply in the language the person writes in. If they write in Chinese, reply in Simplified Chinese.
@@ -110,6 +123,7 @@ export default {
           { type: "text", text: `Today is ${today} (Las Vegas time).\n\n<live_cloud_forecast>\n${forecast}\n</live_cloud_forecast>` },
         ],
         messages: clean,
+        tools: [WEB_SEARCH],
       }),
     });
 
@@ -129,7 +143,7 @@ export default {
 function meter(env, week) {
   const dec = new TextDecoder();
   let buf = "";
-  const usage = { input: 0, cacheWrite: 0, cacheRead: 0, output: 0 };
+  const usage = { input: 0, cacheWrite: 0, cacheRead: 0, output: 0, searches: 0 };
   const read = evt => {
     for (const line of evt.split("\n")) {
       if (!line.startsWith("data:")) continue;
@@ -140,6 +154,7 @@ function meter(env, week) {
       if (u.cache_creation_input_tokens != null) usage.cacheWrite = u.cache_creation_input_tokens;
       if (u.cache_read_input_tokens != null) usage.cacheRead = u.cache_read_input_tokens;
       if (u.output_tokens != null) usage.output = u.output_tokens;
+      if (u.server_tool_use && u.server_tool_use.web_search_requests != null) usage.searches = u.server_tool_use.web_search_requests;
     }
   };
   return new TransformStream({
@@ -151,7 +166,7 @@ function meter(env, week) {
     },
     async flush() {
       if (buf) read(buf);
-      const cost = (usage.input * PRICE.input + usage.cacheWrite * PRICE.cacheWrite + usage.cacheRead * PRICE.cacheRead + usage.output * PRICE.output) / 1e6;
+      const cost = (usage.input * PRICE.input + usage.cacheWrite * PRICE.cacheWrite + usage.cacheRead * PRICE.cacheRead + usage.output * PRICE.output) / 1e6 + usage.searches * SEARCH_USD;
       if (cost > 0) await addSpend(env, week, cost);
     },
   });
