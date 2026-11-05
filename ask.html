@@ -39,10 +39,6 @@
 .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
 .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; max-width: 760px; font-size: 12.5px; color: var(--muted); margin-top: 6px; }
 .linkbtn { appearance: none; background: none; border: 0; padding: 0; color: var(--muted); font: 500 12.5px var(--body); text-decoration: underline; cursor: pointer; }
-.gate { max-width: 520px; }
-.gate form { display: flex; gap: 8px; flex-wrap: wrap; }
-.gate input { flex: 1 1 200px; min-width: 0; font: 500 15px var(--body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; }
-.gate .gerr { color: var(--bad); font-size: 13.5px; margin: 0; }
 .ctx { font-size: 12.5px; color: var(--muted); max-width: 760px; }
 </style>
 </head>
@@ -67,16 +63,6 @@
     <p class="lede" data-i18n="lede"></p>
   </header>
 
-  <section class="box gate" id="gate" hidden aria-labelledby="gate-title">
-    <h2 id="gate-title" data-i18n="gateTitle" style="font-size:19px"></h2>
-    <p data-i18n="gateText"></p>
-    <form id="gate-form">
-      <input id="pass" type="password" autocomplete="current-password" data-i18n-aria="gateTitle" required>
-      <button class="btn" type="submit" data-i18n="gateBtn"></button>
-    </form>
-    <p class="gerr" id="gate-err" hidden data-i18n="gateWrong"></p>
-  </section>
-
   <section class="block" id="chatwrap" aria-label="Chat">
     <div class="chat" id="chat" aria-live="polite"></div>
     <div class="sugg" id="sugg"></div>
@@ -88,7 +74,7 @@
       </form>
       <div class="row">
         <span data-i18n="hint"></span>
-        <span><button class="linkbtn" type="button" id="clear" data-i18n="clear"></button> · <button class="linkbtn" type="button" id="relock" data-i18n="relock"></button></span>
+        <span><button class="linkbtn" type="button" id="clear" data-i18n="clear"></button></span>
       </div>
     </div>
     <p class="ctx" data-i18n="ctx"></p>
@@ -100,7 +86,7 @@
 <script>
 // The Cloudflare Worker that holds the API key (see worker/worker.js in the repo).
 const WORKER_URL = "https://vegas-trip-ask.jerry-302.workers.dev/ask";
-const PASS_KEY = "vegas-ask-pass", CHAT_KEY = "vegas-ask-chat";
+const CHAT_KEY = "vegas-ask-chat";
 
 const UI = {
   en: {
@@ -108,12 +94,9 @@ const UI = {
     eyebrow: "Answers from the trip plan · powered by Claude",
     h1: "Ask Claude",
     lede: "Ask anything about the trip — the plan, flights, parks, the moon and stars, the budget, what to pack. Claude has read every page of this site and sees the live cloud forecast.",
-    gateTitle: "Group passcode",
-    gateText: "Enter the passcode the trip organizer shared. Your browser remembers it, so you only do this once.",
-    gateBtn: "Unlock", gateWrong: "That passcode didn’t work. Check with the trip organizer.",
     placeholder: "Ask about the trip…", send: "Send", stop: "Stop",
     hint: "Enter to send · Shift+Enter for a new line",
-    clear: "New chat", relock: "Change passcode",
+    clear: "New chat",
     you: "You", claude: "Claude",
     sugg: [
       "Which night should we pick for Death Valley?",
@@ -126,6 +109,8 @@ const UI = {
     errNet: "Couldn’t reach Claude. Check your connection and try again.",
     errBusy: "Claude is busy right now. Try again in a minute.",
     errSetup: "Ask Claude isn’t set up yet. The trip organizer still needs to finish the server settings.",
+    errCap: "Ask Claude has reached its limit for this week. It resets on Monday.",
+    errRate: "That’s a lot of questions in an hour. Take a short break and try again.",
     errOther: "Something went wrong. Try again.",
     stopped: "(stopped)",
     ctx: "Answers can be wrong, and prices and hours change — double-check before you book or drive. Questions are sent to Anthropic’s API through the trip’s own server; nothing is saved there.",
@@ -136,12 +121,9 @@ const UI = {
     eyebrow: "根据行程回答 · 由Claude提供",
     h1: "问Claude",
     lede: "关于这次旅行的任何问题都可以问——行程、机票、公园、月亮和星空、预算、该带什么。Claude读过本网站的所有页面，也能看到实时云量预报。",
-    gateTitle: "小组口令",
-    gateText: "输入组织者分享的口令。浏览器会记住它，只需输入一次。",
-    gateBtn: "解锁", gateWrong: "口令不对，请向组织者确认。",
     placeholder: "问一个关于旅行的问题…", send: "发送", stop: "停止",
     hint: "回车发送 · Shift+回车换行",
-    clear: "新对话", relock: "更换口令",
+    clear: "新对话",
     you: "你", claude: "Claude",
     sugg: [
       "死亡谷应该选哪一晚？",
@@ -154,6 +136,8 @@ const UI = {
     errNet: "连不上Claude，请检查网络后重试。",
     errBusy: "Claude现在有点忙，请过一分钟再试。",
     errSetup: "问Claude还没设置好，组织者还需要完成服务器设置。",
+    errCap: "问Claude本周的额度已用完，周一重置。",
+    errRate: "一小时内问得有点多了，休息一下再试。",
     errOther: "出了点问题，请重试。",
     stopped: "（已停止）",
     ctx: "回答可能有误，价格和开放时间也会变——订票或出发前请再确认。问题会通过这次旅行自己的服务器发送到Anthropic的API；服务器不保存任何内容。",
@@ -216,17 +200,9 @@ function updateLast() {
 }
 const scrollDown = () => window.scrollTo({ top: document.body.scrollHeight });
 
-function showGate(wrong) {
-  $("gate").hidden = false; $("gate-err").hidden = !wrong;
-  $("chatwrap").hidden = true; $("pass").focus();
-}
-function hideGate() { $("gate").hidden = true; $("chatwrap").hidden = false; }
-
 async function ask(question) {
   question = question.trim();
   if (!question || busy) return;
-  const pass = Site.store.get(PASS_KEY);
-  if (!pass) { showGate(false); return; }
   chat = chat.filter(m => !m.error);
   chat.push({ role: "user", content: question });
   const answer = { role: "assistant", content: "", pending: true };
@@ -239,13 +215,12 @@ async function ask(question) {
   try {
     const res = await fetch(WORKER_URL, {
       method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal,
-      body: JSON.stringify({ passcode: pass, messages: history, lang: Site.lang }),
+      body: JSON.stringify({ messages: history, lang: Site.lang }),
     });
-    if (res.status === 401) {
-      chat.splice(-2, 2); Site.store.set(PASS_KEY, ""); busy = false; renderChat(); showGate(true);
-      $("q").value = question; return;
+    if (!res.ok) {
+      const info = await res.json().catch(() => ({}));
+      throw Object.assign(new Error("http"), { status: res.status, code: info.error });
     }
-    if (!res.ok) throw Object.assign(new Error("http"), { status: res.status });
     const reader = res.body.getReader(), dec = new TextDecoder();
     let buf = "";
     for (;;) {
@@ -273,7 +248,7 @@ async function ask(question) {
       answer.pending = false; answer.content = (answer.content ? answer.content + "\n\n" : "") + T.stopped;
     } else {
       answer.pending = false; answer.error = true;
-      answer.content = e.status === 503 ? T.errBusy : e.status === 500 && e.message === "http" ? T.errSetup : e.status ? T.errOther : T.errNet;
+      answer.content = e.code === "weekly_cap" ? T.errCap : e.code === "rate_limited" ? T.errRate : e.status === 503 ? T.errBusy : e.code === "not_configured" ? T.errSetup : e.status ? T.errOther : T.errNet;
     }
   } finally {
     busy = false; controller = null; saveChat(); renderChat(); scrollDown();
@@ -285,9 +260,7 @@ function autosize() { const q = $("q"); q.style.height = "auto"; q.style.height 
 function render(t) {
   T = t;
   $("q").placeholder = t.placeholder;
-  $("pass").placeholder = t.gateTitle;
   renderChat();
-  if (!Site.store.get(PASS_KEY)) showGate(false); else hideGate();
 }
 
 $("ask-form").addEventListener("submit", e => { e.preventDefault(); ask($("q").value); });
@@ -296,12 +269,6 @@ $("q").addEventListener("input", autosize);
 $("sugg").addEventListener("click", e => { const b = e.target.closest("button"); if (b) ask(b.textContent); });
 $("stop").addEventListener("click", () => controller && controller.abort());
 $("clear").addEventListener("click", () => { if (busy && controller) controller.abort(); chat = []; saveChat(); renderChat(); $("q").focus(); });
-$("relock").addEventListener("click", () => { Site.store.set(PASS_KEY, ""); showGate(false); });
-$("gate-form").addEventListener("submit", e => {
-  e.preventDefault();
-  const v = $("pass").value.trim(); if (!v) return;
-  Site.store.set(PASS_KEY, v); $("pass").value = ""; hideGate(); $("q").focus();
-});
 
 Site.init(UI, render);
 </script>

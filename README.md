@@ -19,12 +19,13 @@ Live site: https://xmiao8.github.io/vegas-trip-2026/
 
 ## Ask Claude
 
-`ask.html` talks to a Cloudflare Worker (`worker/worker.js`) so the Anthropic API key never appears on this public site. The worker checks a shared group passcode, adds `trip-context.md` and a live cloud forecast, calls Claude, and streams the answer back.
+`ask.html` talks to a Cloudflare Worker (`worker/worker.js`) so the Anthropic API key never appears on this public site. The worker adds `trip-context.md` and a live cloud forecast, calls Claude, and streams the answer back.
 
 Worker secrets (Cloudflare dashboard → worker → Settings → Variables and Secrets):
 
 - `ANTHROPIC_API_KEY`: the Anthropic API key
-- `PASSCODE`: the passcode the group types on the Ask Claude page
+- `USAGE` (KV namespace binding): weekly spend and per-person counts; the worker stops for the week at $100
+- `PASSCODE` (optional secret): require a passcode
 
 Set a monthly spend limit on the Anthropic account as a backstop.
 

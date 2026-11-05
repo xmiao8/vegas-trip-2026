@@ -1,19 +1,25 @@
 // Ask Claude — Cloudflare Worker for the Las Vegas trip site.
 //
-// Keeps the Anthropic API key off the public website. The page sends a question plus
-// the shared passcode; this worker adds the trip plan and a live cloud forecast,
-// calls Claude, and streams the answer back.
+// Keeps the Anthropic API key off the public website. The page sends a question; this
+// worker adds the trip plan and a live cloud forecast, calls Claude, and streams the
+// answer back. It adds up what every answer costs and stops for the week at $100.
 //
-// Secrets (Cloudflare dashboard → this worker → Settings → Variables and Secrets):
-//   ANTHROPIC_API_KEY  your Anthropic API key
-//   PASSCODE           the passcode your group types on the Ask Claude page
+// Settings (Cloudflare dashboard → this worker → Settings):
+//   ANTHROPIC_API_KEY  secret: your Anthropic API key
+//   USAGE              KV namespace binding: keeps the weekly spend and per-person counts
+//   PASSCODE           optional secret: if set, the page must send this passcode
 
 const SITE = "https://xmiao8.github.io/vegas-trip-2026/";
 const ALLOWED_ORIGINS = ["https://xmiao8.github.io"];
-const MODEL = "claude-sonnet-5-5";
+const MODEL = "claude-opus-5-5";
 const MAX_TOKENS = 1200;
 const MAX_TURNS = 20;          // messages kept per conversation
 const MAX_CHARS = 2000;        // per message
+const WEEKLY_CAP_USD = 100;    // stop answering once this week's spend reaches this (resets Monday, Las Vegas time)
+const PER_PERSON_HOURLY = 30;  // questions per hour from one IP address
+
+// Claude Opus 5.5 prices, USD per million tokens (platform.claude.com pricing, Nov 2026).
+const PRICE = { input: 4, cacheWrite: 5, cacheRead: 0.2, output: 20 };
 
 const PLACES = {
   "Las Vegas Strip": [36.1147, -115.1728],
@@ -31,6 +37,7 @@ How to answer:
 - Be concise and practical: short paragraphs or a few bullet points. Use **bold** sparingly. No tables or headings.
 - If asked to change the plan, suggest the change and explain the trade-offs; you can't edit the website.
 - Reply in the language the person writes in. If they write in Chinese, reply in Simplified Chinese.
+- If asked what model you are, say you're Claude, made by Anthropic, without naming a specific model or version.
 - Stay on the trip and things related to it (travel, Las Vegas, the parks, the sky, packing, money). Politely decline unrelated requests.`;
 
 export default {
@@ -48,13 +55,27 @@ export default {
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
     const url = new URL(request.url);
     if (request.method === "GET" && url.pathname === "/") return json(200, { ok: true, service: "vegas-trip ask" });
+    if (request.method === "GET" && url.pathname === "/usage") {
+      if (!env.USAGE) return json(500, { error: "not_configured" });
+      const week = weekKey();
+      return json(200, { week: week.slice(6), spentUSD: round(await getSpend(env, week)), capUSD: WEEKLY_CAP_USD });
+    }
     if (request.method !== "POST" || url.pathname !== "/ask") return json(404, { error: "not_found" });
     if (!ALLOWED_ORIGINS.includes(origin)) return json(403, { error: "origin" });
-    if (!env.ANTHROPIC_API_KEY || !env.PASSCODE) return json(500, { error: "not_configured" });
+    // Without the usage store the weekly cap can't be enforced, so refuse rather than run uncapped.
+    if (!env.ANTHROPIC_API_KEY || !env.USAGE) return json(500, { error: "not_configured" });
 
     let body;
     try { body = await request.json(); } catch { return json(400, { error: "bad_json" }); }
-    if (typeof body.passcode !== "string" || !safeEqual(body.passcode.trim(), env.PASSCODE)) return json(401, { error: "passcode" });
+    if (env.PASSCODE && (typeof body.passcode !== "string" || !safeEqual(body.passcode.trim(), env.PASSCODE))) return json(401, { error: "passcode" });
+
+    const week = weekKey();
+    if (await getSpend(env, week) >= WEEKLY_CAP_USD) return json(429, { error: "weekly_cap" });
+    const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+    const hourKey = `ip:${ip}:${new Date().toISOString().slice(0, 13)}`;
+    const asked = Number(await env.USAGE.get(hourKey)) || 0;
+    if (asked >= PER_PERSON_HOURLY) return json(429, { error: "rate_limited" });
+    ctx.waitUntil(env.USAGE.put(hourKey, String(asked + 1), { expirationTtl: 3700 }));
 
     const msgs = Array.isArray(body.messages) ? body.messages.slice(-MAX_TURNS) : [];
     const clean = msgs
@@ -91,11 +112,58 @@ export default {
       console.log("anthropic error", upstream.status, detail.slice(0, 500));
       return json(upstream.status === 429 || upstream.status === 529 ? 503 : 502, { error: "upstream", status: upstream.status });
     }
-    return new Response(upstream.body, {
+    // Pass the answer straight through, reading the token counts on the way to record the cost.
+    return new Response(upstream.body.pipeThrough(meter(env, week)), {
       headers: { ...cors, "Content-Type": "text/event-stream", "Cache-Control": "no-store" },
     });
   },
 };
+
+// Watches the streamed events for token usage; when the answer ends, adds its cost to the week.
+function meter(env, week) {
+  const dec = new TextDecoder();
+  let buf = "";
+  const usage = { input: 0, cacheWrite: 0, cacheRead: 0, output: 0 };
+  const read = evt => {
+    for (const line of evt.split("\n")) {
+      if (!line.startsWith("data:")) continue;
+      let d; try { d = JSON.parse(line.slice(5)); } catch { continue; }
+      const u = d.type === "message_start" ? d.message && d.message.usage : d.type === "message_delta" ? d.usage : null;
+      if (!u) continue;
+      if (u.input_tokens != null) usage.input = u.input_tokens;
+      if (u.cache_creation_input_tokens != null) usage.cacheWrite = u.cache_creation_input_tokens;
+      if (u.cache_read_input_tokens != null) usage.cacheRead = u.cache_read_input_tokens;
+      if (u.output_tokens != null) usage.output = u.output_tokens;
+    }
+  };
+  return new TransformStream({
+    transform(chunk, controller) {
+      controller.enqueue(chunk);
+      buf += dec.decode(chunk, { stream: true });
+      let i;
+      while ((i = buf.indexOf("\n\n")) >= 0) { read(buf.slice(0, i)); buf = buf.slice(i + 2); }
+    },
+    async flush() {
+      if (buf) read(buf);
+      const cost = (usage.input * PRICE.input + usage.cacheWrite * PRICE.cacheWrite + usage.cacheRead * PRICE.cacheRead + usage.output * PRICE.output) / 1e6;
+      if (cost > 0) await addSpend(env, week, cost);
+    },
+  });
+}
+
+// "spend:YYYY-MM-DD" for the Monday that starts this week, in Las Vegas time.
+function weekKey() {
+  const p = Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date()).map(x => [x.type, x.value]));
+  const d = new Date(Date.UTC(+p.year, +p.month - 1, +p.day));
+  d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7));
+  return "spend:" + d.toISOString().slice(0, 10);
+}
+async function getSpend(env, week) { return Number(await env.USAGE.get(week)) || 0; }
+async function addSpend(env, week, cost) {
+  const now = await getSpend(env, week);
+  await env.USAGE.put(week, String(now + cost), { expirationTtl: 60 * 60 * 24 * 21 });
+}
+const round = n => Math.round(n * 100) / 100;
 
 function safeEqual(a, b) {
   if (a.length !== b.length) return false;
