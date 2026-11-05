@@ -1,4 +1,4 @@
-// Ask Claude — Cloudflare Worker for the Las Vegas trip site.
+// Ask — Cloudflare Worker for the Las Vegas trip site.
 //
 // Keeps the Anthropic API key off the public website. The page sends a question; this
 // worker adds the trip plan and a live cloud forecast, calls Claude, and streams the

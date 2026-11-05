@@ -1,9 +1,9 @@
 // Las Vegas trip — shared language handling and navigation.
 window.Site = (() => {
-  const LANG_KEY = "orlando-trip-lang"; // shared with the Orlando pages so the choice carries over
+  const LANG_KEY = "vegas-trip-lang";
   const COMMON = {
-    en: { toggle: "中文", toggleAria: "切换到中文", navAria: "Pages", navItin: "Itinerary", navFlights: "Flights", navParks: "Parks & sights", navSky: "Sky", navBudget: "Budget", navAsk: "Ask Claude", navOrlando: "← Orlando plan" },
-    zh: { toggle: "English", toggleAria: "Switch to English", navAria: "页面", navItin: "行程", navFlights: "机票", navParks: "公园与景点", navSky: "星空", navBudget: "预算", navAsk: "问Claude", navOrlando: "← 奥兰多方案" },
+    en: { toggle: "中文", toggleAria: "切换到中文", navAria: "Pages", navItin: "Itinerary", navFlights: "Flights", navParks: "Parks & sights", navSky: "Sky", navBudget: "Budget", navAsk: "Ask" },
+    zh: { toggle: "English", toggleAria: "Switch to English", navAria: "页面", navItin: "行程", navFlights: "机票", navParks: "公园与景点", navSky: "星空", navBudget: "预算", navAsk: "提问" },
   };
   const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   const store = {

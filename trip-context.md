@@ -761,9 +761,6 @@ Hotel 22%
 Parks & Sphere 7%
 Food 30%
 Other 8%
-
-The Orlando plan came to about $3,650–3,760 per person (worked out for 3 people) — this plan is about $1,667–$1,777 less each.
-
 Your choices
 Round-trip flight to Las Vegas
 From Madison: United nonstop from O’Hare ($426) + Van Galder bus ($70)

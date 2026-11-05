@@ -25,8 +25,6 @@
 .blegend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); }
 .blegend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
 .blegend b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
-.compare { font-size: 14px; color: var(--muted); }
-.compare b { color: var(--ink); }
 .grid { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 32px; align-items: start; }
 .controls { display: flex; flex-direction: column; gap: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
 .controls h2, .items h2 { font-size: 20px; }
@@ -64,7 +62,6 @@ table.b tfoot td.r { font-family: var(--display); font-size: 20px; }
     <a data-nav="sky.html" href="sky.html" data-i18n="navSky"></a>
     <a data-nav="budget.html" href="budget.html" aria-current="page" data-i18n="navBudget"></a>
     <a data-nav="ask.html" href="ask.html" data-i18n="navAsk"></a>
-    <a class="tripswitch" data-nav="https://xmiao8.github.io/orlando-trip-2026/index.html" href="https://xmiao8.github.io/orlando-trip-2026/" data-i18n="navOrlando"></a>
   </nav>
 
   <header class="top">
@@ -83,7 +80,6 @@ table.b tfoot td.r { font-family: var(--display); font-size: 20px; }
     </div>
     <div class="bar" id="bar" role="img"></div>
     <div class="blegend" id="blegend"></div>
-    <p class="compare" id="compare"></p>
   </section>
 
   <div class="grid">
@@ -160,7 +156,6 @@ const UI = {
     perDay: v => `about ${v} per day`,
     cat: { travel:"Flights & car", stay:"Hotel", do:"Parks & Sphere", food:"Food", other:"Other" },
     barAria: "Share of the average per-person cost by category",
-    compare: v => `The Orlando plan came to about <b>$3,650–3,760</b> per person (worked out for 3 people) — this plan is about <b>${v} less</b> each.`,
     cheaper: "cheaper", ctlTitle: "Your choices",
     flightLabel: "Round-trip flight to Las Vegas", fMsn: "From Madison: United nonstop from O’Hare ($426) + Van Galder bus ($70)",
     hotelLabel: "Hotel per night, whole group", hReg: "Regular × 7", hNye: "New Year’s × 2",
@@ -201,7 +196,6 @@ const UI = {
     perDay: v => `约每天 ${v}`,
     cat: { travel:"机票和租车", stay:"酒店", do:"公园和Sphere", food:"餐饮", other:"其他" },
     barAria: "人均花费按类别的占比",
-    compare: v => `奥兰多方案每人约<b>$3,650–3,760</b>（按3人计算）——这个方案每人约<b>少${v}</b>。`,
     cheaper: "更便宜", ctlTitle: "你的选择",
     flightLabel: "往返拉斯维加斯机票", fMsn: "从麦迪逊：奥黑尔美联航直飞（$426）+ Van Galder大巴（$70）",
     hotelLabel: "酒店，四人每晚合计", hReg: "普通 × 7晚", hNye: "跨年 × 2晚",
@@ -268,8 +262,6 @@ function renderNumbers() {
   $("bar").setAttribute("aria-label", t.barAria);
   $("bar").innerHTML = CATS.filter(k => r.cats[k] > 0).map(k => `<span style="flex:${r.cats[k] / total} 1 0;background:var(--k-${k})" title="${t.cat[k]} ${money(r.cats[k])}"></span>`).join("");
   $("blegend").innerHTML = CATS.map(k => `<span><i style="background:var(--k-${k})"></i>${t.cat[k]} <b>${Math.round(r.cats[k] / total * 100)}%</b></span>`).join("");
-  const lo = 3650 - r.msn, hi = 3760 - r.msn;
-  $("compare").innerHTML = lo > 0 ? t.compare(`${money(lo)}–${money(hi)}`) : "";
 
   const R = t.rows;
   const row = (cat, key, val, note) => `<tr><td><span class="dot" style="background:var(--k-${cat})"></span>${R[key][0]}${note ? `<span class="n">${note}</span>` : ""}</td><td class="r">${val}</td></tr>`;

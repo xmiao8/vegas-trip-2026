@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
 <meta name="claude:viewport-fit-sides" content="cover">
-<title>Ask Claude About the Trip</title>
+<title>Ask About the Trip</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&family=Noto+Sans+SC:wght@400;500;700&display=swap">
@@ -51,7 +51,6 @@
     <a data-nav="sky.html" href="sky.html" data-i18n="navSky"></a>
     <a data-nav="budget.html" href="budget.html" data-i18n="navBudget"></a>
     <a data-nav="ask.html" href="ask.html" aria-current="page" data-i18n="navAsk"></a>
-    <a class="tripswitch" data-nav="https://xmiao8.github.io/orlando-trip-2026/index.html" href="https://xmiao8.github.io/orlando-trip-2026/" data-i18n="navOrlando"></a>
   </nav>
 
   <header class="top">
@@ -90,9 +89,9 @@ const CHAT_KEY = "vegas-ask-chat";
 
 const UI = {
   en: {
-    docTitle: "Ask Claude About the Trip",
+    docTitle: "Ask About the Trip",
     eyebrow: "Answers from the trip plan · powered by Claude",
-    h1: "Ask Claude",
+    h1: "Ask",
     lede: "Ask anything about the trip — the plan, flights, parks, the moon and stars, the budget, what to pack. Claude has read every page of this site and sees the live cloud forecast.",
     placeholder: "Ask about the trip…", send: "Send", stop: "Stop",
     hint: "Enter to send · Shift+Enter for a new line",
@@ -108,8 +107,8 @@ const UI = {
     ],
     errNet: "Couldn’t reach Claude. Check your connection and try again.",
     errBusy: "Claude is busy right now. Try again in a minute.",
-    errSetup: "Ask Claude isn’t set up yet. The trip organizer still needs to finish the server settings.",
-    errCap: "Ask Claude has reached its limit for this week. It resets on Monday.",
+    errSetup: "Ask isn’t set up yet. The trip organizer still needs to finish the server settings.",
+    errCap: "Ask has reached its limit for this week. It resets on Monday.",
     errRate: "That’s a lot of questions in an hour. Take a short break and try again.",
     errOther: "Something went wrong. Try again.",
     stopped: "(stopped)",
@@ -117,9 +116,9 @@ const UI = {
     footer: "Your chat stays in this browser only. Use “New chat” to clear it.",
   },
   zh: {
-    docTitle: "问Claude：旅行助手",
+    docTitle: "提问：旅行助手",
     eyebrow: "根据行程回答 · 由Claude提供",
-    h1: "问Claude",
+    h1: "提问",
     lede: "关于这次旅行的任何问题都可以问——行程、机票、公园、月亮和星空、预算、该带什么。Claude读过本网站的所有页面，也能看到实时云量预报。",
     placeholder: "问一个关于旅行的问题…", send: "发送", stop: "停止",
     hint: "回车发送 · Shift+回车换行",
@@ -135,8 +134,8 @@ const UI = {
     ],
     errNet: "连不上Claude，请检查网络后重试。",
     errBusy: "Claude现在有点忙，请过一分钟再试。",
-    errSetup: "问Claude还没设置好，组织者还需要完成服务器设置。",
-    errCap: "问Claude本周的额度已用完，周一重置。",
+    errSetup: "提问功能还没设置好，组织者还需要完成服务器设置。",
+    errCap: "提问功能本周的额度已用完，周一重置。",
     errRate: "一小时内问得有点多了，休息一下再试。",
     errOther: "出了点问题，请重试。",
     stopped: "（已停止）",
