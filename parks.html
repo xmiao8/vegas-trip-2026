@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Las Vegas Parks Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+<style>
+.jump { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr)); gap: 8px; }
+.jump a { display: flex; flex-direction: column; gap: 1px; text-decoration: none; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); border-left: 4px solid var(--c); }
+.jump a:hover { border-color: var(--c); }
+.jump .d { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.jump .n { font-weight: 600; font-size: 14.5px; line-height: 1.3; }
+.places { display: flex; flex-direction: column; gap: 56px; }
+.place { display: flex; flex-direction: column; gap: 18px; scroll-margin-top: 16px; }
+.place + .place { border-top: 1px solid var(--line); padding-top: 48px; }
+.phead { display: flex; flex-direction: column; gap: 6px; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.when { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.place h2 { font-size: clamp(26px, 4.4vw, 36px); line-height: 1.1; }
+.tagline { font-size: 17px; color: var(--muted); margin: 0; max-width: 60ch; }
+.about { margin: 0; max-width: 68ch; }
+.cols { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.stops { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.stops li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 10px 0; border-top: 1px solid var(--line); }
+.stops li:last-child { border-bottom: 1px solid var(--line); }
+.stops .sn { font-weight: 600; }
+.stops .st { font-family: var(--mono); font-size: 11.5px; color: var(--muted); white-space: nowrap; align-self: start; }
+.stops .sd { grid-column: 1 / -1; font-size: 13.5px; color: var(--muted); }
+.box section { display: flex; flex-direction: column; gap: 6px; }
+.extras { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px; }
+.extras h3 a { text-decoration: none; } .extras h3 a:hover { text-decoration: underline; }
+.top { font-size: 13px; color: var(--muted); }
+@media (max-width: 760px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body>
+<div class="wrap" id="top">
+  <nav class="pnav" data-i18n-aria="navAria">
+    <a data-nav="index.html" href="index.html" data-i18n="navItin"></a>
+    <a data-nav="flights.html" href="flights.html" data-i18n="navFlights"></a>
+    <a data-nav="parks.html" href="parks.html" aria-current="page" data-i18n="navParks"></a>
+    <a data-nav="sky.html" href="sky.html" data-i18n="navSky"></a>
+    <a data-nav="budget.html" href="budget.html" data-i18n="navBudget"></a>
+    <a data-nav="ask.html" href="ask.html" data-i18n="navAsk"></a>
+    <a class="tripswitch" data-nav="https://xmiao8.github.io/orlando-trip-2026/index.html" href="https://xmiao8.github.io/orlando-trip-2026/" data-i18n="navOrlando"></a>
+  </nav>
+
+  <header class="top">
+    <div class="toprow">
+      <div class="eyebrow" data-i18n="eyebrow"></div>
+      <button class="lang" id="lang-toggle" type="button"></button>
+    </div>
+    <h1 data-i18n="h1"></h1>
+    <p class="lede" data-i18n="lede"></p>
+  </header>
+
+  <section aria-labelledby="jump-title">
+    <h2 id="jump-title" class="eyebrow" style="font-family:var(--mono);font-weight:500;font-size:12px;margin-bottom:10px" data-i18n="jumpTitle"></h2>
+    <ol class="jump" id="jump"></ol>
+  </section>
+
+  <div class="places" id="places"></div>
+
+  <footer class="foot" data-i18n-html="footer"></footer>
+</div>
+
+<script>
+const IMG = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
+const PLACES = [
+  { id:"dv", cat:"dv", img:"0/03/Zabriskie_Point_Death_Valley_December_2013_002.jpg/960px-Zabriskie_Point_Death_Valley_December_2013_002.jpg", pos:"center 55%",
+    credit:{ by:"King of Hearts", lic:"CC BY-SA 3.0", licUrl:"https://creativecommons.org/licenses/by-sa/3.0", page:"https://commons.wikimedia.org/wiki/File:Zabriskie_Point_Death_Valley_December_2013_002.jpg" },
+    links:[["nps.gov/deva","https://www.nps.gov/deva/"],["Alerts & road status","https://www.nps.gov/deva/planyourvisit/conditions.htm"]],
+    en:{ when:"One of Dec 28–30 · ~2 hr each way", name:"Death Valley National Park", tagline:"Salt flats, badlands and dunes by day; one of the darkest skies in the country at night.",
+      about:"The hottest, driest and lowest national park in the US, and the largest outside Alaska. In winter it’s pleasant — highs in the 60s–70s °F — and the scenery changes every few miles: a white salt flat 282 feet below sea level, golden badlands, multicolored hills, sand dunes and 5,000-foot viewpoints. After dark, it’s a certified dark-sky park, which is why your stargazing night is here.",
+      stops:[
+        ["Furnace Creek Visitor Center","20 min","Park bookstore for stickers and the passport stamp; check the day’s conditions."],
+        ["Badwater Basin","45 min","Walk out onto the hexagon-patterned salt flat at the lowest point in North America."],
+        ["Artists Drive & Artist’s Palette","45 min","A 9-mile one-way loop past pink, green and purple hills. Best in afternoon light."],
+        ["Devils Golf Course","15 min","A field of jagged salt crystals; listen for them crackling."],
+        ["Zabriskie Point","20 min","The famous view over golden badlands; great at sunset or sunrise."],
+        ["Golden Canyon","1–2 hr","An easy canyon hike through the badlands below Zabriskie."],
+        ["Mesquite Flat Sand Dunes","45 min","Classic rolling dunes; a top sunset and stargazing spot."],
+        ["Dante’s View","1 hr detour","A viewpoint 5,475 ft up, looking straight down at Badwater."],
+      ],
+      good:["$35 per car for 7 days — covered by your America the Beautiful pass. Not one of the parks with the extra non-resident fee.","Fill up in Pahrump on the way in; gas inside the park is expensive.","Cell service is spotty — download offline maps.","Closed right now: Scotty’s Castle, Titus Canyon Road and Darwin Falls (flood damage). The stops above are open.","To stay the night: The Oasis at Death Valley (Inn or Ranch), Stovepipe Wells, or Panamint Springs. Book refundable."] },
+    zh:{ when:"12月28–30日其中一天 · 单程约2小时", name:"死亡谷国家公园", tagline:"白天是盐滩、荒地和沙丘；晚上是全美最暗的星空之一。",
+      about:"美国最热、最干、海拔最低的国家公园，也是阿拉斯加以外面积最大的。冬天很舒服——白天约18–24°C——而且每隔几英里风景就变：海拔-86米的白色盐滩、金色荒地、彩色山丘、沙丘，以及1,600多米高的观景台。天黑后，这里是认证的暗夜公园，所以观星夜安排在这里。",
+      stops:[
+        ["火炉溪游客中心","20分钟","公园书店买贴纸、盖护照章；看看当天路况。"],
+        ["恶水盆地","45分钟","走上北美最低点的六边形盐滩。"],
+        ["艺术家之路与艺术家调色板","45分钟","约14公里的单向环线，经过粉、绿、紫色的山丘。下午光线最好。"],
+        ["魔鬼高尔夫球场","15分钟","一片锯齿状的盐晶体；仔细听会有噼啪声。"],
+        ["扎布里斯基角","20分钟","俯瞰金色荒地的著名观景点；日落或日出最美。"],
+        ["金色峡谷","1–2小时","扎布里斯基角下方穿过荒地的轻松峡谷步道。"],
+        ["梅斯基特平原沙丘","45分钟","经典的连绵沙丘；看日落和观星的好地方。"],
+        ["但丁观景台","绕路1小时","海拔1,668米，正下方就是恶水盆地。"],
+      ],
+      good:["每车$35，7天有效——美丽美国年票可免。不在加收非居民费用的公园名单里。","在帕朗加满油；园内油价很贵。","手机信号不稳定——提前下载离线地图。","目前关闭：斯科蒂城堡、泰特斯峡谷路和达尔文瀑布（洪水损坏）。上面列的景点都开放。","想住一晚：The Oasis at Death Valley（Inn或Ranch）、Stovepipe Wells或Panamint Springs。订可退款的。"] } },
+
+  { id:"zion", cat:"zion", img:"2/21/Utah_-_Springdale_-_The_Watchman_-_Zion_Canyon_Views.jpg/960px-Utah_-_Springdale_-_The_Watchman_-_Zion_Canyon_Views.jpg", pos:"center 40%",
+    credit:{ by:"Jared", lic:"CC BY 2.0", licUrl:"https://creativecommons.org/licenses/by/2.0", page:"https://commons.wikimedia.org/wiki/File:Utah_-_Springdale_-_The_Watchman_-_Zion_Canyon_Views.jpg" },
+    links:[["nps.gov/zion","https://www.nps.gov/zion/"],["Conditions","https://www.nps.gov/zion/planyourvisit/conditions.htm"]],
+    en:{ when:"Dec 26 · ~2.5–3 hr each way", name:"Zion National Park", tagline:"A deep red-rock canyon with the Virgin River running through it.",
+      about:"Zion Canyon is lined with sandstone cliffs up to 2,000 feet high, with easy riverside trails on the canyon floor and steeper climbs to viewpoints. In late December it’s quiet and cold — highs around the 50s °F, nights near freezing — and a dusting of snow on the red cliffs is common and beautiful. It’s in Utah, an hour ahead of Las Vegas.",
+      stops:[
+        ["Kolob Canyons","1 hr","A separate section right off I-15 (exit 40): a 5-mile scenic drive into red finger canyons, with its own visitor center. A perfect first stop."],
+        ["Riverside Walk","1–1.5 hr","A flat 2.2-mile round trip along the river to the mouth of the Narrows."],
+        ["Lower Emerald Pools","1 hr","1.2 miles round trip to a waterfall and pool; can be icy."],
+        ["Canyon Overlook Trail","1 hr","A short, rocky trail through the tunnel on the east side with a huge view down the canyon."],
+        ["Pa’rus Trail","45 min","An easy paved path by the river with views of the Watchman."],
+        ["Watchman Trail","2 hr","3.3 miles round trip to a viewpoint over Springdale; good at sunset."],
+      ],
+      good:["$35 per car (7 days) — covered by your America the Beautiful pass. Non-US residents may still pay an extra $100 per person here.","Angels Landing needs a permit from a lottery, and its chains can be icy in winter.","The Narrows is possible in winter only with a rented drysuit — the water is near freezing.","Check whether the canyon shuttle is running on your date; when it isn’t, you can drive the Scenic Drive yourself.","Bring traction (microspikes) if there’s ice; Springdale outfitters rent them.","Stickers at the Zion Canyon or Kolob Canyons visitor centers."] },
+    zh:{ when:"12月26日 · 单程约2.5–3小时", name:"锡安国家公园", tagline:"维尔京河穿流而过的深邃红岩峡谷。",
+      about:"锡安峡谷两侧是高达600米的砂岩绝壁，谷底有沿河的轻松步道，也有爬到观景点的陡峭路线。12月下旬很安静也很冷——白天约10–15°C，夜里接近冰点——红色崖壁上常常盖一层薄雪，非常漂亮。它在犹他州，比拉斯维加斯早一小时。",
+      stops:[
+        ["科罗布峡谷","1小时","I-15旁（40号出口）的独立园区：8公里风景路进入红色指状峡谷，有自己的游客中心。适合作为第一站。"],
+        ["河畔步道","1–1.5小时","沿河的平坦步道，往返3.5公里，走到窄谷入口。"],
+        ["下翡翠池","1小时","往返2公里到瀑布和水池；可能结冰。"],
+        ["峡谷观景点步道","1小时","东侧穿过隧道后的一条短石路，可俯瞰整个峡谷。"],
+        ["帕鲁斯步道","45分钟","沿河的轻松铺装步道，可以看到守望者峰。"],
+        ["守望者步道","2小时","往返5.3公里，到俯瞰斯普林代尔的观景点；日落时很美。"],
+      ],
+      good:["每车$35（7天）——美丽美国年票可免。非美国居民在这里可能仍需每人另付$100。","天使降落步道需要抽签许可，冬天铁链段可能结冰。","冬天走窄谷必须租干式潜水服——水温接近冰点。","确认当天峡谷接驳车是否运行；不运行时可以自己开车进风景路。","有冰就带冰爪；斯普林代尔的户外店可以租。","贴纸在锡安峡谷或科罗布峡谷游客中心买。"] } },
+
+  { id:"mead", cat:"mead", img:"1/1d/Lake_Mead_and_its_bathtub_ring_upstream_of_Hoover_Dam%2C_Black_Canyon%2C_Arizona%E2%80%93Nevada.jpg/960px-Lake_Mead_and_its_bathtub_ring_upstream_of_Hoover_Dam%2C_Black_Canyon%2C_Arizona%E2%80%93Nevada.jpg", pos:"center 50%",
+    credit:{ by:"Christian David", lic:"CC BY-SA 4.0", licUrl:"https://creativecommons.org/licenses/by-sa/4.0", page:"https://commons.wikimedia.org/wiki/File:Lake_Mead_and_its_bathtub_ring_upstream_of_Hoover_Dam,_Black_Canyon,_Arizona%E2%80%93Nevada.jpg" },
+    links:[["nps.gov/lake","https://www.nps.gov/lake/"],["Hoover Dam (usbr.gov)","https://www.usbr.gov/lc/hooverdam/"]],
+    en:{ when:"Dec 24 · ~45 min each way", name:"Hoover Dam & Lake Mead", tagline:"A 1930s concrete giant, the reservoir behind it, and a moonrise on Christmas Eve.",
+      about:"Hoover Dam holds back the Colorado River to form Lake Mead, the largest reservoir in the US. The lake is now near record lows, so a band of bleached white rock — the “bathtub ring” — shows how far the water has dropped. The dam sits on the Nevada–Arizona line; in winter the Arizona side is an hour ahead.",
+      stops:[
+        ["Mike O’Callaghan–Pat Tillman Memorial Bridge","30 min","A walkway on the bypass bridge with the best full view of the dam, about 900 feet above the river."],
+        ["Top of Hoover Dam","45 min","Walk across the dam between Nevada and Arizona and look down the 726-foot face."],
+        ["Hoover Dam tours","1 hr","Paid guided tours of the power plant and the dam’s tunnels; check times on usbr.gov."],
+        ["Lake Mead visitor center","30 min","Near Boulder City: exhibits, views and your park sticker."],
+        ["Lakeview Overlook","20 min","A viewpoint over the lake and the bathtub ring; a good spot for the Christmas Eve moonrise."],
+        ["Boulder City","1 hr","A small historic town built for the dam workers; good for lunch."],
+      ],
+      good:["Driving to the dam and bridge doesn’t require the park fee; Lake Mead charges $25 per car for its scenic lakeshore roads (covered by your pass).","The dam has a paid parking garage; free lots on the Arizona side fill up.","Expect security screening for vehicles approaching the dam.","Christmas Eve hours may be shorter — do the visitor center early."] },
+    zh:{ when:"12月24日 · 单程约45分钟", name:"胡佛水坝与米德湖", tagline:"1930年代的混凝土巨坝、坝后的水库，以及平安夜的月出。",
+      about:"胡佛水坝拦住科罗拉多河，形成了全美最大的水库米德湖。湖水现在接近历史最低，峡谷岩壁上一圈褪成白色的岩石——“浴缸环”——显示水位降了多少。水坝跨在内华达州和亚利桑那州交界上；冬天亚利桑那那边比内华达早一小时。",
+      stops:[
+        ["迈克·奥卡拉汉–帕特·蒂尔曼纪念大桥","30分钟","绕行大桥上的人行道，是看水坝全景最好的地方，距河面约270米。"],
+        ["胡佛水坝坝顶","45分钟","在内华达和亚利桑那之间走过坝顶，俯看221米高的坝面。"],
+        ["胡佛水坝导览","1小时","付费参观发电厂和坝内隧道；时间见usbr.gov。"],
+        ["米德湖游客中心","30分钟","在博尔德城附近：展览、风景和公园贴纸。"],
+        ["湖景观景台","20分钟","俯瞰湖面和浴缸环；平安夜看月出的好地方。"],
+        ["博尔德城","1小时","为修坝工人建的历史小镇；适合吃午饭。"],
+      ],
+      good:["开车去水坝和大桥不用交公园门票；进米德湖沿湖风景路每车$25（年票可免）。","水坝有收费停车楼；亚利桑那一侧的免费停车场很快会满。","靠近水坝的车辆会接受安检。","平安夜开放时间可能缩短——游客中心早点去。"] } },
+
+  { id:"sphere", cat:"vegas", img:"c/c9/Sphere_-_Las_Vegas_%2853685825749%29.jpg/960px-Sphere_-_Las_Vegas_%2853685825749%29.jpg", pos:"center 35%",
+    credit:{ by:"Shelby L. Bell", lic:"CC BY 2.0", licUrl:"https://creativecommons.org/licenses/by/2.0", page:"https://commons.wikimedia.org/wiki/File:Sphere_-_Las_Vegas_(53685825749).jpg" },
+    links:[["thesphere.com","https://www.thesphere.com/shows"]],
+    en:{ when:"Dec 25 show · outside any night", name:"Sphere", tagline:"The giant LED dome next to the Venetian — free to see outside, wild to see inside.",
+      about:"Sphere opened in 2023. Its outside is covered in LEDs and shows changing animations every night, visible from much of the Strip. Inside is a wraparound screen that fills your whole field of view, with haptic seats and effects like wind. During your trip it’s showing The Wizard of Oz at Sphere, a re-imagined version of the 1939 film made for the dome, plus concert residencies.",
+      stops:[
+        ["The Wizard of Oz at Sphere","evening","The immersive film. Around $95–125 in November; holiday dates cost more."],
+        ["Backstreet Boys","Dec 26 – Jan 2","Concert residency over your dates — much pricier than the film."],
+        ["Eagles · Metallica","select dates","Also in residence this winter on certain nights."],
+        ["Seeing it from outside","free","Best from the Strip near the Venetian and Wynn, or from the High Roller at the LINQ."],
+      ],
+      good:["Seats in the 200 and 300 sections, near the center, usually give the fullest view; the lowest level sits under an overhang.","Popular holiday showtimes sell out — book early.","Arrive 30–45 minutes early for security and the lobby displays."] },
+    zh:{ when:"12月25日看演出 · 外观每晚都能看", name:"Sphere球幕", tagline:"威尼斯人酒店旁的巨型LED球——外面免费看，里面很震撼。",
+      about:"Sphere于2023年开业。外表覆盖LED，每晚播放不同动画，大道很多地方都能看到。内部是一块包围整个视野的巨幕，配有震动座椅和吹风等特效。你们去的时候在放《绿野仙踪》Sphere版——为球幕重新制作的1939年经典电影——另外还有几位歌手的驻场演唱会。",
+      stops:[
+        ["Sphere版《绿野仙踪》","晚上","沉浸式电影。11月约$95–125；节日期间更贵。"],
+        ["后街男孩","12月26日 – 1月2日","行程期间的驻场演唱会——比电影贵很多。"],
+        ["老鹰乐队 · 金属乐队","部分日期","这个冬天也在特定晚上驻场。"],
+        ["从外面看","免费","在威尼斯人和永利附近的大道上看最好，或者坐LINQ的摩天轮。"],
+      ],
+      good:["200和300区靠中间的位置通常视野最完整；最低层有挑檐遮挡。","热门节日场次会卖光——早点订。","提前30–45分钟到，过安检、看大厅展示。"] } },
+
+  { id:"primerib", cat:"vegas", img:null,
+    links:[["Prime rib deals list (Oct 2026)","https://lasvegasthenandnow.com/where-to-find-cheap-prime-rib-in-las-vegas-deals-and-specials/"]],
+    en:{ when:"Christmas dinner, or any night", name:"Prime rib in Vegas", tagline:"The classic Vegas dinner, still best downtown and off the Strip.",
+      about:"Casinos once sold prime rib below cost to keep people in the building. The $5 specials are gone, but downtown and locals’ casinos still serve big cuts at fair prices. Holiday hours can change, so call ahead on Christmas.",
+      stops:[
+        ["The Cal — Market Street Cafe","$24.99","Downtown; daily 4–10 p.m."],
+        ["4 Queens — Magnolia’s","$29.99","Downtown; 10 oz, daily 4 p.m.–midnight."],
+        ["Jerry’s Nugget — Jerry’s Famous Coffee Shop","$22.99 / $46.99","North Las Vegas; English cut, or a 28–30 oz thick cut."],
+        ["Palace Station — The Brass Fork","$25.99","Off-Strip; nightly 4–10 p.m."],
+        ["Ellis Island — Village Pub & Cafe","$34.99","King cut; the closest to the Strip."],
+        ["South Point — Primarily Prime Rib","$29.95","South of the Strip; 10 oz."],
+        ["Downtown Grand — Freedom Beat","$19.99","All-you-can-eat, Fridays and Saturdays only, 5–10 p.m."],
+      ],
+      good:["Prices from a list updated Oct 29, 2026; menus change.","Under 21? You can eat at casino restaurants, but you can’t hang around the casino floor."] },
+    zh:{ when:"圣诞晚餐，或任何一晚", name:"拉斯维加斯烤牛肋排", tagline:"经典的拉斯维加斯晚餐，市中心和大道外最划算。",
+      about:"以前赌场会亏本卖烤牛肋排，好让客人留在场内。$5的特价已经没有了，但市中心和本地人常去的赌场仍然有分量大、价格公道的牛肋排。节日营业时间可能变动，圣诞节当天先打电话确认。",
+      stops:[
+        ["The Cal — Market Street Cafe","$24.99","市中心；每天下午4点–晚上10点。"],
+        ["4 Queens — Magnolia’s","$29.99","市中心；10盎司，每天下午4点–午夜。"],
+        ["Jerry’s Nugget — Jerry’s Famous Coffee Shop","$22.99 / $46.99","北拉斯维加斯；英式薄切，或28–30盎司厚切。"],
+        ["Palace Station — The Brass Fork","$25.99","大道外；每晚4–10点。"],
+        ["Ellis Island — Village Pub & Cafe","$34.99","国王切；离大道最近。"],
+        ["South Point — Primarily Prime Rib","$29.95","大道以南；10盎司。"],
+        ["Downtown Grand — Freedom Beat","$19.99","无限量，仅周五周六下午5–10点。"],
+      ],
+      good:["价格来自2026年10月29日更新的清单；菜单会变。","未满21岁？可以在赌场餐厅吃饭，但不能在赌场区域逗留。"] } },
+
+  { id:"nearby", cat:"flex", img:null,
+    links:[["Valley of Fire","https://parks.nv.gov/parks/valley-of-fire"],["Red Rock Canyon","https://www.blm.gov/programs/national-conservation-lands/nevada/red-rock-canyon"]],
+    en:{ when:"Flex days (Dec 27, 28, 30)", name:"Close to Vegas", tagline:"Easy half-day trips for the flex days.",
+      about:"Two red-rock landscapes within an hour of the Strip, for the days you’re not driving to a national park.",
+      stops:[
+        ["Valley of Fire State Park","~1 hr away","Nevada’s oldest state park: bright red sandstone, the Fire Wave and Elephant Rock, and ancient petroglyphs at Atlatl Rock. Per-car fee."],
+        ["Red Rock Canyon","~30 min away","A 13-mile scenic loop past red and cream cliffs, with short hikes. Timed-entry reservations are required for the drive in winter (recreation.gov)."],
+        ["Ethel M cactus garden lights","~25 min away","A free holiday light display in a cactus garden at a chocolate factory in Henderson."],
+      ],
+      good:["Valley of Fire and Red Rock both close in the evening, so they’re daytime trips.","Neither sells national park stickers — Valley of Fire is a state park, Red Rock is federal (BLM) land."] },
+    zh:{ when:"机动日（12月27、28、30日）", name:"拉斯维加斯近郊", tagline:"机动日可以去的半日游。",
+      about:"距大道一小时以内的两处红岩风景，留给不去国家公园的日子。",
+      stops:[
+        ["火焰谷州立公园","约1小时","内华达最早的州立公园：鲜红砂岩、火焰波浪和大象岩，以及阿特拉特岩的古代岩画。按车收费。"],
+        ["红岩峡谷","约30分钟","21公里的风景环线，经过红色和米色的崖壁，有短途步道。冬季开车进入需要预约时段（recreation.gov）。"],
+        ["Ethel M仙人掌花园灯光","约25分钟","亨德森一家巧克力工厂仙人掌花园里的免费节日灯光。"],
+      ],
+      good:["火焰谷和红岩峡谷傍晚都会关闭，只适合白天去。","这两处都不卖国家公园贴纸——火焰谷是州立公园，红岩峡谷属于联邦土地管理局（BLM）。"] } },
+];
+
+const UI = {
+  en: {
+    docTitle: "Las Vegas Parks Guide",
+    eyebrow: "Death Valley · Zion · Hoover Dam · the Sphere · prime rib",
+    h1: "Parks & sights",
+    lede: "What each place is like, what’s worth your time, how long it takes, and what to know before you go — in the order of the trip.",
+    jumpTitle: "Jump to",
+    hStops: "Worth your time", hGood: "Good to know", photo: "Photo", top: "Back to top",
+    footer: "Photos from <a href=\"https://commons.wikimedia.org/\">Wikimedia Commons</a> under the Creative Commons licenses shown with each one. Conditions, hours and prices were checked in early November 2026 and can change; check each site the week you go.",
+  },
+  zh: {
+    docTitle: "拉斯维加斯公园指南",
+    eyebrow: "死亡谷 · 锡安 · 胡佛水坝 · Sphere球幕 · 烤牛肋排",
+    h1: "公园与景点",
+    lede: "每个地方是什么样、哪些值得去、要花多久，以及出发前要知道的事——按行程顺序。",
+    jumpTitle: "跳到",
+    hStops: "值得去的地方", hGood: "须知", photo: "照片", top: "回到顶部",
+    footer: "照片来自<a href=\"https://commons.wikimedia.org/\">维基共享资源</a>，按每张照片标注的知识共享许可使用。路况、开放时间和价格于2026年11月初查询，可能变化；出发那周请再确认。",
+  },
+};
+const ORDER = ["mead","sphere","primerib","zion","dv","nearby"];
+const esc = Site.esc;
+function render(t, lang) {
+  const list = ORDER.map(id => PLACES.find(p => p.id === id));
+  document.getElementById("jump").innerHTML = list.map(p => `<li class="c-${p.cat}"><a href="#${p.id}"><span class="d">${esc(p[lang].when)}</span><span class="n">${esc(p[lang].name)}</span></a></li>`).join("");
+  document.getElementById("places").innerHTML = list.map(p => {
+    const c = p[lang];
+    const photo = p.img ? `<figure class="photo"><div class="frame"><img src="${IMG + p.img}" alt="${esc(c.name)}" loading="lazy" style="object-position:${p.pos}" onerror="this.closest('figure').classList.add('noimg')"><div class="ph" aria-hidden="true">${esc(c.name)}</div></div><figcaption>${t.photo}: <a href="${p.credit.page}" target="_blank" rel="noopener">${esc(p.credit.by)}</a>, <a href="${p.credit.licUrl}" target="_blank" rel="noopener">${p.credit.lic}</a>, via Wikimedia Commons</figcaption></figure>` : "";
+    return `<article class="place c-${p.cat}" id="${p.id}" aria-labelledby="${p.id}-h">
+      ${photo}
+      <div class="phead"><div class="badges"><span class="tag">${esc(c.when)}</span></div><h2 id="${p.id}-h">${esc(c.name)}</h2><p class="tagline">${esc(c.tagline)}</p></div>
+      <p class="about">${esc(c.about)}</p>
+      <div class="cols">
+        <div class="col"><h3>${t.hStops}</h3><ul class="stops">${c.stops.map(([n, tm, d]) => `<li><span class="sn">${esc(n)}</span><span class="st">${esc(tm)}</span><span class="sd">${esc(d)}</span></li>`).join("")}</ul></div>
+        <div class="col">
+          <div class="box"><section><h3>${t.hGood}</h3><ul>${c.good.map(g => `<li>${esc(g)}</li>`).join("")}</ul></section>
+            <div class="links">${p.links.map(([l, u]) => `<a class="official" href="${u}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join("")}</div></div>
+          <a class="top" href="#top">↑ ${t.top}</a>
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+}
+Site.init(UI, render);
+const target = location.hash.slice(1);
+if (target && PLACES.some(p => p.id === target)) requestAnimationFrame(() => document.getElementById(target).scrollIntoView({ block: "start" }));
+</script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Las Vegas Winter Trip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <nav class="pnav" data-i18n-aria="navAria">
+    <a data-nav="index.html" href="index.html" aria-current="page" data-i18n="navItin"></a>
+    <a data-nav="flights.html" href="flights.html" data-i18n="navFlights"></a>
+    <a data-nav="parks.html" href="parks.html" data-i18n="navParks"></a>
+    <a data-nav="sky.html" href="sky.html" data-i18n="navSky"></a>
+    <a data-nav="budget.html" href="budget.html" data-i18n="navBudget"></a>
+    <a data-nav="ask.html" href="ask.html" data-i18n="navAsk"></a>
+    <a class="tripswitch" data-nav="https://xmiao8.github.io/orlando-trip-2026/index.html" href="https://xmiao8.github.io/orlando-trip-2026/" data-i18n="navOrlando"></a>
+  </nav>
+
+  <header class="top">
+    <div class="toprow">
+      <div class="eyebrow" data-i18n="eyebrow"></div>
+      <button class="lang" id="lang-toggle" type="button"></button>
+    </div>
+    <h1 data-i18n-html="h1"></h1>
+    <p class="lede" data-i18n="lede"></p>
+    <div class="facts" id="facts"></div>
+  </header>
+
+  <section aria-labelledby="glance-title">
+    <h2 id="glance-title" class="eyebrow" style="font-family:var(--mono);font-weight:500;font-size:12px;margin-bottom:10px" data-i18n="glance"></h2>
+    <div class="strip" id="strip"></div>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <section aria-labelledby="days-title">
+    <div class="sechead">
+      <h2 id="days-title" data-i18n="daysTitle"></h2>
+      <div class="chips" role="group" id="chips"></div>
+    </div>
+    <ol class="days" id="days"></ol>
+  </section>
+
+  <div class="panels">
+    <section class="panel" aria-labelledby="dates-title">
+      <h2 id="dates-title" data-i18n="datesTitle"></h2>
+      <dl class="kd" id="dates"></dl>
+    </section>
+    <section class="panel" aria-labelledby="todo-title">
+      <div class="sechead">
+        <h2 id="todo-title" data-i18n="todoTitle"></h2>
+        <span class="progress" id="progress"></span>
+      </div>
+      <ul class="checks" id="checks"></ul>
+    </section>
+  </div>
+
+  <footer class="foot" data-i18n="footer"></footer>
+</div>
+
+<script>
+const CATS = ["vegas","mead","zion","dv","flex","travel"];
+const DAYS = [
+  { id:"dec23", m:12, d:23, w:3, cat:"travel", drive:0, guide:"sky",
+    en:{ tag:"Arrive", park:"Las Vegas · LAS", iconic:"Supermoon", title:"Land in Vegas, watch the supermoon rise",
+      items:["Flights land late morning (United from O’Hare gets in at 11:34 a.m.); pick up the rental car and check in","The full supermoon rises at 4:09 p.m., just before sunset (4:31). Find a spot with a clear view east, like a parking-garage roof","Evening on the Strip: the Sphere lit up, Bellagio fountains"],
+      note:"The moon clears the mountains east of town around 4:25–4:40 p.m. — the classic huge orange moonrise." },
+    zh:{ tag:"抵达", park:"拉斯维加斯 · LAS机场", iconic:"超级月亮", title:"飞抵拉斯维加斯，看超级月亮升起",
+      items:["上午晚些落地（美联航从奥黑尔11:34到），取租车、入住","满月超级月亮下午4:09升起，就在日落（4:31）前。找一个朝东视野开阔的地方，比如停车楼楼顶","晚上逛大道：亮灯的Sphere球幕、百乐宫喷泉"],
+      note:"月亮大约在下午4:25–4:40越过城东的山——经典的巨大橙色月出。" } },
+  { id:"dec24", m:12, d:24, w:4, cat:"mead", drive:1.5, guide:"mead",
+    en:{ tag:"Lake Mead", park:"Hoover Dam + Lake Mead · ~45 min", iconic:"Christmas Eve moonrise", title:"Hoover Dam, Lake Mead and a Christmas Eve moonrise",
+      items:["Hoover Dam: walk across the top, then the bypass bridge for the classic view","Lake Mead visitor center for the park sticker (go early; holiday hours may be short)","Lunch in Boulder City","The moon rises over the lake about 5:25 p.m. (98% full), in twilight, from Lakeview Overlook or the lakeshore"],
+      note:"The lake is near record lows, so you’ll see a huge white “bathtub ring” on the canyon walls." },
+    zh:{ tag:"米德湖", park:"胡佛水坝 + 米德湖 · 约45分钟", iconic:"平安夜月出", title:"胡佛水坝、米德湖和平安夜月出",
+      items:["胡佛水坝：在坝顶走一走，再上旁边的大桥看经典全景","在米德湖游客中心买公园贴纸（早点去，节日期间可能提早关门）","在博尔德城吃午饭","下午约5:25月亮从湖上升起（98%满月），在黄昏中，可在湖景观景台或湖边看"],
+      note:"湖水接近历史最低，峡谷岩壁上会看到一圈巨大的白色“浴缸环”。" } },
+  { id:"dec25", m:12, d:25, w:5, cat:"vegas", drive:0, guide:"sphere",
+    en:{ tag:"Vegas", park:"Las Vegas", iconic:"Christmas Day", title:"Christmas in Vegas: the Sphere and prime rib",
+      items:["The Wizard of Oz at Sphere (book ahead)","Bellagio Conservatory holiday display (free, open 24/7)","Prime rib Christmas dinner downtown: The Cal ($24.99), Magnolia’s at the 4 Queens ($29.99), or the 30-oz cut at Jerry’s Nugget","Fremont Street’s light canopy after dinner"],
+      note:"National park visitor centers are usually closed on Christmas Day — a good day to stay in town." },
+    zh:{ tag:"拉斯维加斯", park:"拉斯维加斯", iconic:"圣诞节", title:"在拉斯维加斯过圣诞：Sphere球幕和烤牛肋排",
+      items:["Sphere球幕的《绿野仙踪》（提前订票）","百乐宫温室花园的节日布景（免费，24小时开放）","市中心吃圣诞烤牛肋排晚餐：The Cal（$24.99）、4 Queens的Magnolia’s（$29.99），或Jerry’s Nugget的30盎司厚切","晚饭后去弗里蒙特街看灯光天幕"],
+      note:"国家公园游客中心圣诞节当天通常关门——这天留在城里正好。" } },
+  { id:"dec26", m:12, d:26, w:6, cat:"zion", drive:6, guide:"zion",
+    en:{ tag:"Zion", park:"Zion National Park · ~2.5–3 hr each way", title:"Zion day trip",
+      items:["Leave by 6 a.m. Utah is an hour ahead, and sunset there is about 5:20 p.m.","Kolob Canyons: a short scenic drive and visitor center right off I-15","Zion Canyon: Riverside Walk, Emerald Pools, and Canyon Overlook through the tunnel","Dinner in Springdale, drive back after dark"],
+      note:"Your America the Beautiful pass covers the car; non-US residents may still pay an extra $100 each at Zion. To skip 6 hours of driving in one day, stay overnight in Springdale and come back on the 27th." },
+    zh:{ tag:"锡安", park:"锡安国家公园 · 单程约2.5–3小时", title:"锡安一日游",
+      items:["早上6点前出发。犹他州比拉斯维加斯早一小时，日落约下午5:20","科罗布峡谷：I-15旁的一段短风景路和游客中心","锡安峡谷：河畔步道、翡翠池，以及穿过隧道的峡谷观景点步道","在斯普林代尔吃晚饭，天黑后开回去"],
+      note:"美丽美国年票包含整车门票；非美国居民在锡安可能仍需每人另付$100。不想一天开6小时，可以在斯普林代尔住一晚，27日再回。" } },
+  { id:"dec27", m:12, d:27, w:0, cat:"flex", drive:1,
+    en:{ tag:"Flex", park:"Las Vegas", title:"Free day (or Zion, day two)",
+      items:["Red Rock Canyon scenic drive (timed-entry reservation needed)","Ethel M Chocolates cactus garden lights in Henderson after dark","Or rest — the Death Valley window starts tomorrow"] },
+    zh:{ tag:"机动", park:"拉斯维加斯", title:"自由日（或锡安第二天）",
+      items:["红岩峡谷风景路（需要预约入场时段）","天黑后去亨德森的Ethel M巧克力工厂看仙人掌花园灯光","或者休息——明天开始是死亡谷的观星窗口"] } },
+  { id:"dec28", m:12, d:28, w:1, cat:"flex", drive:2.5, guide:"sky",
+    en:{ tag:"Flex", park:"Valley of Fire · ~1 hr", title:"Easy day — or Death Valley if tonight looks clearest",
+      items:["Valley of Fire State Park: red sandstone, petroglyphs, the Fire Wave hike","Or a lazy Vegas day: pool, shopping, a buffet"],
+      note:"Death Valley backup night: dark from 6:12 to 10:25 p.m., about 4 hours of stars." },
+    zh:{ tag:"机动", park:"火焰谷 · 约1小时", title:"轻松一天——如果今晚最晴，就去死亡谷",
+      items:["火焰谷州立公园：红色砂岩、岩画、火焰波浪步道","或者在拉斯维加斯悠闲一天：泳池、购物、自助餐"],
+      note:"死亡谷备选夜：晚上6:12到10:25天黑无月，约4小时星空。" } },
+  { id:"dec29", m:12, d:29, w:2, cat:"dv", drive:4.5, guide:"dv",
+    en:{ tag:"Death Valley", park:"Death Valley National Park · ~2 hr each way", iconic:"Stargazing night", title:"Death Valley: desert by day, stars by night",
+      items:["Leave around 10:30 a.m.; fill up the tank in Pahrump","Furnace Creek visitor center for stickers, then Badwater Basin and Artists Drive","Sunset at the Mesquite Flat dunes or Zabriskie Point (~4:40 p.m.)","Fully dark at 6:13 p.m.: about 5 hours of stars before the moon rises at 11:30 p.m. Saturn is high early; Jupiter rises in the east around 9–10 p.m.","Drive back (~2 hr), or stay the night in the park"],
+      note:"The planned night — but go on whichever of Dec 28, 29 or 30 has the clearest forecast. The Sky page shows the live cloud outlook." },
+    zh:{ tag:"死亡谷", park:"死亡谷国家公园 · 单程约2小时", iconic:"观星夜", title:"死亡谷：白天看沙漠，晚上看星星",
+      items:["上午10:30左右出发，在帕朗加满油","先去火炉溪游客中心买贴纸，再去恶水盆地和艺术家之路","在梅斯基特平原沙丘或扎布里斯基角看日落（约下午4:40）","晚上6:13完全天黑：月亮11:30升起前约5小时星空。土星一开始就很高，木星约9–10点从东边升起","开车回去（约2小时），或在公园里住一晚"],
+      note:"计划的观星夜——但12月28、29、30日哪天预报最晴就哪天去。星空页面有实时云量预报。" } },
+  { id:"dec30", m:12, d:30, w:3, cat:"flex", drive:0, guide:"sky",
+    en:{ tag:"Flex", park:"Las Vegas", title:"Easy day — or Death Valley if tonight looks clearest",
+      items:["Rest up before New Year’s Eve","Catch the Sphere again or another show"],
+      note:"Death Valley backup night, and the darkest of the trip: dark from 6:13 p.m. until moonrise at 12:33 a.m., about 6 hours." },
+    zh:{ tag:"机动", park:"拉斯维加斯", title:"轻松一天——如果今晚最晴，就去死亡谷",
+      items:["跨年夜前好好休息","再去一次Sphere或看别的演出"],
+      note:"死亡谷备选夜，也是整个行程最暗的一晚：晚上6:13到月出（凌晨12:33）约6小时。" } },
+  { id:"dec31", m:12, d:31, w:4, cat:"vegas", drive:0,
+    en:{ tag:"Vegas", park:"Las Vegas Strip", iconic:"New Year’s Eve", title:"New Year’s Eve on the Strip",
+      items:["The Strip closes to cars around 6 p.m. and turns into a giant street party","Midnight fireworks from about ten casino rooftops at once","Buses were free last year; dress warm (40s–50s °F)"],
+      note:"Some casino viewing areas need a room key. Fremont Street’s party is ticketed and may be 21+." },
+    zh:{ tag:"拉斯维加斯", park:"拉斯维加斯大道", iconic:"跨年夜", title:"在拉斯维加斯大道跨年",
+      items:["大道约晚上6点禁止车辆通行，变成巨大的街头派对","午夜约十座赌场酒店楼顶同时放烟花","去年公交免费；穿暖和点（约4–15°C）"],
+      note:"部分赌场的观景区需要房卡。弗里蒙特街的派对要买票，可能限21岁以上。" } },
+  { id:"jan1", m:1, d:1, w:5, cat:"travel", drive:0,
+    en:{ tag:"Travel", park:"Depart LAS", title:"Sleep in, then fly home",
+      items:["Late checkout","Return the rental car at the airport","Fly to O’Hare and take the bus home to Madison"],
+      note:"Book afternoon flights after the late night." },
+    zh:{ tag:"出行", park:"从LAS机场出发", title:"睡个懒觉，然后飞回家",
+      items:["晚点退房","在机场还租车","飞回奥黑尔，坐大巴回麦迪逊"],
+      note:"跨年熬夜后，订下午的航班。" } },
+];
+
+const CHECKS = [
+  { id:"flights", en:["Flights to Las Vegas (LAS)","United nonstop from O’Hare, $426 round trip + $70 bus each, for all 4. See the Flights page"], zh:["飞拉斯维加斯（LAS）的机票","4人都从奥黑尔坐美联航直飞，往返$426 + 大巴$70每人。详见机票页"] },
+  { id:"hotel", en:["Hotel off the Strip with free parking","9 nights; the New Year’s nights cost more"], zh:["大道外、免费停车的酒店","9晚；跨年那两晚更贵"] },
+  { id:"car", en:["Rental car","Drivers under 25 usually pay a daily fee"], zh:["租车","25岁以下司机通常每天要加钱"] },
+  { id:"sphere", en:["Sphere tickets: The Wizard of Oz","Christmas Day or another evening"], zh:["Sphere门票：《绿野仙踪》","圣诞节当天或其他晚上"] },
+  { id:"parks", en:["Bring the America the Beautiful pass + photo ID","The signed pass holder must be in the car; it covers everyone in it at Death Valley, Zion and Lake Mead"], zh:["带上美丽美国年票和带照片的证件","签名持卡人必须在车上；在死亡谷、锡安和米德湖可覆盖车上所有人"] },
+  { id:"dvroom", en:["Refundable Death Valley room (optional)","Hold one of Dec 28–30 and move it once the forecast is clear"], zh:["可退款的死亡谷住宿（可选）","先订12月28–30日其中一晚，预报明确后再改"] },
+  { id:"redrock", en:["Red Rock Canyon timed entry (optional)","Reserve on recreation.gov"], zh:["红岩峡谷入场预约（可选）","在recreation.gov预约"] },
+  { id:"gear", en:["Warm layers + red flashlight","Desert nights drop into the 30s–40s °F"], zh:["保暖衣物 + 红光手电","沙漠夜间会降到0–9°C左右"] },
+];
+
+const UI = {
+  en: {
+    docTitle: "Las Vegas Winter Trip",
+    eyebrow: "Dec 23, 2026 – Jan 1, 2027 · Las Vegas base · 4 travelers from Madison",
+    h1: "Las Vegas Winter Trip <span>’26</span>",
+    lede: "One hotel in Vegas, day trips out to the desert: a Christmas supermoon, the Sphere, prime rib, Zion and Hoover Dam, and one clear night of stars in Death Valley.",
+    facts: [["3","park days"],["2","moonrises"],["1","night of stars"],["1","Sphere show"]],
+    glance: "Trip at a glance",
+    cat: { vegas:"Las Vegas", mead:"Hoover Dam & Lake Mead", zion:"Zion", dv:"Death Valley", flex:"Flex day", travel:"Travel" },
+    daysTitle: "Day by day", filterAria: "Filter days",
+    chips: [["all","All"],["parks","Parks"],["vegas","Vegas"],["flex","Flex days"]],
+    empty: "No days match this filter.",
+    drive: h => `Driving: about ${h} hr round trip`,
+    guide: "Guide →",
+    dow: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"], mon: {12:"Dec",1:"Jan"},
+    datesTitle: "Dates that shape the plan",
+    dates: [["Dec 23","Full supermoon rises 4:09 p.m."],["Dec 24","Moon rises ~5:25 p.m. over Lake Mead"],["Dec 25","Park visitor centers usually closed"],["Dec 28–30","Death Valley window — go on the clearest night"],["Dec 31","Strip closes to cars around 6 p.m."],["Jan 19","Spring classes start at UW–Madison"]],
+    todoTitle: "To book", progress: (d, t) => `${d} of ${t} booked`,
+    footer: "Moon and sunset times are calculated for Las Vegas and Furnace Creek (Pacific Time) and assume a flat horizon; mountains delay what you see by 10–30 minutes. Prices were checked Nov 5, 2026. Checklist ticks are saved only in your own browser.",
+  },
+  zh: {
+    docTitle: "拉斯维加斯寒假之旅",
+    eyebrow: "2026年12月23日 – 2027年1月1日 · 以拉斯维加斯为据点 · 4人从麦迪逊出发",
+    h1: "拉斯维加斯寒假之旅 <span>’26</span>",
+    lede: "住在拉斯维加斯同一家酒店，每天开车去沙漠：圣诞超级月亮、Sphere球幕、烤牛肋排、锡安和胡佛水坝，再在死亡谷看一个晴朗的星空夜。",
+    facts: [["3","天国家公园"],["2","次月出"],["1","晚观星"],["1","场Sphere"]],
+    glance: "行程总览",
+    cat: { vegas:"拉斯维加斯", mead:"胡佛水坝与米德湖", zion:"锡安", dv:"死亡谷", flex:"机动日", travel:"出行" },
+    daysTitle: "每日行程", filterAria: "筛选日期",
+    chips: [["all","全部"],["parks","国家公园"],["vegas","拉斯维加斯"],["flex","机动日"]],
+    empty: "没有符合筛选条件的日期。",
+    drive: h => `开车：往返约${h}小时`,
+    guide: "指南 →",
+    dow: ["周日","周一","周二","周三","周四","周五","周六"], mon: {12:"12月",1:"1月"},
+    datesTitle: "影响计划的关键日期",
+    dates: [["12月23日","满月超级月亮下午4:09升起"],["12月24日","月亮约下午5:25从米德湖上升起"],["12月25日","国家公园游客中心通常关门"],["12月28–30日","死亡谷观星窗口——挑最晴的一晚去"],["12月31日","大道约晚上6点禁止车辆通行"],["1月19日","威斯康星大学麦迪逊分校春季学期开课"]],
+    todoTitle: "待预订", progress: (d, t) => `已订 ${d} / ${t}`,
+    footer: "月出和日落时间按拉斯维加斯和火炉溪（太平洋时间）计算，假设地平线平坦；山会让你实际看到的时间晚10–30分钟。价格于2026年11月5日查询。清单的勾选只保存在你自己的浏览器里。",
+  },
+};
+
+const esc = Site.esc;
+const CHECK_KEY = "vegas-trip-checks";
+let filter = "all";
+let saved = {};
+try { saved = JSON.parse(Site.store.get(CHECK_KEY) || "{}") || {}; } catch (e) { saved = {}; }
+const matches = (cat, f) => f === "all" || (f === "parks" ? ["mead","zion","dv"].includes(cat) : f === "vegas" ? ["vegas","travel"].includes(cat) : cat === "flex");
+
+function render(t, lang) {
+  document.getElementById("facts").innerHTML = t.facts.map(([n, l]) => `<span><b>${n}</b>${esc(l)}</span>`).join("");
+  document.getElementById("legend").innerHTML = CATS.map(c => `<span class="c-${c}"><i></i>${esc(t.cat[c])}</span>`).join("");
+  document.getElementById("chips").setAttribute("aria-label", t.filterAria);
+  document.getElementById("chips").innerHTML = t.chips.map(([k, l]) => `<button class="chip" type="button" data-f="${k}" aria-pressed="${k === filter}">${esc(l)}</button>`).join("");
+  document.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => setFilter(c.dataset.f)));
+
+  const strip = document.getElementById("strip"), list = document.getElementById("days");
+  strip.innerHTML = ""; list.innerHTML = "";
+  DAYS.forEach(day => {
+    const c = day[lang], dow = t.dow[day.w], mon = t.mon[day.m];
+    const b = document.createElement("button");
+    b.type = "button"; b.className = `cell c-${day.cat}`;
+    b.setAttribute("aria-label", `${dow} ${mon} ${day.d}: ${c.title}`);
+    b.innerHTML = `<span>${esc(dow)}</span><span class="n">${day.d}</span><span class="t">${esc(c.tag)}</span>`;
+    b.addEventListener("click", () => { setFilter("all"); document.getElementById(day.id).scrollIntoView({ block: "start" }); });
+    strip.appendChild(b);
+
+    const li = document.createElement("li");
+    li.className = `day c-${day.cat}`; li.id = day.id; li.dataset.cat = day.cat;
+    const guideHref = day.guide === "sky" ? "sky.html" : day.guide ? `parks.html#${day.guide}` : "";
+    li.innerHTML = `
+      <div class="date"><span>${esc(dow)}</span><span class="num">${day.d}</span><span>${esc(mon)}</span></div>
+      <div class="dbody">
+        <div class="where"><span class="tag">${esc(c.tag)}</span><span class="park">${esc(c.park)}</span>${c.iconic ? `<span class="iconic">★ ${esc(c.iconic)}</span>` : ""}${guideHref ? `<a class="guide" href="${guideHref}">${t.guide}</a>` : ""}</div>
+        <h3>${esc(c.title)}</h3>
+        <ul>${c.items.map(i => `<li>${esc(i)}</li>`).join("")}</ul>
+        ${c.note ? `<div class="note">${esc(c.note)}</div>` : ""}
+        ${day.drive ? `<div class="drive">${esc(t.drive(day.drive))}</div>` : ""}
+      </div>`;
+    list.appendChild(li);
+  });
+  const empty = document.createElement("li");
+  empty.className = "empty"; empty.id = "empty"; empty.textContent = t.empty;
+  list.appendChild(empty);
+  setFilter(filter);
+
+  document.getElementById("dates").innerHTML = t.dates.map(([d, x]) => `<dt>${esc(d)}</dt><dd>${esc(x)}</dd>`).join("");
+  const checksEl = document.getElementById("checks"); checksEl.innerHTML = "";
+  CHECKS.forEach(item => {
+    const [label, sub] = item[lang];
+    const li = document.createElement("li");
+    li.innerHTML = `<label class="check" for="chk-${item.id}"><input type="checkbox" id="chk-${item.id}" ${saved[item.id] ? "checked" : ""}><span class="cbox" aria-hidden="true"></span><span class="txt">${esc(label)}<small>${esc(sub)}</small></span></label>`;
+    li.querySelector("input").addEventListener("change", e => { saved[item.id] = e.target.checked; Site.store.set(CHECK_KEY, JSON.stringify(saved)); progress(t); });
+    checksEl.appendChild(li);
+  });
+  progress(t);
+}
+function progress(t) { document.getElementById("progress").textContent = t.progress(CHECKS.filter(c => saved[c.id]).length, CHECKS.length); }
+function setFilter(f) {
+  filter = f;
+  document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", String(c.dataset.f === f)));
+  let shown = 0;
+  document.querySelectorAll(".day").forEach(li => { const m = matches(li.dataset.cat, f); li.hidden = !m; if (m) shown++; });
+  const e = document.getElementById("empty"); if (e) e.hidden = shown > 0;
+}
+Site.init(UI, render);
+</script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Ask Claude About the Trip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+<style>
+.chat { display: flex; flex-direction: column; gap: 14px; max-width: 760px; width: 100%; }
+.msg { display: flex; flex-direction: column; gap: 4px; max-width: 100%; }
+.msg .who { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.msg.user { align-self: flex-end; align-items: flex-end; max-width: 85%; }
+.msg.user .bubble { background: var(--ink); color: var(--bg); border-radius: 14px 14px 4px 14px; padding: 10px 14px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 15px; }
+.msg.bot .bubble { background: var(--surface); border: 1px solid var(--line); border-radius: 14px 14px 14px 4px; padding: 12px 16px; font-size: 15px; line-height: 1.55; overflow-wrap: anywhere; }
+.msg.bot .bubble > * { margin: 0 0 10px; } .msg.bot .bubble > *:last-child { margin-bottom: 0; }
+.msg.bot .bubble ul, .msg.bot .bubble ol { padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
+.msg.bot .bubble code { font-family: var(--mono); font-size: 13px; background: color-mix(in srgb, var(--ink) 7%, transparent); padding: 1px 5px; border-radius: 4px; }
+.msg.bot.err .bubble { border-color: color-mix(in srgb, var(--bad) 45%, transparent); color: var(--bad); }
+.typing { display: inline-flex; gap: 4px; padding: 4px 0; }
+.typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: blink 1.2s infinite ease-in-out; }
+.typing i:nth-child(2) { animation-delay: .2s; } .typing i:nth-child(3) { animation-delay: .4s; }
+@keyframes blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .typing i { animation: none; opacity: .6; } }
+.sugg { display: flex; flex-wrap: wrap; gap: 8px; max-width: 760px; }
+.sugg button { appearance: none; font: 500 14px var(--body); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; cursor: pointer; text-align: left; }
+.sugg button:hover { border-color: var(--accent); }
+.composer { position: sticky; bottom: 0; padding: 12px 0 calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(to bottom, transparent, var(--bg) 22%); max-width: 760px; width: 100%; }
+.composer form { display: flex; gap: 8px; align-items: flex-end; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 8px 8px 8px 14px; box-shadow: 0 4px 16px rgb(0 0 0 / .06); }
+.composer form:focus-within { border-color: var(--accent); }
+.composer textarea { flex: 1; min-width: 0; resize: none; border: 0; outline: 0; background: transparent; color: var(--ink); font: 400 15px/1.45 var(--body); max-height: 160px; padding: 6px 0; }
+.btn { appearance: none; border: 0; border-radius: 10px; padding: 9px 16px; font: 600 14px var(--body); cursor: pointer; background: var(--accent); color: #fff; white-space: nowrap; }
+.btn:disabled { opacity: .45; cursor: default; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; max-width: 760px; font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+.linkbtn { appearance: none; background: none; border: 0; padding: 0; color: var(--muted); font: 500 12.5px var(--body); text-decoration: underline; cursor: pointer; }
+.gate { max-width: 520px; }
+.gate form { display: flex; gap: 8px; flex-wrap: wrap; }
+.gate input { flex: 1 1 200px; min-width: 0; font: 500 15px var(--body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; }
+.gate .gerr { color: var(--bad); font-size: 13.5px; margin: 0; }
+.ctx { font-size: 12.5px; color: var(--muted); max-width: 760px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="pnav" data-i18n-aria="navAria">
+    <a data-nav="index.html" href="index.html" data-i18n="navItin"></a>
+    <a data-nav="flights.html" href="flights.html" data-i18n="navFlights"></a>
+    <a data-nav="parks.html" href="parks.html" data-i18n="navParks"></a>
+    <a data-nav="sky.html" href="sky.html" data-i18n="navSky"></a>
+    <a data-nav="budget.html" href="budget.html" data-i18n="navBudget"></a>
+    <a data-nav="ask.html" href="ask.html" aria-current="page" data-i18n="navAsk"></a>
+    <a class="tripswitch" data-nav="https://xmiao8.github.io/orlando-trip-2026/index.html" href="https://xmiao8.github.io/orlando-trip-2026/" data-i18n="navOrlando"></a>
+  </nav>
+
+  <header class="top">
+    <div class="toprow">
+      <div class="eyebrow" data-i18n="eyebrow"></div>
+      <button class="lang" id="lang-toggle" type="button"></button>
+    </div>
+    <h1 data-i18n="h1"></h1>
+    <p class="lede" data-i18n="lede"></p>
+  </header>
+
+  <section class="box gate" id="gate" hidden aria-labelledby="gate-title">
+    <h2 id="gate-title" data-i18n="gateTitle" style="font-size:19px"></h2>
+    <p data-i18n="gateText"></p>
+    <form id="gate-form">
+      <input id="pass" type="password" autocomplete="current-password" data-i18n-aria="gateTitle" required>
+      <button class="btn" type="submit" data-i18n="gateBtn"></button>
+    </form>
+    <p class="gerr" id="gate-err" hidden data-i18n="gateWrong"></p>
+  </section>
+
+  <section class="block" id="chatwrap" aria-label="Chat">
+    <div class="chat" id="chat" aria-live="polite"></div>
+    <div class="sugg" id="sugg"></div>
+    <div class="composer">
+      <form id="ask-form">
+        <textarea id="q" rows="1" data-i18n-aria="placeholder"></textarea>
+        <button class="btn ghost" type="button" id="stop" hidden data-i18n="stop"></button>
+        <button class="btn" type="submit" id="send" data-i18n="send"></button>
+      </form>
+      <div class="row">
+        <span data-i18n="hint"></span>
+        <span><button class="linkbtn" type="button" id="clear" data-i18n="clear"></button> · <button class="linkbtn" type="button" id="relock" data-i18n="relock"></button></span>
+      </div>
+    </div>
+    <p class="ctx" data-i18n="ctx"></p>
+  </section>
+
+  <footer class="foot" data-i18n="footer"></footer>
+</div>
+
+<script>
+// The Cloudflare Worker that holds the API key (see worker/worker.js in the repo).
+const WORKER_URL = "https://vegas-trip-ask.WORKERS_SUBDOMAIN.workers.dev/ask";
+const PASS_KEY = "vegas-ask-pass", CHAT_KEY = "vegas-ask-chat";
+
+const UI = {
+  en: {
+    docTitle: "Ask Claude About the Trip",
+    eyebrow: "Answers from the trip plan · powered by Claude",
+    h1: "Ask Claude",
+    lede: "Ask anything about the trip — the plan, flights, parks, the moon and stars, the budget, what to pack. Claude has read every page of this site and sees the live cloud forecast.",
+    gateTitle: "Group passcode",
+    gateText: "Enter the passcode the trip organizer shared. Your browser remembers it, so you only do this once.",
+    gateBtn: "Unlock", gateWrong: "That passcode didn’t work. Check with the trip organizer.",
+    placeholder: "Ask about the trip…", send: "Send", stop: "Stop",
+    hint: "Enter to send · Shift+Enter for a new line",
+    clear: "New chat", relock: "Change passcode",
+    you: "You", claude: "Claude",
+    sugg: [
+      "Which night should we pick for Death Valley?",
+      "Where’s the best spot to watch the supermoon rise on Dec 23?",
+      "What should we pack for desert nights?",
+      "How much will the trip cost each of us?",
+      "What’s open on Christmas Day?",
+      "Is Zion doable as a day trip in winter?",
+    ],
+    errNet: "Couldn’t reach Claude. Check your connection and try again.",
+    errBusy: "Claude is busy right now. Try again in a minute.",
+    errSetup: "Ask Claude isn’t set up yet. The trip organizer still needs to finish the server settings.",
+    errOther: "Something went wrong. Try again.",
+    stopped: "(stopped)",
+    ctx: "Answers can be wrong, and prices and hours change — double-check before you book or drive. Questions are sent to Anthropic’s API through the trip’s own server; nothing is saved there.",
+    footer: "Your chat stays in this browser only. Use “New chat” to clear it.",
+  },
+  zh: {
+    docTitle: "问Claude：旅行助手",
+    eyebrow: "根据行程回答 · 由Claude提供",
+    h1: "问Claude",
+    lede: "关于这次旅行的任何问题都可以问——行程、机票、公园、月亮和星空、预算、该带什么。Claude读过本网站的所有页面，也能看到实时云量预报。",
+    gateTitle: "小组口令",
+    gateText: "输入组织者分享的口令。浏览器会记住它，只需输入一次。",
+    gateBtn: "解锁", gateWrong: "口令不对，请向组织者确认。",
+    placeholder: "问一个关于旅行的问题…", send: "发送", stop: "停止",
+    hint: "回车发送 · Shift+回车换行",
+    clear: "新对话", relock: "更换口令",
+    you: "你", claude: "Claude",
+    sugg: [
+      "死亡谷应该选哪一晚？",
+      "12月23日在哪里看超级月亮升起最好？",
+      "沙漠的夜晚应该带什么？",
+      "这次旅行每人大概花多少钱？",
+      "圣诞节当天哪些地方开门？",
+      "冬天锡安一日游可行吗？",
+    ],
+    errNet: "连不上Claude，请检查网络后重试。",
+    errBusy: "Claude现在有点忙，请过一分钟再试。",
+    errSetup: "问Claude还没设置好，组织者还需要完成服务器设置。",
+    errOther: "出了点问题，请重试。",
+    stopped: "（已停止）",
+    ctx: "回答可能有误，价格和开放时间也会变——订票或出发前请再确认。问题会通过这次旅行自己的服务器发送到Anthropic的API；服务器不保存任何内容。",
+    footer: "对话只保存在这个浏览器里。点“新对话”可以清除。",
+  },
+};
+
+const $ = id => document.getElementById(id);
+const esc = Site.esc;
+let T = null, busy = false, controller = null;
+let chat = [];
+try { chat = JSON.parse(Site.store.get(CHAT_KEY) || "[]"); if (!Array.isArray(chat)) chat = []; } catch (e) { chat = []; }
+const saveChat = () => Site.store.set(CHAT_KEY, JSON.stringify(chat.slice(-30)));
+
+// Small, safe markdown: paragraphs, bullet/numbered lists, **bold**, *italic*, `code`, links.
+function inline(s) {
+  s = esc(s);
+  s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
+  s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  s = s.replace(/(^|[^*])\*([^*\s][^*]*)\*/g, "$1<em>$2</em>");
+  s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  s = s.replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>');
+  return s;
+}
+function md(text) {
+  const out = []; let list = null;
+  const close = () => { if (list) { out.push(`<${list.tag}>${list.items.map(i => `<li>${inline(i)}</li>`).join("")}</${list.tag}>`); list = null; } };
+  let para = [];
+  const flush = () => { if (para.length) { out.push(`<p>${para.map(inline).join("<br>")}</p>`); para = []; } };
+  for (const raw of text.split("\n")) {
+    const line = raw.replace(/\s+$/, "");
+    const ul = line.match(/^\s*[-*•]\s+(.*)/), ol = line.match(/^\s*\d+[.)]\s+(.*)/);
+    if (ul || ol) {
+      flush();
+      const tag = ul ? "ul" : "ol";
+      if (!list || list.tag !== tag) { close(); list = { tag, items: [] }; }
+      list.items.push((ul || ol)[1]);
+    } else if (!line.trim()) { flush(); close(); }
+    else if (list && /^\s{2,}/.test(raw)) { list.items[list.items.length - 1] += " " + line.trim(); }
+    else { close(); para.push(line.replace(/^#+\s*/, "")); }
+  }
+  flush(); close();
+  return out.join("");
+}
+
+function bubble(m) {
+  const who = m.role === "user" ? T.you : T.claude;
+  const body = m.role === "user" ? esc(m.content) : (m.pending && !m.content ? '<span class="typing" aria-label="…"><i></i><i></i><i></i></span>' : md(m.content));
+  return `<div class="msg ${m.role === "user" ? "user" : "bot"}${m.error ? " err" : ""}"><span class="who">${esc(who)}</span><div class="bubble">${body}</div></div>`;
+}
+function renderChat() {
+  $("chat").innerHTML = chat.map(bubble).join("");
+  $("sugg").hidden = chat.length > 0;
+  $("sugg").innerHTML = T.sugg.map(s => `<button type="button">${esc(s)}</button>`).join("");
+  $("send").disabled = busy; $("stop").hidden = !busy;
+}
+function updateLast() {
+  const last = $("chat").lastElementChild;
+  if (last) last.outerHTML = bubble(chat[chat.length - 1]);
+}
+const scrollDown = () => window.scrollTo({ top: document.body.scrollHeight });
+
+function showGate(wrong) {
+  $("gate").hidden = false; $("gate-err").hidden = !wrong;
+  $("chatwrap").hidden = true; $("pass").focus();
+}
+function hideGate() { $("gate").hidden = true; $("chatwrap").hidden = false; }
+
+async function ask(question) {
+  question = question.trim();
+  if (!question || busy) return;
+  const pass = Site.store.get(PASS_KEY);
+  if (!pass) { showGate(false); return; }
+  chat = chat.filter(m => !m.error);
+  chat.push({ role: "user", content: question });
+  const answer = { role: "assistant", content: "", pending: true };
+  chat.push(answer);
+  busy = true; renderChat(); scrollDown();
+  $("q").value = ""; autosize();
+
+  const history = chat.filter(m => !m.error && !m.pending && m.content).map(m => ({ role: m.role, content: m.content }));
+  controller = new AbortController();
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal,
+      body: JSON.stringify({ passcode: pass, messages: history, lang: Site.lang }),
+    });
+    if (res.status === 401) {
+      chat.splice(-2, 2); Site.store.set(PASS_KEY, ""); busy = false; renderChat(); showGate(true);
+      $("q").value = question; return;
+    }
+    if (!res.ok) throw Object.assign(new Error("http"), { status: res.status });
+    const reader = res.body.getReader(), dec = new TextDecoder();
+    let buf = "";
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let i;
+      while ((i = buf.indexOf("\n\n")) >= 0) {
+        const evt = buf.slice(0, i); buf = buf.slice(i + 2);
+        for (const line of evt.split("\n")) {
+          if (!line.startsWith("data:")) continue;
+          let d; try { d = JSON.parse(line.slice(5)); } catch (e) { continue; }
+          if (d.type === "content_block_delta" && d.delta && d.delta.type === "text_delta") {
+            answer.content += d.delta.text; answer.pending = false; updateLast();
+          } else if (d.type === "error") {
+            throw Object.assign(new Error("stream"), { status: d.error && d.error.type === "overloaded_error" ? 503 : 500 });
+          }
+        }
+      }
+    }
+    answer.pending = false;
+    if (!answer.content) throw Object.assign(new Error("empty"), { status: 500 });
+  } catch (e) {
+    if (e.name === "AbortError") {
+      answer.pending = false; answer.content = (answer.content ? answer.content + "\n\n" : "") + T.stopped;
+    } else {
+      answer.pending = false; answer.error = true;
+      answer.content = e.status === 503 ? T.errBusy : e.status === 500 && e.message === "http" ? T.errSetup : e.status ? T.errOther : T.errNet;
+    }
+  } finally {
+    busy = false; controller = null; saveChat(); renderChat(); scrollDown();
+  }
+}
+
+function autosize() { const q = $("q"); q.style.height = "auto"; q.style.height = Math.min(q.scrollHeight, 160) + "px"; }
+
+function render(t) {
+  T = t;
+  $("q").placeholder = t.placeholder;
+  $("pass").placeholder = t.gateTitle;
+  renderChat();
+  if (!Site.store.get(PASS_KEY)) showGate(false); else hideGate();
+}
+
+$("ask-form").addEventListener("submit", e => { e.preventDefault(); ask($("q").value); });
+$("q").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); ask($("q").value); } });
+$("q").addEventListener("input", autosize);
+$("sugg").addEventListener("click", e => { const b = e.target.closest("button"); if (b) ask(b.textContent); });
+$("stop").addEventListener("click", () => controller && controller.abort());
+$("clear").addEventListener("click", () => { if (busy && controller) controller.abort(); chat = []; saveChat(); renderChat(); $("q").focus(); });
+$("relock").addEventListener("click", () => { Site.store.set(PASS_KEY, ""); showGate(false); });
+$("gate-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const v = $("pass").value.trim(); if (!v) return;
+  Site.store.set(PASS_KEY, v); $("pass").value = ""; hideGate(); $("q").focus();
+});
+
+Site.init(UI, render);
+</script>
+</body>
+</html>

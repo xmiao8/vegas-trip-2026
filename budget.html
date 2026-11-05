@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Las Vegas Trip Budget</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+<style>
+:root { --k-travel: var(--c-travel); --k-stay: var(--c-flex); --k-do: var(--c-zion); --k-food: var(--c-dv); --k-other: var(--c-sky); }
+.summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 12px 28px; }
+.fig { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.fig .lbl { font-size: 13px; color: var(--muted); }
+.fig .num { font-family: var(--display); font-size: clamp(30px, 5vw, 40px); font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.fig.total .num { color: var(--accent); }
+.fig .sub { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.bar { display: flex; height: 14px; border-radius: 7px; overflow: hidden; background: var(--line); gap: 2px; }
+.bar span { display: block; height: 100%; transition: flex-basis .25s ease; }
+@media (prefers-reduced-motion: reduce) { .bar span { transition: none; } }
+.blegend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); }
+.blegend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.blegend b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.compare { font-size: 14px; color: var(--muted); }
+.compare b { color: var(--ink); }
+.grid { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 32px; align-items: start; }
+.controls { display: flex; flex-direction: column; gap: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+.controls h2, .items h2 { font-size: 20px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field > label, .flabel { font-size: 13px; font-weight: 600; }
+.hint { font-size: 12px; color: var(--muted); }
+select, input[type="number"] { width: 100%; font: 500 14px var(--body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; }
+.money { position: relative; }
+.money::before { content: "$"; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 14px; pointer-events: none; }
+.money input { padding-left: 22px; font-variant-numeric: tabular-nums; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tog { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 8px; align-items: start; font-size: 13.5px; cursor: pointer; }
+.tog input { margin: 2px 0 0; width: 16px; height: 16px; accent-color: var(--accent); }
+.reset { appearance: none; background: none; border: 0; padding: 0; color: var(--muted); font: 500 13px var(--body); text-decoration: underline; cursor: pointer; align-self: flex-start; }
+.items { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+table.b { width: 100%; border-collapse: collapse; font-size: 14px; }
+table.b th { text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 500; padding: 0 8px 8px 0; border-bottom: 1px solid var(--line); }
+table.b th.r, table.b td.r { text-align: right; padding-right: 0; padding-left: 12px; }
+table.b td { padding: 10px 8px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.b td.r { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 600; }
+table.b td .n { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+table.b td .dot { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 8px; vertical-align: 1px; }
+table.b tr.g td { padding-top: 16px; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border-bottom: 0; padding-bottom: 4px; }
+table.b tfoot td { border-bottom: 0; font-weight: 700; font-size: 15px; padding-top: 12px; }
+table.b tfoot td.r { font-family: var(--display); font-size: 20px; }
+@media (max-width: 720px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="pnav" data-i18n-aria="navAria">
+    <a data-nav="index.html" href="index.html" data-i18n="navItin"></a>
+    <a data-nav="flights.html" href="flights.html" data-i18n="navFlights"></a>
+    <a data-nav="parks.html" href="parks.html" data-i18n="navParks"></a>
+    <a data-nav="sky.html" href="sky.html" data-i18n="navSky"></a>
+    <a data-nav="budget.html" href="budget.html" aria-current="page" data-i18n="navBudget"></a>
+    <a data-nav="ask.html" href="ask.html" data-i18n="navAsk"></a>
+    <a class="tripswitch" data-nav="https://xmiao8.github.io/orlando-trip-2026/index.html" href="https://xmiao8.github.io/orlando-trip-2026/" data-i18n="navOrlando"></a>
+  </nav>
+
+  <header class="top">
+    <div class="toprow">
+      <div class="eyebrow" data-i18n="eyebrow"></div>
+      <button class="lang" id="lang-toggle" type="button"></button>
+    </div>
+    <h1 data-i18n="h1"></h1>
+    <p class="lede" data-i18n="lede"></p>
+  </header>
+
+  <section class="block" aria-label="Summary">
+    <div class="summary">
+      <div class="fig"><span class="lbl" data-i18n="figMsn"></span><span class="num" id="n-msn"></span><span class="sub" id="s-msn"></span></div>
+      <div class="fig total"><span class="lbl" data-i18n="figGroup"></span><span class="num" id="n-group"></span><span class="sub" data-i18n="figGroupSub"></span></div>
+    </div>
+    <div class="bar" id="bar" role="img"></div>
+    <div class="blegend" id="blegend"></div>
+    <p class="compare" id="compare"></p>
+  </section>
+
+  <div class="grid">
+    <section class="controls" aria-labelledby="ctl-title">
+      <h2 id="ctl-title" data-i18n="ctlTitle"></h2>
+      <div class="field">
+        <span class="flabel" data-i18n="flightLabel"></span>
+        <div class="money"><input type="number" id="f-msn" min="0" step="10" inputmode="numeric" data-i18n-aria="flightLabel"></div>
+        <span class="hint" data-i18n="fMsn"></span>
+      </div>
+      <div class="field">
+        <span class="flabel" data-i18n="hotelLabel"></span>
+        <div class="pair">
+          <div class="field"><label for="h-reg" class="hint" data-i18n="hReg"></label><div class="money"><input type="number" id="h-reg" min="0" step="10" inputmode="numeric"></div></div>
+          <div class="field"><label for="h-nye" class="hint" data-i18n="hNye"></label><div class="money"><input type="number" id="h-nye" min="0" step="10" inputmode="numeric"></div></div>
+        </div>
+        <span class="hint" data-i18n="hotelHint"></span>
+      </div>
+      <div class="field">
+        <label class="tog" for="o-dv"><input type="checkbox" id="o-dv"><span data-i18n="optDv"></span></label>
+        <label class="tog" for="o-zion"><input type="checkbox" id="o-zion"><span data-i18n="optZion"></span></label>
+      </div>
+      <div class="field">
+        <label for="car" data-i18n="carLabel"></label>
+        <div class="money"><input type="number" id="car" min="0" step="10" inputmode="numeric"></div>
+      </div>
+      <div class="field">
+        <label for="entry" data-i18n="entryLabel"></label>
+        <select id="entry"></select>
+        <label class="tog" for="o-nonres"><input type="checkbox" id="o-nonres"><span data-i18n="optNonres"></span></label>
+      </div>
+      <div class="field">
+        <label for="sphere" data-i18n="sphereLabel"></label>
+        <div class="money"><input type="number" id="sphere" min="0" step="5" inputmode="numeric"></div>
+      </div>
+      <div class="field">
+        <label for="food" data-i18n="foodLabel"></label>
+        <div class="money"><input type="number" id="food" min="0" step="5" inputmode="numeric"></div>
+      </div>
+      <div class="field">
+        <label for="misc" data-i18n="miscLabel"></label>
+        <div class="money"><input type="number" id="misc" min="0" step="10" inputmode="numeric"></div>
+      </div>
+      <button type="button" class="reset" id="reset" data-i18n="reset"></button>
+    </section>
+
+    <section class="items" aria-labelledby="items-title">
+      <h2 id="items-title" data-i18n="itemsTitle"></h2>
+      <div class="tablewrap">
+        <table class="b">
+          <thead><tr><th data-i18n="thItem"></th><th class="r" data-i18n="thPer"></th></tr></thead>
+          <tbody id="rows"></tbody>
+          <tfoot><tr><td data-i18n="footTotal"></td><td class="r" id="t-range"></td></tr></tfoot>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <footer class="foot" data-i18n="footer"></footer>
+</div>
+
+<script>
+const PEOPLE = 4, REG_NIGHTS = 7, NYE_NIGHTS = 2, DAYS = 10, PARKING = 60, HOOVER = 15, DV_ROOM = 220, ZION_ROOM = 180, NONRES = 100;
+const DEFAULTS = { fMsn: 496, hReg: 150, hNye: 350, car: 600, entry: "have", nonres: false, sphere: 120, food: 60, misc: 150, dv: false, zion: false };
+const ENTRY = { have: 0, pay: 95, pass: 80 };
+const CATS = ["travel","stay","do","food","other"];
+const UI = {
+  en: {
+    docTitle: "Las Vegas Trip Budget",
+    eyebrow: "Dec 23, 2026 – Jan 1, 2027 · 9 nights · 4 travelers from Madison",
+    h1: "Trip budget",
+    lede: "Estimated cost per person. Shared costs (hotel, car, parking, park entry) are split four ways. Change the choices and the totals update.",
+    figMsn: "Per person", figGroup: "Whole group", figGroupSub: "4 travelers",
+    perDay: v => `about ${v} per day`,
+    cat: { travel:"Flights & car", stay:"Hotel", do:"Parks & Sphere", food:"Food", other:"Other" },
+    barAria: "Share of the average per-person cost by category",
+    compare: v => `The Orlando plan came to about <b>$3,650–3,760</b> per person (worked out for 3 people) — this plan is about <b>${v} less</b> each.`,
+    cheaper: "cheaper", ctlTitle: "Your choices",
+    flightLabel: "Round-trip flight to Las Vegas", fMsn: "From Madison: United nonstop from O’Hare ($426) + Van Galder bus ($70)",
+    hotelLabel: "Hotel per night, whole group", hReg: "Regular × 7", hNye: "New Year’s × 2",
+    hotelHint: "One off-Strip room with two queen beds for 4, with free parking. Dec 30–31 cost far more than the rest of the week.",
+    optDv: "Stay a night in Death Valley (+ about $220 for the room)", optZion: "Stay a night in Springdale for Zion (+ about $180)",
+    carLabel: "Rental car + gas, whole group (mid-size SUV for 4 + luggage)",
+    entryLabel: "National park entry",
+    entryOpts: { have:"We have an America the Beautiful pass: $0", pay:"Pay at each park: $95 per car", pass:"Buy an America the Beautiful pass: $80" },
+    optNonres: "I’m not a US resident (Zion may still charge +$100)",
+    sphereLabel: "Sphere ticket (The Wizard of Oz)",
+    foodLabel: "Food, per person per day", miscLabel: "Souvenirs, stickers & other, per person",
+    reset: "Reset to suggested values",
+    itemsTitle: "Line by line", thItem: "Item", thPer: "Per person", footTotal: "Total per person",
+    groups: { travel:"Getting there & around", stay:"Staying", do:"Parks & shows", daily:"Day to day" },
+    rows: {
+      flight: ["Flight + bus", "United nonstop O’Hare ⇄ Las Vegas, Dec 23 – Jan 1, plus the Van Galder bus from Madison"],
+      car: ["Rental car + gas", v => `${v} for the group, split 4 ways; ~900 miles of driving`],
+      parking: ["Parking", "Strip garages and the Hoover Dam garage, split 4 ways"],
+      hotel: ["Hotel", (r, n, tot) => `7 × ${r} + 2 × ${n} (New Year’s) = ${tot}, split 4 ways`],
+      dv: ["Death Valley night", "Refundable room, split 4 ways"],
+      zion: ["Springdale night", "Near Zion, split 4 ways"],
+      entry: ["Park entry", "Death Valley, Zion and Lake Mead, split 4 ways"],
+      nonres: ["Zion non-resident fee", "Per person"],
+      sphere: ["Sphere: The Wizard of Oz", "Holiday pricing"],
+      hoover: ["Hoover Dam tour", "Optional, about $15"],
+      food: ["Food", v => `${v} a day × 10 days, prime rib included`],
+      misc: ["Souvenirs, stickers & other", ""],
+    },
+    range: (a, b) => a === b ? a : `${a} – ${b}`,
+    footer: "Flights from Google Flights on Nov 5, 2026. Hotel, car and Sphere prices are estimates; Las Vegas hotel prices around New Year’s run about three times Christmas-week rates. Your choices are saved only in your own browser.",
+  },
+  zh: {
+    docTitle: "拉斯维加斯旅行预算",
+    eyebrow: "2026年12月23日 – 2027年1月1日 · 9晚 · 4人从麦迪逊出发",
+    h1: "旅行预算",
+    lede: "每人预估花费。共同费用（酒店、租车、停车、公园门票）四人平摊。修改选项，总额会随之更新。",
+    figMsn: "每人", figGroup: "四人合计", figGroupSub: "4人",
+    perDay: v => `约每天 ${v}`,
+    cat: { travel:"机票和租车", stay:"酒店", do:"公园和Sphere", food:"餐饮", other:"其他" },
+    barAria: "人均花费按类别的占比",
+    compare: v => `奥兰多方案每人约<b>$3,650–3,760</b>（按3人计算）——这个方案每人约<b>少${v}</b>。`,
+    cheaper: "更便宜", ctlTitle: "你的选择",
+    flightLabel: "往返拉斯维加斯机票", fMsn: "从麦迪逊：奥黑尔美联航直飞（$426）+ Van Galder大巴（$70）",
+    hotelLabel: "酒店，四人每晚合计", hReg: "普通 × 7晚", hNye: "跨年 × 2晚",
+    hotelHint: "大道外、免费停车、两张大床四人一间。12月30–31日比这周其他晚上贵很多。",
+    optDv: "在死亡谷住一晚（房间约+$220）", optZion: "在斯普林代尔住一晚去锡安（约+$180）",
+    carLabel: "租车 + 油费，四人合计（中型SUV，装得下4人和行李）",
+    entryLabel: "国家公园门票",
+    entryOpts: { have:"已有美丽美国年票：$0", pay:"每个公园单独付：每车共$95", pass:"买一张美丽美国年票：$80" },
+    optNonres: "我不是美国居民（锡安可能仍收+$100）",
+    sphereLabel: "Sphere门票（《绿野仙踪》）",
+    foodLabel: "餐饮，每人每天", miscLabel: "纪念品、贴纸及其他，每人",
+    reset: "恢复建议值",
+    itemsTitle: "明细", thItem: "项目", thPer: "每人", footTotal: "每人合计",
+    groups: { travel:"交通", stay:"住宿", do:"公园和演出", daily:"日常" },
+    rows: {
+      flight: ["机票 + 大巴", "美联航奥黑尔 ⇄ 拉斯维加斯直飞，12月23日 – 1月1日，加麦迪逊出发的Van Galder大巴"],
+      car: ["租车 + 油费", v => `四人合计 ${v}，平摊；约1,450公里车程`],
+      parking: ["停车", "大道停车楼和胡佛水坝停车楼，四人平摊"],
+      hotel: ["酒店", (r, n, tot) => `7 × ${r} + 2 × ${n}（跨年）= ${tot}，四人平摊`],
+      dv: ["死亡谷住一晚", "可退款房间，四人平摊"],
+      zion: ["斯普林代尔住一晚", "锡安附近，四人平摊"],
+      entry: ["公园门票", "死亡谷、锡安和米德湖，四人平摊"],
+      nonres: ["锡安非居民费用", "每人"],
+      sphere: ["Sphere：《绿野仙踪》", "节日价格"],
+      hoover: ["胡佛水坝导览", "可选，约$15"],
+      food: ["餐饮", v => `每天 ${v} × 10天，含烤牛肋排`],
+      misc: ["纪念品、贴纸及其他", ""],
+    },
+    range: (a, b) => a === b ? a : `${a} – ${b}`,
+    footer: "机票价格于2026年11月5日在Google Flights查询。酒店、租车和Sphere价格为估算；拉斯维加斯跨年期间的酒店价格约为圣诞周的三倍。你的选择只保存在你自己的浏览器里。",
+  },
+};
+
+const KEY = "vegas-trip-budget-v2"; // v2: group of 4 from Madison, pass already owned
+let state = { ...DEFAULTS };
+try { const s = JSON.parse(Site.store.get(KEY) || "null"); if (s) state = { ...DEFAULTS, ...s }; } catch (e) {}
+const $ = id => document.getElementById(id);
+const money = v => "$" + Math.round(v).toLocaleString("en-US");
+const num = v => { const n = Number(v); return Number.isFinite(n) && n >= 0 ? n : 0; };
+const save = () => Site.store.set(KEY, JSON.stringify(state));
+const INPUTS = [["f-msn","fMsn"],["h-reg","hReg"],["h-nye","hNye"],["car","car"],["sphere","sphere"],["food","food"],["misc","misc"]];
+let T = null;
+
+function compute() {
+  const hotelTotal = num(state.hReg) * REG_NIGHTS + num(state.hNye) * NYE_NIGHTS;
+  const c = {
+    car: num(state.car) / PEOPLE, parking: PARKING / PEOPLE,
+    hotel: hotelTotal / PEOPLE, dv: state.dv ? DV_ROOM / PEOPLE : 0, zion: state.zion ? ZION_ROOM / PEOPLE : 0,
+    entry: (ENTRY[state.entry] ?? 95) / PEOPLE, nonres: state.nonres ? NONRES : 0,
+    sphere: num(state.sphere), hoover: HOOVER, food: num(state.food) * DAYS, misc: num(state.misc),
+  };
+  const sum = Object.values(c).reduce((a, b) => a + b, 0);
+  const msn = sum + num(state.fMsn);
+  const avgFlight = num(state.fMsn);
+  const cats = { travel: avgFlight + c.car + c.parking, stay: c.hotel + c.dv + c.zion, do: c.entry + c.nonres + c.sphere + c.hoover, food: c.food, other: c.misc };
+  return { c, msn, group: Math.round(msn) * PEOPLE, cats, hotelTotal };
+}
+
+function renderNumbers() {
+  const t = T, r = compute(), c = r.c;
+  $("n-msn").textContent = money(r.msn); $("s-msn").textContent = t.perDay(money(r.msn / DAYS));
+  $("n-group").textContent = money(r.group);
+  const total = Object.values(r.cats).reduce((a, b) => a + b, 0) || 1;
+  $("bar").setAttribute("aria-label", t.barAria);
+  $("bar").innerHTML = CATS.filter(k => r.cats[k] > 0).map(k => `<span style="flex:${r.cats[k] / total} 1 0;background:var(--k-${k})" title="${t.cat[k]} ${money(r.cats[k])}"></span>`).join("");
+  $("blegend").innerHTML = CATS.map(k => `<span><i style="background:var(--k-${k})"></i>${t.cat[k]} <b>${Math.round(r.cats[k] / total * 100)}%</b></span>`).join("");
+  const lo = 3650 - r.msn, hi = 3760 - r.msn;
+  $("compare").innerHTML = lo > 0 ? t.compare(`${money(lo)}–${money(hi)}`) : "";
+
+  const R = t.rows;
+  const row = (cat, key, val, note) => `<tr><td><span class="dot" style="background:var(--k-${cat})"></span>${R[key][0]}${note ? `<span class="n">${note}</span>` : ""}</td><td class="r">${val}</td></tr>`;
+  const g = n => `<tr class="g"><td colspan="2">${t.groups[n]}</td></tr>`;
+  $("rows").innerHTML = [
+    g("travel"),
+    row("travel","flight", money(num(state.fMsn)), R.flight[1]),
+    row("travel","car", money(c.car), R.car[1](money(num(state.car)))),
+    row("travel","parking", money(c.parking), R.parking[1]),
+    g("stay"),
+    row("stay","hotel", money(c.hotel), R.hotel[1](money(num(state.hReg)), money(num(state.hNye)), money(r.hotelTotal))),
+    state.dv ? row("stay","dv", money(c.dv), R.dv[1]) : "",
+    state.zion ? row("stay","zion", money(c.zion), R.zion[1]) : "",
+    g("do"),
+    row("do","entry", money(c.entry), `${t.entryOpts[state.entry]} · ${R.entry[1]}`),
+    state.nonres ? row("do","nonres", money(c.nonres), R.nonres[1]) : "",
+    row("do","sphere", money(c.sphere), R.sphere[1]),
+    row("do","hoover", money(c.hoover), R.hoover[1]),
+    g("daily"),
+    row("food","food", money(c.food), R.food[1](money(num(state.food)))),
+    row("other","misc", money(c.misc), R.misc[1]),
+  ].join("");
+  $("t-range").textContent = money(r.msn);
+}
+
+function renderControls() {
+  INPUTS.forEach(([id, k]) => { if (document.activeElement !== $(id)) $(id).value = state[k]; });
+  $("entry").value = state.entry; $("o-dv").checked = state.dv; $("o-zion").checked = state.zion; $("o-nonres").checked = state.nonres;
+}
+
+function render(t) {
+  T = t;
+  const sel = $("entry"); sel.innerHTML = "";
+  Object.keys(ENTRY).forEach(k => { const o = document.createElement("option"); o.value = k; o.textContent = t.entryOpts[k]; sel.appendChild(o); });
+  renderControls(); renderNumbers();
+}
+
+INPUTS.forEach(([id, k]) => {
+  $(id).addEventListener("input", e => { state[k] = e.target.value === "" ? 0 : Number(e.target.value); save(); renderNumbers(); });
+  $(id).addEventListener("blur", renderControls);
+});
+$("entry").addEventListener("change", e => { state.entry = e.target.value; save(); renderNumbers(); });
+[["o-dv","dv"],["o-zion","zion"],["o-nonres","nonres"]].forEach(([id, k]) => $(id).addEventListener("change", e => { state[k] = e.target.checked; save(); renderNumbers(); }));
+$("reset").addEventListener("click", () => { state = { ...DEFAULTS }; save(); renderControls(); renderNumbers(); });
+Site.init(UI, render);
+</script>
+</body>
+</html>

@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Las Vegas Trip Flights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+<style>
+.routes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 12px; }
+.route { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--c, var(--line)); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.route.best { border-color: var(--accent); border-top-color: var(--accent); }
+.route .rk { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.route h3 { font-size: 19px; }
+.route .price { font-family: var(--display); font-size: clamp(30px, 5vw, 38px); font-weight: 800; letter-spacing: -.02em; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.route.best .price { color: var(--accent); }
+.route .math { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.route ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.pill { font-family: var(--mono); font-size: 11px; letter-spacing: .04em; padding: 1px 8px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; display: inline-block; }
+.pill.pick { color: var(--accent); } .pill.ok { color: var(--good); } .pill.warn { color: var(--warn); } .pill.no { color: var(--bad); } .pill.na { color: var(--muted); }
+table.t td.time { white-space: nowrap; font-weight: 600; }
+table.t td.time small { font-weight: 500; color: var(--muted); margin-left: 2px; }
+table.t td.pr { white-space: nowrap; font-weight: 700; text-align: right; }
+table.t td.pr .sub { display: block; font-weight: 500; font-size: 12px; color: var(--muted); }
+table.t th.r { text-align: right; }
+table.t td .air { font-weight: 600; display: block; }
+table.t td .ap { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+table.t td .leg { display: block; font-variant-numeric: tabular-nums; }
+table.t td .why { display: block; font-size: 12.5px; color: var(--muted); margin-top: 3px; max-width: 34ch; }
+table.t td .two { display: block; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+table.t tr.dim td { opacity: .62; }
+table.t td.pr + td { padding-left: 14px; }
+table.t td.big { font-family: var(--display); font-size: 18px; font-weight: 800; }
+table.t tr.hl td.big { color: var(--accent); }
+.callout { display: flex; gap: 10px; align-items: baseline; font-size: 14px; background: color-mix(in srgb, var(--c-sky) 10%, transparent); border: 1px solid color-mix(in srgb, var(--c-sky) 35%, transparent); border-radius: 8px; padding: 10px 12px; max-width: 72ch; }
+.callout b { white-space: nowrap; }
+ol.tips { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; max-width: 72ch; font-size: 14.5px; }
+ul.combo { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+ul.combo li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+ul.combo li:last-child { border-bottom: 0; padding-bottom: 0; }
+ul.combo b { font-family: var(--display); font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; }
+ul.combo small { grid-column: 1 / -1; color: var(--muted); font-size: 12.5px; }
+@media (max-width: 600px) {
+  table.ft thead { display: none; }
+  table.ft, table.ft tbody { display: block; }
+  table.ft tr { display: grid; grid-template-columns: minmax(0, 1fr) auto auto auto; align-items: baseline; column-gap: 10px; row-gap: 6px; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+  table.ft tr.hl { background: color-mix(in srgb, var(--accent) 9%, transparent); border-radius: 6px; }
+  table.ft tr.hl td { background: none; }
+  table.ft td { padding: 0; border: 0; }
+  table.ft td.time + td.time::before { content: "→ "; color: var(--muted); font-weight: 500; }
+  table.ft td:last-child { grid-column: 1 / -1; padding-left: 0; }
+  table.ft td .why { max-width: none; display: inline; margin: 0 0 0 8px; }
+  table.ct thead { display: none; }
+  table.ct, table.ct tbody { display: block; }
+  table.ct tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px 12px; padding: 12px 8px; border-bottom: 1px solid var(--line); }
+  table.ct tr.hl { background: color-mix(in srgb, var(--accent) 9%, transparent); border-radius: 6px; }
+  table.ct tr.hl td { background: none; }
+  table.ct td { padding: 0; border: 0; }
+  table.ct td.pr { text-align: left; }
+  table.ct td.pr + td { padding-left: 0; }
+  table.ct td.pr::before { content: attr(data-l); display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  table.ct td:last-child { grid-column: 1 / -1; padding-left: 0; }
+  table.ct td .why { max-width: none; display: inline; margin: 0 0 0 8px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="pnav" data-i18n-aria="navAria">
+    <a data-nav="index.html" href="index.html" data-i18n="navItin"></a>
+    <a data-nav="flights.html" href="flights.html" aria-current="page" data-i18n="navFlights"></a>
+    <a data-nav="parks.html" href="parks.html" data-i18n="navParks"></a>
+    <a data-nav="sky.html" href="sky.html" data-i18n="navSky"></a>
+    <a data-nav="budget.html" href="budget.html" data-i18n="navBudget"></a>
+    <a data-nav="ask.html" href="ask.html" data-i18n="navAsk"></a>
+    <a class="tripswitch" data-nav="https://xmiao8.github.io/orlando-trip-2026/index.html" href="https://xmiao8.github.io/orlando-trip-2026/" data-i18n="navOrlando"></a>
+  </nav>
+
+  <header class="top">
+    <div class="toprow">
+      <div class="eyebrow" data-i18n="eyebrow"></div>
+      <button class="lang" id="lang-toggle" type="button"></button>
+    </div>
+    <h1 data-i18n="h1"></h1>
+    <p class="lede" data-i18n="lede"></p>
+  </header>
+
+  <section class="block" aria-labelledby="routes-title">
+    <div class="sechead"><h2 id="routes-title" data-i18n="routesTitle"></h2><span class="meta" data-i18n="routesMeta"></span></div>
+    <div class="routes" id="routes"></div>
+  </section>
+
+  <section class="block c-travel" aria-labelledby="combo-title">
+    <div class="sechead"><h2 id="combo-title" data-i18n="comboTitle"></h2><span class="meta" data-i18n="comboMeta"></span></div>
+    <div class="tablewrap"><table class="t ct" id="combos"></table></div>
+    <p class="note" data-i18n="comboNote"></p>
+  </section>
+
+  <section class="block c-travel" aria-labelledby="out-title">
+    <div class="sechead"><h2 id="out-title" data-i18n="outTitle"></h2><span class="meta" data-i18n="outMeta"></span></div>
+    <p class="callout" data-i18n-html="moonCallout"></p>
+    <div class="tablewrap"><table class="t ft" id="out"></table></div>
+    <p class="note" data-i18n="outNote"></p>
+  </section>
+
+  <section class="block c-travel" aria-labelledby="back-title">
+    <div class="sechead"><h2 id="back-title" data-i18n="backTitle"></h2><span class="meta" data-i18n="backMeta"></span></div>
+    <div class="tablewrap"><table class="t ft" id="back"></table></div>
+    <p class="note" data-i18n="backNote"></p>
+  </section>
+
+  <div class="panels">
+    <section class="panel" aria-labelledby="msn-title">
+      <h2 id="msn-title" data-i18n="msnTitle"></h2>
+      <div class="box">
+        <p data-i18n="msnText"></p>
+        <ul class="combo" id="msn"></ul>
+      </div>
+    </section>
+    <section class="panel" aria-labelledby="bus-title">
+      <h2 id="bus-title" data-i18n="busTitle"></h2>
+      <div class="box">
+        <ul id="bus"></ul>
+        <a class="official" href="https://www.coachusa.com/van-galder-bus-company" target="_blank" rel="noopener" data-i18n="busLink"></a>
+      </div>
+    </section>
+  </div>
+
+  <section class="block" aria-labelledby="tips-title">
+    <h2 id="tips-title" data-i18n="tipsTitle"></h2>
+    <ol class="tips" id="tips"></ol>
+  </section>
+
+  <section class="block" aria-labelledby="links-title">
+    <h2 id="links-title" data-i18n="linksTitle"></h2>
+    <div class="links">
+      <a href="https://www.google.com/travel/flights?q=Flights%20from%20Chicago%20to%20LAS%20on%202026-12-23%20through%202027-01-01" target="_blank" rel="noopener" data-i18n="lnkChi"></a>
+      <a href="https://www.google.com/travel/flights?q=Flights%20from%20MSN%20to%20LAS%20on%202026-12-23%20through%202027-01-01" target="_blank" rel="noopener" data-i18n="lnkMsn"></a>
+      <a href="https://www.coachusa.com/van-galder-bus-company" target="_blank" rel="noopener" data-i18n="lnkBus"></a>
+    </div>
+  </section>
+
+  <footer class="foot" data-i18n="footer"></footer>
+</div>
+
+<script>
+const BUS = 70;
+// All prices: Google Flights, Nov 5, 2026, per person, economy (cheapest fare shown, often basic economy).
+// Times are local: Chicago/Madison in Central time, Las Vegas in Pacific time.
+// Flight legs: [airline, from, to, dep [h,m], arr [h,m], via?]
+const F = {
+  ua915:  ["ua","ORD","LAS",[9,15],[11,34]],
+  ua1250: ["ua","ORD","LAS",[12,50],[15,4]],
+  f9735:  ["f9","ORD","LAS",[7,35],[10,2]],
+  ua1430: ["ua","LAS","ORD",[14,30],[20,20]],
+  ua700b: ["ua","LAS","ORD",[7,0],[12,50]],
+  aa818b: ["aa","LAS","ORD",[8,18],[14,1]],
+  msn700: ["ua","MSN","LAS",[7,0],[11,34],"ORD"],
+  msn700b:["ua","LAS","MSN",[7,0],[16,46],"ORD"],
+};
+// Complete round trips (going Dec 23, home Jan 1). rt = Google's round-trip total; two = sold as two separate tickets.
+const COMBOS = [
+  { go:"ua915",  back:"ua1430", rt:426, bus:true,  st:"pick", why:"cPick" },
+  { go:"ua1250", back:"ua1430", rt:431, bus:true,  st:"ok",   why:"cLater" },
+  { go:"f9735",  back:"ua1430", rt:367, bus:true,  st:"warn", why:"cFrontier", two:true },
+  { go:"ua915",  back:"aa818b", rt:383, bus:true,  st:"warn", why:"cEarly", two:true },
+  { go:"ua915",  back:"ua700b", rt:332, bus:true,  st:"warn", why:"cSeven" },
+  { go:"msn700", back:"msn700b",rt:453, bus:false, st:"warn", why:"cMsn" },
+];
+// Going Dec 23, Chicago → Las Vegas nonstops. p = cheapest round trip that starts with this flight; w = round trip with the United 2:30 p.m. flight home.
+const OUT = [
+  { al:"wn", from:"MDW", dep:[5,50],  arr:[7,50],  p:353, st:"ok",   why:"early" },
+  { al:"f9", from:"ORD", dep:[7,35],  arr:[10,2],  p:273, w:367, two:true, st:"warn", why:"basic" },
+  { al:"ua", from:"ORD", dep:[9,15],  arr:[11,34], p:332, w:426, st:"pick", why:"pickOut" },
+  { al:"ua", from:"ORD", dep:[12,50], arr:[15,4],  p:337, w:431, st:"ok",   why:"tight" },
+  { al:"aa", from:"ORD", dep:[18,59], arr:[21,15], p:308, st:"warn", why:"afterMoon" },
+  { al:"ua", from:"ORD", dep:[20,20], arr:[22,38], p:307, st:"warn", why:"afterMoon" },
+  { al:"aa", from:"ORD", dep:[21,10], arr:[23,21], p:308, st:"warn", why:"afterMoon" },
+  { al:"ua", from:"ORD", dep:[21,47], arr:[23,59], p:307, st:"warn", why:"afterMoon" },
+];
+// Coming home Jan 1, Las Vegas → O'Hare nonstops: round-trip total when going out on United 9:15 a.m.
+const BACK = [
+  { al:"aa", to:"ORD", dep:[0,25],  arr:[5,59],  p:341, two:true, st:"no", why:"midnight" },
+  { al:"aa", to:"ORD", dep:[6,51],  arr:[12,35], p:383, two:true, st:"warn", why:"noSleep" },
+  { al:"ua", to:"ORD", dep:[7,0],   arr:[12,50], p:332, st:"warn", why:"noSleep" },
+  { al:"aa", to:"ORD", dep:[8,18],  arr:[14,1],  p:383, two:true, st:"warn", why:"earlyBack" },
+  { al:"ua", to:"ORD", dep:[8,40],  arr:[14,29], p:462, st:"ok",   why:"" },
+  { al:"ua", to:"ORD", dep:[10,35], arr:[16,25], p:482, st:"ok",   why:"" },
+  { al:"ua", to:"ORD", dep:[12,45], arr:[18,35], p:482, st:"ok",   why:"safeBus" },
+  { al:"ua", to:"ORD", dep:[14,30], arr:[20,20], p:426, st:"pick", why:"pickBack" },
+  { al:"ua", to:"ORD", dep:[16,10], arr:[22,0],  p:462, st:"warn", why:"lateBus" },
+  { al:"aa", to:"ORD", dep:[18,0],  arr:[23,35], p:413, two:true, st:"warn", why:"lateBus" },
+  { al:"aa", to:"ORD", dep:[23,28], arr:[5,0], next:true, p:383, two:true, st:"warn", why:"redeye" },
+];
+// Madison round trips (1 stop each way).
+const MSN = [
+  { k:"m1", p:453 }, { k:"m2", p:484 }, { k:"m3", p:570 }, { k:"m4", p:824 }, { k:"m5", p:784 },
+];
+
+const UI = {
+  en: {
+    docTitle: "Las Vegas Trip Flights",
+    eyebrow: "Dec 23, 2026 – Jan 1, 2027 · 4 travelers from Madison",
+    h1: "Flights",
+    lede: "Round-trip prices from Google Flights for going out Dec 23 and coming home Jan 1, checked Nov 5, 2026. All prices are per person in economy and change daily. Nothing is booked.",
+    routesTitle: "The short version", routesMeta: "round trip, per person",
+    airline: { ua:"United", aa:"American", wn:"Southwest", f9:"Frontier" },
+    rChi: { name:"Chicago nonstop + bus", tag:"Best", math: `United round trip $426 + bus $${BUS} · group of 4: ${"$" + ((426 + BUS) * 4).toLocaleString("en-US")}`,
+      pts:["Out 9:15 a.m. from O’Hare, in time for the 4:09 p.m. moonrise","Home 2:30 p.m. on New Year’s Day, so you can sleep in","About 2.5 hours on the bus each way"] },
+    rMsn: { name:"Madison (MSN)", tag:"Only with an early flight home", math: "1 stop each way, no bus",
+      pts:["$453 only if you fly home at 7 a.m. on New Year’s Day","An afternoon flight home costs $784–824","Connects at O’Hare onto the same United 9:15 a.m. flight"] },
+    comboTitle: "Full round trips compared", comboMeta: "Dec 23 out · Jan 1 home",
+    comboNote: "“2 tickets” means Google sells it as two separate one-way tickets. If one flight is delayed or cancelled, the other airline doesn’t have to rebook you.",
+    th: { go:"Going · Dec 23", back:"Coming home · Jan 1", rt:"Round trip", total:"With bus", flight:"Flight", dep:"Departs", arr:"Arrives", price:"Round trip", note:"" },
+    lblRt: "Round trip", lblTotal: "With bus", noBus: "no bus", two: "2 tickets", via: v => `via ${v}`,
+    outTitle: "Going: Wed, Dec 23 · Chicago → Las Vegas", outMeta: "nonstop",
+    moonCallout: "<b>Moonrise 4:09 p.m.</b> The full supermoon comes up over the mountains east of Las Vegas just before sunset. Land by early afternoon to pick up the car and get to a viewpoint.",
+    outNote: "The top price is the cheapest round trip starting with that flight, which usually means a 7 a.m. or after-midnight flight home. The second line is the round trip with the United 2:30 p.m. flight home on Jan 1.",
+    withBack: v => `${v} with 2:30 p.m. home`,
+    backTitle: "Coming home: Fri, Jan 1 · Las Vegas → Chicago", backMeta: "nonstop · round trip with United 9:15 a.m. out",
+    backNote: "Las Vegas is 2 hours behind Chicago, so the 2:30 p.m. flight lands at O’Hare at 8:20 p.m. Chicago time.",
+    st: { pick:"Our pick", ok:"Works", warn:"Trade-off", no:"Not doable" },
+    why: {
+      cPick:"Catch the supermoon rise, sleep in on New Year’s Day",
+      cLater:"Later start, but a tighter rush to catch the moonrise",
+      cFrontier:"Frontier basic fare; a carry-on costs extra each way",
+      cEarly:"Early alarm the morning after New Year’s Eve",
+      cSeven:"Cheapest, but means a 7 a.m. flight after the New Year’s party",
+      cMsn:"No bus, but a 7 a.m. flight home with a long layover at O’Hare",
+      early:"Very early start from Madison: the bus would leave in the middle of the night",
+      earlyBack:"Doable, but an early alarm after New Year’s Eve",
+      basic:"Basic fare: carry-on bag and seat choice cost extra",
+      pickOut:"Lands late morning with time to get the car, check in and catch the moonrise",
+      tight:"Lands about an hour before moonrise; tight with the rental car pickup",
+      afterMoon:"Lands after moonrise. The full moon will be high in the sky, but you miss it rising",
+      midnight:"Leaves 25 minutes after the New Year’s fireworks, so not possible",
+      noSleep:"Means going straight from the party to the airport",
+      safeBus:"Lands early evening, plenty of time for a bus to Madison",
+      pickBack:"Sleep in, check out at noon, and still get back to Chicago the same evening. Check the last bus to Madison",
+      lateBus:"Lands late, so check that a bus to Madison still runs that night",
+      redeye:"Overnight flight: one more evening in Vegas, but no hotel room after checkout",
+    },
+    msnTitle: "Flying from Madison",
+    msnText: "Every Madison flight connects. United’s 7:00 a.m. from Madison connects at O’Hare onto the same 9:15 a.m. nonstop as above. Coming home, only the early flights are reasonably priced.",
+    msn: {
+      m1: ["United 7:00 a.m. out · United 7:00 a.m. home", "Home at 4:46 p.m. after a 2 hr 45 min layover at O’Hare"],
+      m2: ["United 7:00 a.m. out · United 7:00 a.m. home", "Shorter layover, home at 3:04 p.m."],
+      m3: ["United 7:00 a.m. out · United 8:40 a.m. home", "Home at 4:46 p.m."],
+      m4: ["United 7:00 a.m. out · United 1:46 p.m. home", "The only afternoon option on United: via Denver, home 8:38 p.m."],
+      m5: ["American 2:43 p.m. out · American 4:44 p.m. home", "Via Phoenix both ways; lands 6:39 p.m., after moonrise, and gets home at midnight"],
+    },
+    busTitle: "Van Galder bus",
+    bus: [
+      "About $70 round trip between Madison and O’Hare or Midway, roughly 2.5 hours each way",
+      "Runs on the same schedule every day of the year, holidays included",
+      "Book ahead for holiday travel days",
+      "Aim to reach the airport 2 hours before your flight; holiday security lines are long",
+      "Southwest flies from Midway (MDW), not O’Hare, so book the bus to the right airport",
+    ],
+    busLink: "Van Galder schedule & tickets ↗",
+    tipsTitle: "Before you book",
+    tips: [
+      "Book all 4 on one reservation. Basic economy doesn’t let you pick seats, so you may be split up; a standard economy fare lets you sit together.",
+      "The cheapest United and Frontier fares are basic economy, which don’t include a full-size carry-on. Check the fare type and bag fees before you compare totals.",
+      "Google’s price insights suggested booking by around Dec 11. Holiday fares tend to rise as the dates get close, so booking in November is safer.",
+      "Turn on a Google Flights price alert for the Chicago search to see if the fare drops.",
+      "Book the flight before the bus, then book 4 bus seats that get you to the airport 2 hours early.",
+      "Most US airlines let you cancel free within 24 hours of booking (when you book a week or more ahead), so you can lock in a fare and still change your mind.",
+    ],
+    linksTitle: "Search it yourself",
+    lnkChi: "Chicago → Las Vegas, Dec 23 – Jan 1 ↗", lnkMsn: "Madison → Las Vegas, Dec 23 – Jan 1 ↗", lnkBus: "Van Galder bus ↗",
+    footer: "Round-trip prices from Google Flights on Nov 5, 2026, and they change daily. The bus price is an approximate round-trip fare. Times are local: Chicago and Madison are Central time, Las Vegas is Pacific time (2 hours behind).",
+    time: (h, m) => `${((h + 11) % 12) + 1}:${String(m).padStart(2, "0")} ${h < 12 ? "a.m." : "p.m."}`,
+    next: "+1 day",
+  },
+  zh: {
+    docTitle: "拉斯维加斯旅行机票",
+    eyebrow: "2026年12月23日 – 2027年1月1日 · 4人从麦迪逊出发",
+    h1: "机票",
+    lede: "12月23日去、1月1日回的往返价格，2026年11月5日在Google Flights查询。所有价格为每人经济舱，每天都会变。还没有订任何票。",
+    routesTitle: "简单来说", routesMeta: "往返，每人",
+    airline: { ua:"美联航", aa:"美国航空", wn:"西南航空", f9:"边疆航空" },
+    rChi: { name:"芝加哥直飞 + 大巴", tag:"推荐", math: `美联航往返 $426 + 大巴 $${BUS} · 四人合计 ${"$" + ((426 + BUS) * 4).toLocaleString("en-US")}`,
+      pts:["上午9:15从奥黑尔出发，赶得上16:09的月出","元旦下午2:30回，可以睡个懒觉","每程坐约2.5小时大巴"] },
+    rMsn: { name:"麦迪逊（MSN）", tag:"只适合早班回程", math: "每程转机1次，不用坐大巴",
+      pts:["只有元旦早上7点回程才是$453","下午回程要$784–824","在奥黑尔转机，接上同一班美联航9:15直飞"] },
+    comboTitle: "完整往返对比", comboMeta: "12月23日去 · 1月1日回",
+    comboNote: "“2张票”表示Google是按两张单程票卖的。如果一段航班延误或取消，另一家航空公司没有义务帮你改签。",
+    th: { go:"去程 · 12月23日", back:"回程 · 1月1日", rt:"往返", total:"含大巴", flight:"航班", dep:"起飞", arr:"到达", price:"往返", note:"" },
+    lblRt: "往返", lblTotal: "含大巴", noBus: "不用大巴", two: "2张票", via: v => `经${v}`,
+    outTitle: "去程：12月23日（周三）· 芝加哥 → 拉斯维加斯", outMeta: "直飞",
+    moonCallout: "<b>月出 16:09</b> 满月超级月亮在日落前从拉斯维加斯东边的山后升起。最好下午早些时候落地，留时间取车、去观景点。",
+    outNote: "上面的价格是以这班为去程的最便宜往返，通常配的是早上7点或午夜后的回程。第二行是配1月1日美联航下午2:30回程的往返价。",
+    withBack: v => `配14:30回程 ${v}`,
+    backTitle: "回程：1月1日（周五）· 拉斯维加斯 → 芝加哥", backMeta: "直飞 · 去程为美联航9:15时的往返价",
+    backNote: "拉斯维加斯比芝加哥晚2小时，所以14:30的航班芝加哥时间20:20到奥黑尔。",
+    st: { pick:"推荐", ok:"可以", warn:"有取舍", no:"不可行" },
+    why: {
+      cPick:"赶得上超级月亮升起，元旦还能睡懒觉",
+      cLater:"出发晚一点，但赶月出会比较赶",
+      cFrontier:"边疆航空基础票，随身行李每程另收费",
+      cEarly:"跨年第二天一早就要起床",
+      cSeven:"最便宜，但跨年后要赶早上7点的航班",
+      cMsn:"不用坐大巴，但早上7点的航班，在奥黑尔要转很久",
+      early:"从麦迪逊出发太早：大巴半夜就要走",
+      earlyBack:"赶得上，但跨年后要早起",
+      basic:"基础票：随身行李和选座要另外付钱",
+      pickOut:"上午晚些落地，有时间取车、入住，再去看月出",
+      tight:"落地后约一小时就月出，加上取车有点赶",
+      afterMoon:"月出后才落地。满月会高挂天上，但看不到它升起",
+      midnight:"跨年烟花后25分钟就起飞，不可能赶上",
+      noSleep:"意味着跨年后直接去机场",
+      safeBus:"傍晚落地，有足够时间坐大巴回麦迪逊",
+      pickBack:"睡个懒觉、中午退房，当晚还能回到芝加哥。查一下回麦迪逊的末班大巴",
+      lateBus:"落地较晚，查一下当晚还有没有回麦迪逊的大巴",
+      redeye:"红眼航班：在拉斯维加斯多待一个晚上，但退房后没有酒店房间",
+    },
+    msnTitle: "从麦迪逊出发",
+    msnText: "麦迪逊的航班都要转机。美联航早上7:00从麦迪逊出发，在奥黑尔接上面那班9:15直飞。回程只有早班价格还算合理。",
+    msn: {
+      m1: ["去：美联航 7:00 · 回：美联航 7:00", "在奥黑尔转机2小时45分钟，16:46到家"],
+      m2: ["去：美联航 7:00 · 回：美联航 7:00", "转机时间更短，15:04到家"],
+      m3: ["去：美联航 7:00 · 回：美联航 8:40", "16:46到家"],
+      m4: ["去：美联航 7:00 · 回：美联航 13:46", "美联航唯一的下午回程：经丹佛，20:38到家"],
+      m5: ["去：美国航空 14:43 · 回：美国航空 16:44", "往返都经凤凰城；去程18:39落地，错过月出，回程半夜到家"],
+    },
+    busTitle: "Van Galder大巴",
+    bus: [
+      "麦迪逊到奥黑尔或中途机场往返约$70，单程约2.5小时",
+      "全年每天同一时刻表，节假日也照常运行",
+      "节日出行日记得提前订票",
+      "争取起飞前2小时到机场；节日期间安检排队很长",
+      "西南航空从中途机场（MDW）起飞，不是奥黑尔，大巴要订到对的机场",
+    ],
+    busLink: "Van Galder时刻表和购票 ↗",
+    tipsTitle: "订票前",
+    tips: [
+      "4个人订在同一个订单里。基础经济舱不能选座，可能被分开坐；普通经济舱可以选座坐在一起。",
+      "美联航和边疆航空最便宜的是基础经济舱，不含大件随身行李。比较总价前先看清票种和行李费。",
+      "Google的价格分析建议在12月11日左右前订票。节日机票越临近越容易涨，所以11月订更稳妥。",
+      "在Google Flights给芝加哥的搜索打开价格提醒，降价时会通知你。",
+      "先订机票再订大巴，订4个能提前2小时到机场的大巴座位。",
+      "大多数美国航空公司在订票后24小时内可以免费取消（提前一周以上订票时），可以先锁定价格，还能反悔。",
+    ],
+    linksTitle: "自己查一查",
+    lnkChi: "芝加哥 → 拉斯维加斯，12月23日 – 1月1日 ↗", lnkMsn: "麦迪逊 → 拉斯维加斯，12月23日 – 1月1日 ↗", lnkBus: "Van Galder大巴 ↗",
+    footer: "往返价格于2026年11月5日在Google Flights查询，每天都会变。大巴价格为大致往返票价。时间均为当地时间：芝加哥和麦迪逊为中部时间，拉斯维加斯为太平洋时间（晚2小时）。",
+    time: (h, m) => `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`,
+    next: "次日",
+  },
+};
+
+const $ = id => document.getElementById(id);
+const esc = Site.esc;
+const money = v => "$" + Math.round(v).toLocaleString("en-US");
+const rowCls = st => st === "pick" ? "hl" : st === "no" ? "dim" : "";
+const status = (t, r) => `<span class="pill ${r.st}">${esc(t.st[r.st])}</span>${r.why ? `<span class="why">${esc(t.why[r.why])}</span>` : ""}`;
+
+function leg(t, key) {
+  const [al, a, b, dep, arr, via] = F[key];
+  return `<span class="air">${esc(t.airline[al])}</span><span class="leg">${t.time(...dep)} → ${t.time(...arr)}</span><span class="ap">${a} → ${b}${via ? " · " + esc(t.via(via)) : ""}</span>`;
+}
+
+function combos(t) {
+  const head = `<thead><tr><th>${t.th.go}</th><th>${t.th.back}</th><th class="r">${t.th.rt}</th><th class="r">${t.th.total}</th><th></th></tr></thead>`;
+  const body = COMBOS.map(c => `<tr class="${rowCls(c.st)}">
+      <td>${leg(t, c.go)}</td><td>${leg(t, c.back)}</td>
+      <td class="pr" data-l="${esc(t.lblRt)}">${money(c.rt)}${c.two ? `<span class="sub">${esc(t.two)}</span>` : ""}</td>
+      <td class="pr big" data-l="${esc(t.lblTotal)}">${money(c.rt + (c.bus ? BUS : 0))}${c.bus ? "" : `<span class="sub">${esc(t.noBus)}</span>`}</td>
+      <td>${status(t, c)}</td></tr>`).join("");
+  return head + `<tbody>${body}</tbody>`;
+}
+
+function table(t, rows, dir) {
+  const head = `<thead><tr><th>${t.th.flight}</th><th>${t.th.dep}</th><th>${t.th.arr}</th><th class="r">${t.th.price}</th><th></th></tr></thead>`;
+  const body = rows.map(r => {
+    const route = dir === "out" ? `${r.from} → LAS` : `LAS → ${r.to}`;
+    const sub = r.w ? `<span class="sub">${esc(t.withBack(money(r.w)))}</span>` : "";
+    const two = r.two ? `<span class="sub">${esc(t.two)}</span>` : "";
+    return `<tr class="${rowCls(r.st)}">
+      <td><span class="air">${esc(t.airline[r.al])}</span><span class="ap">${route}</span></td>
+      <td class="time">${t.time(...r.dep)}</td>
+      <td class="time">${t.time(...r.arr)}${r.next ? `<small>${esc(t.next)}</small>` : ""}</td>
+      <td class="pr">${money(r.p)}${dir === "out" ? sub : two}</td>
+      <td>${status(t, r)}</td>
+    </tr>`;
+  }).join("");
+  return head + `<tbody>${body}</tbody>`;
+}
+
+function render(t) {
+  const pick = COMBOS.find(c => c.st === "pick"), msn = COMBOS.find(c => c.why === "cMsn");
+  const card = (r, cls, priceTxt) => `<article class="route ${cls}">
+      <div class="rk"><h3>${esc(r.name)}</h3><span class="pill ${cls.includes("best") ? "pick" : "na"}">${esc(r.tag)}</span></div>
+      <div class="price">${priceTxt}</div>
+      <div class="math">${esc(r.math)}</div>
+      <ul>${r.pts.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
+    </article>`;
+  $("routes").innerHTML = card(t.rChi, "best c-travel", money(pick.rt + BUS)) + card(t.rMsn, "c-flex", money(msn.rt));
+  $("combos").innerHTML = combos(t);
+  $("out").innerHTML = table(t, OUT, "out");
+  $("back").innerHTML = table(t, BACK, "back");
+  $("msn").innerHTML = MSN.map(m => `<li><span>${esc(t.msn[m.k][0])}</span><b>${money(m.p)}</b><small>${esc(t.msn[m.k][1])}</small></li>`).join("");
+  $("bus").innerHTML = t.bus.map(b => `<li>${esc(b)}</li>`).join("");
+  $("tips").innerHTML = t.tips.map(b => `<li>${esc(b)}</li>`).join("");
+}
+
+Site.init(UI, render);
+</script>
+</body>
+</html>
