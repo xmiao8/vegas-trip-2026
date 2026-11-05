@@ -21,6 +21,12 @@
 .msg.bot .bubble > * { margin: 0 0 10px; } .msg.bot .bubble > *:last-child { margin-bottom: 0; }
 .msg.bot .bubble ul, .msg.bot .bubble ol { padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
 .msg.bot .bubble code { font-family: var(--mono); font-size: 13px; background: color-mix(in srgb, var(--ink) 7%, transparent); padding: 1px 5px; border-radius: 4px; }
+.msg.bot .search { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+.msg.bot .search svg { width: 14px; height: 14px; flex: none; }
+.msg.bot .srcs { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted); display: flex; flex-direction: column; gap: 3px; }
+.msg.bot .srcs b { font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; font-weight: 500; }
+.msg.bot .srcs a { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.msg.bot .srcs a:hover { color: var(--accent); }
 .msg.bot.err .bubble { border-color: color-mix(in srgb, var(--bad) 45%, transparent); color: var(--bad); }
 .typing { display: inline-flex; gap: 4px; padding: 4px 0; }
 .typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: blink 1.2s infinite ease-in-out; }
@@ -92,7 +98,7 @@ const UI = {
     docTitle: "Ask About the Trip",
     eyebrow: "Answers from the trip plan · powered by Claude",
     h1: "Ask",
-    lede: "Ask anything about the trip — the plan, flights, parks, the moon and stars, the budget, what to pack. Claude has read every page of this site and sees the live cloud forecast.",
+    lede: "Ask anything about the trip — the plan, flights, parks, the moon and stars, the budget, what to pack. Claude has read every page of this site, sees the live cloud forecast, and can search the web for anything current.",
     placeholder: "Ask about the trip…", send: "Send", stop: "Stop",
     hint: "Enter to send · Shift+Enter for a new line",
     clear: "New chat",
@@ -106,6 +112,7 @@ const UI = {
       "Is Zion doable as a day trip in winter?",
     ],
     errNet: "Couldn’t reach Claude. Check your connection and try again.",
+    searching: "Searching the web…", searchingFor: q => `Searching the web for “${q}”…`, sources: "Sources",
     errBusy: "Claude is busy right now. Try again in a minute.",
     errSetup: "Ask isn’t set up yet. The trip organizer still needs to finish the server settings.",
     errCap: "Ask has reached its limit for this week. It resets on Monday.",
@@ -119,7 +126,7 @@ const UI = {
     docTitle: "提问：旅行助手",
     eyebrow: "根据行程回答 · 由Claude提供",
     h1: "提问",
-    lede: "关于这次旅行的任何问题都可以问——行程、机票、公园、月亮和星空、预算、该带什么。Claude读过本网站的所有页面，也能看到实时云量预报。",
+    lede: "关于这次旅行的任何问题都可以问——行程、机票、公园、月亮和星空、预算、该带什么。Claude读过本网站的所有页面，能看到实时云量预报，还能上网搜索最新信息。",
     placeholder: "问一个关于旅行的问题…", send: "发送", stop: "停止",
     hint: "回车发送 · Shift+回车换行",
     clear: "新对话",
@@ -133,6 +140,7 @@ const UI = {
       "冬天锡安一日游可行吗？",
     ],
     errNet: "连不上Claude，请检查网络后重试。",
+    searching: "正在搜索网络…", searchingFor: q => `正在搜索：“${q}”…`, sources: "来源",
     errBusy: "Claude现在有点忙，请过一分钟再试。",
     errSetup: "提问功能还没设置好，组织者还需要完成服务器设置。",
     errCap: "提问功能本周的额度已用完，周一重置。",
@@ -182,9 +190,19 @@ function md(text) {
   return out.join("");
 }
 
+const SEARCH_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14" stroke-linecap="round"/></svg>';
+const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return u; } };
 function bubble(m) {
   const who = m.role === "user" ? T.you : T.claude;
-  const body = m.role === "user" ? esc(m.content) : (m.pending && !m.content ? '<span class="typing" aria-label="…"><i></i><i></i><i></i></span>' : md(m.content));
+  let body;
+  if (m.role === "user") body = esc(m.content);
+  else {
+    const typing = '<span class="typing" aria-label="…"><i></i><i></i><i></i></span>';
+    const search = m.searching ? `<div class="search">${SEARCH_ICON}<span>${esc(m.query ? T.searchingFor(m.query) : T.searching)}</span></div>` : "";
+    const text = m.content ? md(m.content) : (m.pending ? typing : "");
+    const srcs = m.sources && m.sources.length && !m.pending ? `<div class="srcs"><b>${esc(T.sources)}</b>${m.sources.slice(0, 6).map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title || host(s.url))} · ${esc(host(s.url))}</a>`).join("")}</div>` : "";
+    body = search + text + (m.searching && m.content ? typing : "") + srcs;
+  }
   return `<div class="msg ${m.role === "user" ? "user" : "bot"}${m.error ? " err" : ""}"><span class="who">${esc(who)}</span><div class="bubble">${body}</div></div>`;
 }
 function renderChat() {
@@ -221,7 +239,7 @@ async function ask(question) {
       throw Object.assign(new Error("http"), { status: res.status, code: info.error });
     }
     const reader = res.body.getReader(), dec = new TextDecoder();
-    let buf = "";
+    let buf = "", queryJson = "";
     for (;;) {
       const { value, done } = await reader.read();
       if (done) break;
@@ -232,21 +250,33 @@ async function ask(question) {
         for (const line of evt.split("\n")) {
           if (!line.startsWith("data:")) continue;
           let d; try { d = JSON.parse(line.slice(5)); } catch (e) { continue; }
-          if (d.type === "content_block_delta" && d.delta && d.delta.type === "text_delta") {
-            answer.content += d.delta.text; answer.pending = false; updateLast();
+          if (d.type === "content_block_start" && d.content_block) {
+            const b = d.content_block;
+            if (b.type === "server_tool_use") { answer.searching = true; answer.query = ""; queryJson = ""; updateLast(); }
+            else if (b.type === "text" && answer.content && !/\n\n$/.test(answer.content)) answer.content += "\n\n";
+          } else if (d.type === "content_block_delta" && d.delta && d.delta.type === "input_json_delta") {
+            queryJson += d.delta.partial_json || "";
+            const q = queryJson.match(/"query"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+            if (q) { answer.query = q[1]; updateLast(); }
+          } else if (d.type === "content_block_delta" && d.delta && d.delta.type === "citations_delta" && d.delta.citation) {
+            const c = d.delta.citation;
+            if (c.url && !(answer.sources ||= []).some(s => s.url === c.url)) answer.sources.push({ url: c.url, title: c.title });
+          } else if (d.type === "content_block_delta" && d.delta && d.delta.type === "text_delta") {
+            answer.content += d.delta.text; answer.pending = false; answer.searching = false; updateLast();
           } else if (d.type === "error") {
             throw Object.assign(new Error("stream"), { status: d.error && d.error.type === "overloaded_error" ? 503 : 500 });
           }
         }
       }
     }
-    answer.pending = false;
+    answer.pending = false; answer.searching = false;
+    answer.content = answer.content.replace(/^\s+/, "");
     if (!answer.content) throw Object.assign(new Error("empty"), { status: 500 });
   } catch (e) {
     if (e.name === "AbortError") {
-      answer.pending = false; answer.content = (answer.content ? answer.content + "\n\n" : "") + T.stopped;
+      answer.pending = false; answer.searching = false; answer.content = (answer.content ? answer.content + "\n\n" : "") + T.stopped;
     } else {
-      answer.pending = false; answer.error = true;
+      answer.pending = false; answer.searching = false; answer.error = true;
       answer.content = e.code === "weekly_cap" ? T.errCap : e.code === "rate_limited" ? T.errRate : e.status === 503 ? T.errBusy : e.code === "not_configured" ? T.errSetup : e.status ? T.errOther : T.errNet;
     }
   } finally {

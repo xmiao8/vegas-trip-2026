@@ -7,11 +7,11 @@ Generated from the trip website (https://xmiao8.github.io/vegas-trip-2026/) on 2
 DEC 23, 2026 – JAN 1, 2027 · LAS VEGAS BASE · 4 TRAVELERS FROM MADISON
 Las Vegas Winter Trip ’26
 
-One hotel in Vegas, day trips out to the desert: a Christmas supermoon, the Sphere, prime rib, Zion and Hoover Dam, and one clear night of stars in Death Valley.
+A hotel in Vegas, a night in Zion and day trips into the desert: a Christmas supermoon, the Sphere, prime rib, Hoover Dam, and one clear night of stars in Death Valley.
 
-3park days
+4park days
 2moonrises
-1night of stars
+2nights of stars
 1Sphere show
 TRIP AT A GLANCE
 Las Vegas
@@ -64,25 +64,32 @@ Sat
 26
 Dec
 ZION
-Zion National Park · ~2.5–3 hr each way
+Zion National Park · ~2.5–3 hr drive
+★ Night in Springdale
 Guide →
-Zion day trip
-Leave by 6 a.m. Utah is an hour ahead, and sunset there is about 5:20 p.m.
-Kolob Canyons: a short scenic drive and visitor center right off I-15
-Zion Canyon: Riverside Walk, Emerald Pools, and Canyon Overlook through the tunnel
-Dinner in Springdale, drive back after dark
-Your America the Beautiful pass covers the car; non-US residents may still pay an extra $100 each at Zion. To skip 6 hours of driving in one day, stay overnight in Springdale and come back on the 27th.
-Driving: about 6 hr round trip
+Zion, day one: Kolob Canyons, the canyon floor and a dark-sky night
+Check out of the Vegas hotel and leave around 7:30 a.m. Utah is an hour ahead, so it’s about 1 p.m. there by the time you reach Zion Canyon
+Before 3 p.m. Utah time: enter the Angels Landing day-before lottery on Recreation.gov for tomorrow; results come at 4 p.m.
+On the way: Kolob Canyons (I-15 exit 40), a 5-mile scenic drive into red finger canyons with its own visitor center
+Afternoon in Zion Canyon: stickers at the visitor center, then the shuttle up to the Riverside Walk at the mouth of the Narrows. The shuttle runs Dec 26 – Jan 2 and cars aren’t allowed on the Scenic Drive; the last one up leaves at 4:30 p.m.
+Ride back down and hop off at Canyon Junction for sunset (about 5:25 p.m.) over the Watchman, then walk the easy Pa’rus Trail to the visitor center. Bring a headlamp
+Check in to Springdale, dinner in town, then about 2 hours of stars: fully dark at 6:55 p.m., moonrise 8:47 p.m. (86%). Zion is a certified Dark Sky Park
+Your America the Beautiful pass covers the car; non-US residents may still pay an extra $100 each at Zion. All times on this day are Utah time.
+Driving: about 3 hr one way
 Sun
 27
 Dec
-FLEX
-Las Vegas
-Free day (or Zion, day two)
-Red Rock Canyon scenic drive (timed-entry reservation needed)
-Ethel M Chocolates cactus garden lights in Henderson after dark
-Or rest — the Death Valley window starts tomorrow
-Driving: about 1 hr round trip
+ZION
+Zion National Park → Las Vegas
+Guide →
+Zion, day two: Angels Landing (if you win the lottery), back to Vegas
+If you won the lottery: take the first canyon shuttle (8 a.m.) to the Grotto for Angels Landing, about 5 miles round trip and 4–5 hours. Bring microspikes for the chains
+No permit: hike to Scout Lookout (no permit needed, same big view), or do the Canyon Overlook Trail and Lower Emerald Pools
+Get around on the shuttles: the Springdale shuttle to the park entrance, then the Zion Canyon shuttle (first one 8 a.m.; last one out of the canyon 5:45 p.m.). Canyon Overlook is on the highway through the tunnel, so drive there
+Leave by about 2 p.m. Utah time; you gain the hour back and reach Vegas around 4 p.m.
+Check back in to the Vegas hotel and take it easy — the Death Valley window starts tomorrow
+A permit is only needed for the chains section past Scout Lookout. If it’s icy, rangers may advise against the chains — Scout Lookout is a great turnaround. Sunrise is 7:40 a.m.
+Driving: about 2.5 hr one way
 Mon
 28
 Dec
@@ -147,6 +154,8 @@ Dec 24
 Moon rises ~5:25 p.m. over Lake Mead
 Dec 25
 Park visitor centers usually closed
+Dec 26–27
+Zion, overnight in Springdale
 Dec 28–30
 Death Valley window — go on the clearest night
 Dec 31
@@ -154,24 +163,28 @@ Strip closes to cars around 6 p.m.
 Jan 19
 Spring classes start at UW–Madison
 To book
-0 of 8 booked
+0 of 10 booked
 Flights to Las Vegas (LAS)
 United nonstop from O’Hare, $426 round trip + $70 bus each, for all 4. See the Flights page
-Hotel off the Strip with free parking
-9 nights; the New Year’s nights cost more
+Las Vegas hotels: 2 rooms with two beds, free parking
+Dec 23–26 (e.g. The D downtown, ~$379) and Dec 27–Jan 1 (e.g. Sam’s Town, ~$954); Priceline totals for both rooms
+Springdale hotel for Dec 26
+2 rooms near Zion’s entrance, e.g. Zion Park Motel (~$299) or Driftwood Lodge (~$318); book refundable
+Recreation.gov account for the Angels Landing lottery
+Set it up before the trip; apply Dec 26 by 3 p.m. Utah time for Dec 27
 Rental car
 Drivers under 25 usually pay a daily fee
 Sphere tickets: The Wizard of Oz
 Christmas Day or another evening
 Bring the America the Beautiful pass + photo ID
 The signed pass holder must be in the car; it covers everyone in it at Death Valley, Zion and Lake Mead
-Refundable Death Valley room (optional)
+Refundable Death Valley rooms (optional)
 Hold one of Dec 28–30 and move it once the forecast is clear
 Red Rock Canyon timed entry (optional)
 Reserve on recreation.gov
 Warm layers + red flashlight
 Desert nights drop into the 30s–40s °F
-Moon and sunset times are calculated for Las Vegas and Furnace Creek (Pacific Time) and assume a flat horizon; mountains delay what you see by 10–30 minutes. Prices were checked Nov 5, 2026. Checklist ticks are saved only in your own browser.
+Moon and sunset times are calculated for Las Vegas and Furnace Creek (Pacific Time) and Springdale (Utah time) and assume a flat horizon; mountains delay what you see by 10–30 minutes. Prices were checked Nov 5, 2026. Checklist ticks are saved only in your own browser.
 
 ## Flights page
 
@@ -415,11 +428,11 @@ Dec 25 show · outside any night
 Sphere
 Christmas dinner, or any night
 Prime rib in Vegas
-Dec 26 · ~2.5–3 hr each way
+Dec 26–27 · overnight in Springdale · ~2.5–3 hr from Vegas
 Zion National Park
 One of Dec 28–30 · ~2 hr each way
 Death Valley National Park
-Flex days (Dec 27, 28, 30)
+Flex days (Dec 28, 30)
 Close to Vegas
 Hoover Dam & Lake Mead
 Photo: Christian David (https://commons.wikimedia.org/wiki/File:Lake_Mead_and_its_bathtub_ring_upstream_of_Hoover_Dam,_Black_Canyon,_Arizona%E2%80%93Nevada.jpg), CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0), via Wikimedia Commons
@@ -521,7 +534,7 @@ Prime rib deals list (Oct 2026) ↗ (https://lasvegasthenandnow.com/where-to-fin
 ↑ Back to top
 Zion National Park
 Photo: Jared (https://commons.wikimedia.org/wiki/File:Utah_-_Springdale_-_The_Watchman_-_Zion_Canyon_Views.jpg), CC BY 2.0 (https://creativecommons.org/licenses/by/2.0), via Wikimedia Commons
-DEC 26 · ~2.5–3 HR EACH WAY
+DEC 26–27 · OVERNIGHT IN SPRINGDALE · ~2.5–3 HR FROM VEGAS
 Zion National Park
 
 A deep red-rock canyon with the Virgin River running through it.
@@ -547,13 +560,17 @@ An easy paved path by the river with views of the Watchman.
 Watchman Trail
 2 hr
 3.3 miles round trip to a viewpoint over Springdale; good at sunset.
+Angels Landing
+4–5 hr
+About 5 miles round trip from the Grotto. Scout Lookout is open to everyone; the final chains section to the summit needs a lottery permit.
 Good to know
 $35 per car (7 days) — covered by your America the Beautiful pass. Non-US residents may still pay an extra $100 per person here.
-Angels Landing needs a permit from a lottery, and its chains can be icy in winter.
+Angels Landing needs a permit for the chains section past Scout Lookout. The winter seasonal lottery has closed, but you can enter the day-before lottery on Recreation.gov (apply by 3 p.m. Utah time, results at 4 p.m.). The chains can be icy in winter.
 The Narrows is possible in winter only with a rented drysuit — the water is near freezing.
-Check whether the canyon shuttle is running on your date; when it isn’t, you can drive the Scenic Drive yourself.
+The canyon shuttle runs Dec 26 – Jan 2 (first 8 a.m., last out of the canyon 5:45 p.m.); while it runs, cars aren’t allowed on the Scenic Drive. A free Springdale shuttle connects town to the park entrance. Times can change — check nps.gov/zion before you go.
 Bring traction (microspikes) if there’s ice; Springdale outfitters rent them.
 Stickers at the Zion Canyon or Kolob Canyons visitor centers.
+Staying in Springdale puts you minutes from the park entrance, so you can catch the sunset, a dark sky after dinner and an early start on the trails.
 nps.gov/zion ↗ (https://www.nps.gov/zion/)
 Conditions ↗ (https://www.nps.gov/zion/planyourvisit/conditions.htm)
 ↑ Back to top
@@ -599,7 +616,7 @@ To stay the night: The Oasis at Death Valley (Inn or Ranch), Stovepipe Wells, or
 nps.gov/deva ↗ (https://www.nps.gov/deva/)
 Alerts & road status ↗ (https://www.nps.gov/deva/planyourvisit/conditions.htm)
 ↑ Back to top
-FLEX DAYS (DEC 27, 28, 30)
+FLEX DAYS (DEC 28, 30)
 Close to Vegas
 
 Easy half-day trips for the flex days.
@@ -629,7 +646,7 @@ Photos from Wikimedia Commons (https://commons.wikimedia.org/) under the Creativ
 MOON, DARKNESS AND LIVE CLOUD FORECASTS · PACIFIC TIME
 Sky planner
 
-The two moonrises at the start of the trip, the Death Valley stargazing window at the end, and a live cloud forecast for each — so you can pick the clearest night.
+The two moonrises at the start of the trip, a dark-sky night in Zion, the Death Valley stargazing window at the end, and a live cloud forecast for each — so you can pick the clearest night.
 
 Your sky nights
 
@@ -651,6 +668,15 @@ Sunset
 Watch
 5:20–6:15 p.m.
 Forecast opens around Wed, Dec 9
+Sat, Dec 26 · Springdale · Utah time
+Zion dark-sky night
+Dark
+6:55 p.m.
+Moonrise
+8:47 p.m. (86%)
+Stars
+~1.9 hours
+Forecast opens around Fri, Dec 11
 Mon, Dec 28 · Furnace Creek
 Death Valley — option 1
 Dark
@@ -746,36 +772,31 @@ Live cloud data from Open-Meteo (https://open-meteo.com/). Moon and sun times we
 ## Budget page
 
 DEC 23, 2026 – JAN 1, 2027 · 9 NIGHTS · 4 TRAVELERS FROM MADISON
-Trip budget
+Dec 23–26 · Las Vegas (3 nights)
 
-Estimated cost per person. Shared costs (hotel, car, parking, park entry) are split four ways. Change the choices and the totals update.
+Estimated cost per person for the essentials: getting there, hotels, the car, park entry and food. Shared costs are split four ways. Optional extras like shows, tours and souvenirs aren’t included. Change the choices and the totals update.
 
 Per person
-$1,984
-about $198 per day
+$1,750
+about $175 per day
 Whole group
-$7,936
+$7,000
 4 travelers
-Flights & car 33%
-Hotel 22%
-Parks & Sphere 7%
-Food 30%
-Other 8%
+Flights & car 42%
+Hotel 23%
+Food 34%
 Your choices
 Round-trip flight to Las Vegas
 From Madison: United nonstop from O’Hare ($426) + Van Galder bus ($70)
-Hotel per night, whole group
-Regular × 7
-New Year’s × 2
-One off-Strip room with two queen beds for 4, with free parking. Dec 30–31 cost far more than the rest of the week.
-Stay a night in Death Valley (+ about $220 for the room)
-Stay a night in Springdale for Zion (+ about $180)
-Rental car + gas, whole group (mid-size SUV for 4 + luggage)
+Hotels, 2 rooms, total per stay
+Dec 23–26 · Las Vegas (3 nights)
+Dec 26 · Springdale for Zion (1 night)
+Dec 27 – Jan 1 · Las Vegas (5 nights)
+Two rooms with two beds each and free parking. Suggested: The D downtown ($379), Zion Park Motel ($299) and Sam’s Town ($954), from Priceline on Nov 5. Check taxes and resort fees at checkout.
+Stay a night in Death Valley (+ about $450 for two rooms, a rough estimate)
+Rental car + gas, whole group
 National park entry
-I’m not a US resident (Zion may still charge +$100)
-Sphere ticket (The Wizard of Oz)
 Food, per person per day
-Souvenirs, stickers & other, per person
 Line by line
 ITEM	PER PERSON
 GETTING THERE & AROUND
@@ -783,29 +804,25 @@ Flight + bus
 United nonstop O’Hare ⇄ Las Vegas, Dec 23 – Jan 1, plus the Van Galder bus from Madison
 $496
 Rental car + gas
-$600 for the group, split 4 ways; ~900 miles of driving
-$150
+$925 for the group, split 4 ways. Costco Travel quote: Alamo intermediate SUV (Nissan Rogue AWD or similar), $775 with taxes, unlimited miles, extra driver included; plus ~$150 gas for ~900 miles
+$231
 Parking
 Strip garages and the Hoover Dam garage, split 4 ways
 $15
 STAYING
-Hotel
-7 × $150 + 2 × $350 (New Year’s) = $1,750, split 4 ways
-$438
-PARKS & SHOWS
+Las Vegas hotels
+Dec 23–26 $379 + Dec 27 – Jan 1 $954 = $1,333 for 2 rooms, split 4 ways
+$333
+Springdale hotel (Zion)
+Dec 26, 2 rooms near the park entrance, split 4 ways
+$75
+PARKS
 Park entry
 We have an America the Beautiful pass: $0 · Death Valley, Zion and Lake Mead, split 4 ways
 $0
-Sphere: The Wizard of Oz
-Holiday pricing
-$120
-Hoover Dam tour
-Optional, about $15
-$15
 DAY TO DAY
 Food
 $60 a day × 10 days, prime rib included
 $600
-Souvenirs, stickers & other	$150
-Total per person	$1,984
-Flights from Google Flights on Nov 5, 2026. Hotel, car and Sphere prices are estimates; Las Vegas hotel prices around New Year’s run about three times Christmas-week rates. Your choices are saved only in your own browser.
+Total per person	$1,750
+Flights from Google Flights and hotels from Priceline, both checked Nov 5, 2026. Car from Costco Travel the same day; gas and food are estimates. Your choices are saved only in your own browser.
