@@ -47,6 +47,7 @@
     <a data-nav="index.html" href="index.html" data-i18n="navItin"></a>
     <a data-nav="flights.html" href="flights.html" data-i18n="navFlights"></a>
     <a data-nav="parks.html" href="parks.html" aria-current="page" data-i18n="navParks"></a>
+    <a data-nav="food.html" href="food.html" data-i18n="navFood"></a>
     <a data-nav="sky.html" href="sky.html" data-i18n="navSky"></a>
     <a data-nav="budget.html" href="budget.html" data-i18n="navBudget"></a>
     <a data-nav="ask.html" href="ask.html" data-i18n="navAsk"></a>
@@ -77,7 +78,7 @@ const PLACES = [
   { id:"dv", cat:"dv", img:"0/03/Zabriskie_Point_Death_Valley_December_2013_002.jpg/960px-Zabriskie_Point_Death_Valley_December_2013_002.jpg", pos:"center 55%",
     credit:{ by:"King of Hearts", lic:"CC BY-SA 3.0", licUrl:"https://creativecommons.org/licenses/by-sa/3.0", page:"https://commons.wikimedia.org/wiki/File:Zabriskie_Point_Death_Valley_December_2013_002.jpg" },
     links:[["nps.gov/deva","https://www.nps.gov/deva/"],["Alerts & road status","https://www.nps.gov/deva/planyourvisit/conditions.htm"]],
-    en:{ when:"One of Dec 28–30 · ~2 hr each way", name:"Death Valley National Park", tagline:"Salt flats, badlands and dunes by day; one of the darkest skies in the country at night.",
+    en:{ when:"Dec 28 · ~2 hr each way", name:"Death Valley National Park", tagline:"Salt flats, badlands and dunes by day; one of the darkest skies in the country at night.",
       about:"The hottest, driest and lowest national park in the US, and the largest outside Alaska. In winter it’s pleasant — highs in the 60s–70s °F — and the scenery changes every few miles: a white salt flat 282 feet below sea level, golden badlands, multicolored hills, sand dunes and 5,000-foot viewpoints. After dark, it’s a certified dark-sky park, which is why your stargazing night is here.",
       stops:[
         ["Furnace Creek Visitor Center","20 min","Park bookstore for stickers and the passport stamp; check the day’s conditions."],
@@ -89,8 +90,8 @@ const PLACES = [
         ["Mesquite Flat Sand Dunes","45 min","Classic rolling dunes; a top sunset and stargazing spot."],
         ["Dante’s View","1 hr detour","A viewpoint 5,475 ft up, looking straight down at Badwater."],
       ],
-      good:["$35 per car for 7 days — covered by your America the Beautiful pass. Not one of the parks with the extra non-resident fee.","Fill up in Pahrump on the way in; gas inside the park is expensive.","Cell service is spotty — download offline maps.","Closed right now: Scotty’s Castle, Titus Canyon Road and Darwin Falls (flood damage). The stops above are open.","To stay the night: The Oasis at Death Valley (Inn or Ranch), Stovepipe Wells, or Panamint Springs. Book refundable."] },
-    zh:{ when:"12月28–30日其中一天 · 单程约2小时", name:"死亡谷国家公园", tagline:"白天是盐滩、荒地和沙丘；晚上是全美最暗的星空之一。",
+      good:["$35 per car for 7 days — covered by your America the Beautiful pass. Not one of the parks with the extra non-resident fee.","Fill up in Pahrump on the way in; gas inside the park is expensive.","Cell service is spotty — download offline maps.","Closed right now: Scotty’s Castle, Titus Canyon Road and Darwin Falls (flood damage). The stops above are open.","Stargaze from about 6:15 until 9:30 p.m., before the moon rises at 10:25, then drive back to Vegas. Badwater Basin and Harmony Borax Works are dark spots close to the road."] },
+    zh:{ when:"12月28日 · 单程约2小时", name:"死亡谷国家公园", tagline:"白天是盐滩、荒地和沙丘；晚上是全美最暗的星空之一。",
       about:"美国最热、最干、海拔最低的国家公园，也是阿拉斯加以外面积最大的。冬天很舒服——白天约18–24°C——而且每隔几英里风景就变：海拔-86米的白色盐滩、金色荒地、彩色山丘、沙丘，以及1,600多米高的观景台。天黑后，这里是认证的暗夜公园，所以观星夜安排在这里。",
       stops:[
         ["火炉溪游客中心","20分钟","公园书店买贴纸、盖护照章；看看当天路况。"],
@@ -102,7 +103,7 @@ const PLACES = [
         ["梅斯基特平原沙丘","45分钟","经典的连绵沙丘；看日落和观星的好地方。"],
         ["但丁观景台","绕路1小时","海拔1,668米，正下方就是恶水盆地。"],
       ],
-      good:["每车$35，7天有效——美丽美国年票可免。不在加收非居民费用的公园名单里。","在帕朗加满油；园内油价很贵。","手机信号不稳定——提前下载离线地图。","目前关闭：斯科蒂城堡、泰特斯峡谷路和达尔文瀑布（洪水损坏）。上面列的景点都开放。","想住一晚：The Oasis at Death Valley（Inn或Ranch）、Stovepipe Wells或Panamint Springs。订可退款的。"] } },
+      good:["每车$35，7天有效——美丽美国年票可免。不在加收非居民费用的公园名单里。","在帕朗加满油；园内油价很贵。","手机信号不稳定——提前下载离线地图。","目前关闭：斯科蒂城堡、泰特斯峡谷路和达尔文瀑布（洪水损坏）。上面列的景点都开放。","从晚上6:15左右看星星到9:30，月亮10:25才升起，然后开车回拉斯维加斯。恶水盆地和硼砂工厂遗址离路近，天也够黑。"] } },
 
   { id:"zion", cat:"zion", img:"2/21/Utah_-_Springdale_-_The_Watchman_-_Zion_Canyon_Views.jpg/960px-Utah_-_Springdale_-_The_Watchman_-_Zion_Canyon_Views.jpg", pos:"center 40%",
     credit:{ by:"Jared", lic:"CC BY 2.0", licUrl:"https://creativecommons.org/licenses/by/2.0", page:"https://commons.wikimedia.org/wiki/File:Utah_-_Springdale_-_The_Watchman_-_Zion_Canyon_Views.jpg" },
@@ -132,32 +133,6 @@ const PLACES = [
       ],
       good:["每车$35（7天）——美丽美国年票可免。非美国居民在这里可能仍需每人另付$100。","天使降落过了侦察者观景点之后的铁链段需要许可。冬季的季度抽签已经截止，但可以在Recreation.gov参加前一天抽签（犹他州时间下午3点前申请，4点出结果）。冬天铁链段可能结冰。","冬天走窄谷必须租干式潜水服——水温接近冰点。","峡谷接驳车12月26日–1月2日运行（首班早上8点，出峡谷末班下午5:45）；运行期间风景路禁止私家车。免费的斯普林代尔接驳车连接小镇和公园入口。时间可能变动——出发前查一下nps.gov/zion。","有冰就带冰爪；斯普林代尔的户外店可以租。","贴纸在锡安峡谷或科罗布峡谷游客中心买。","住在斯普林代尔离公园入口只有几分钟，可以看日落、晚饭后看星空，第二天一早上步道。"] } },
 
-  { id:"mead", cat:"mead", img:"1/1d/Lake_Mead_and_its_bathtub_ring_upstream_of_Hoover_Dam%2C_Black_Canyon%2C_Arizona%E2%80%93Nevada.jpg/960px-Lake_Mead_and_its_bathtub_ring_upstream_of_Hoover_Dam%2C_Black_Canyon%2C_Arizona%E2%80%93Nevada.jpg", pos:"center 50%",
-    credit:{ by:"Christian David", lic:"CC BY-SA 4.0", licUrl:"https://creativecommons.org/licenses/by-sa/4.0", page:"https://commons.wikimedia.org/wiki/File:Lake_Mead_and_its_bathtub_ring_upstream_of_Hoover_Dam,_Black_Canyon,_Arizona%E2%80%93Nevada.jpg" },
-    links:[["nps.gov/lake","https://www.nps.gov/lake/"],["Hoover Dam (usbr.gov)","https://www.usbr.gov/lc/hooverdam/"]],
-    en:{ when:"Dec 24 · ~45 min each way", name:"Hoover Dam & Lake Mead", tagline:"A 1930s concrete giant, the reservoir behind it, and a moonrise on Christmas Eve.",
-      about:"Hoover Dam holds back the Colorado River to form Lake Mead, the largest reservoir in the US. The lake is now near record lows, so a band of bleached white rock — the “bathtub ring” — shows how far the water has dropped. The dam sits on the Nevada–Arizona line; in winter the Arizona side is an hour ahead.",
-      stops:[
-        ["Mike O’Callaghan–Pat Tillman Memorial Bridge","30 min","A walkway on the bypass bridge with the best full view of the dam, about 900 feet above the river."],
-        ["Top of Hoover Dam","45 min","Walk across the dam between Nevada and Arizona and look down the 726-foot face."],
-        ["Hoover Dam tours","1 hr","Paid guided tours of the power plant and the dam’s tunnels; check times on usbr.gov."],
-        ["Lake Mead visitor center","30 min","Near Boulder City: exhibits, views and your park sticker."],
-        ["Lakeview Overlook","20 min","A viewpoint over the lake and the bathtub ring; a good spot for the Christmas Eve moonrise."],
-        ["Boulder City","1 hr","A small historic town built for the dam workers; good for lunch."],
-      ],
-      good:["Driving to the dam and bridge doesn’t require the park fee; Lake Mead charges $25 per car for its scenic lakeshore roads (covered by your pass).","The dam has a paid parking garage; free lots on the Arizona side fill up.","Expect security screening for vehicles approaching the dam.","Christmas Eve hours may be shorter — do the visitor center early."] },
-    zh:{ when:"12月24日 · 单程约45分钟", name:"胡佛水坝与米德湖", tagline:"1930年代的混凝土巨坝、坝后的水库，以及平安夜的月出。",
-      about:"胡佛水坝拦住科罗拉多河，形成了全美最大的水库米德湖。湖水现在接近历史最低，峡谷岩壁上一圈褪成白色的岩石——“浴缸环”——显示水位降了多少。水坝跨在内华达州和亚利桑那州交界上；冬天亚利桑那那边比内华达早一小时。",
-      stops:[
-        ["迈克·奥卡拉汉–帕特·蒂尔曼纪念大桥","30分钟","绕行大桥上的人行道，是看水坝全景最好的地方，距河面约270米。"],
-        ["胡佛水坝坝顶","45分钟","在内华达和亚利桑那之间走过坝顶，俯看221米高的坝面。"],
-        ["胡佛水坝导览","1小时","付费参观发电厂和坝内隧道；时间见usbr.gov。"],
-        ["米德湖游客中心","30分钟","在博尔德城附近：展览、风景和公园贴纸。"],
-        ["湖景观景台","20分钟","俯瞰湖面和浴缸环；平安夜看月出的好地方。"],
-        ["博尔德城","1小时","为修坝工人建的历史小镇；适合吃午饭。"],
-      ],
-      good:["开车去水坝和大桥不用交公园门票；进米德湖沿湖风景路每车$25（年票可免）。","水坝有收费停车楼；亚利桑那一侧的免费停车场很快会满。","靠近水坝的车辆会接受安检。","平安夜开放时间可能缩短——游客中心早点去。"] } },
-
   { id:"sphere", cat:"vegas", img:"c/c9/Sphere_-_Las_Vegas_%2853685825749%29.jpg/960px-Sphere_-_Las_Vegas_%2853685825749%29.jpg", pos:"center 35%",
     credit:{ by:"Shelby L. Bell", lic:"CC BY 2.0", licUrl:"https://creativecommons.org/licenses/by/2.0", page:"https://commons.wikimedia.org/wiki/File:Sphere_-_Las_Vegas_(53685825749).jpg" },
     links:[["thesphere.com","https://www.thesphere.com/shows"]],
@@ -180,48 +155,21 @@ const PLACES = [
       ],
       good:["200和300区靠中间的位置通常视野最完整；最低层有挑檐遮挡。","热门节日场次会卖光——早点订。","提前30–45分钟到，过安检、看大厅展示。"] } },
 
-  { id:"primerib", cat:"vegas", img:null,
-    links:[["Prime rib deals list (Oct 2026)","https://lasvegasthenandnow.com/where-to-find-cheap-prime-rib-in-las-vegas-deals-and-specials/"]],
-    en:{ when:"Christmas dinner, or any night", name:"Prime rib in Vegas", tagline:"The classic Vegas dinner, still best downtown and off the Strip.",
-      about:"Casinos once sold prime rib below cost to keep people in the building. The $5 specials are gone, but downtown and locals’ casinos still serve big cuts at fair prices. Holiday hours can change, so call ahead on Christmas.",
-      stops:[
-        ["The Cal — Market Street Cafe","$24.99","Downtown; daily 4–10 p.m."],
-        ["4 Queens — Magnolia’s","$29.99","Downtown; 10 oz, daily 4 p.m.–midnight."],
-        ["Jerry’s Nugget — Jerry’s Famous Coffee Shop","$22.99 / $46.99","North Las Vegas; English cut, or a 28–30 oz thick cut."],
-        ["Palace Station — The Brass Fork","$25.99","Off-Strip; nightly 4–10 p.m."],
-        ["Ellis Island — Village Pub & Cafe","$34.99","King cut; the closest to the Strip."],
-        ["South Point — Primarily Prime Rib","$29.95","South of the Strip; 10 oz."],
-        ["Downtown Grand — Freedom Beat","$19.99","All-you-can-eat, Fridays and Saturdays only, 5–10 p.m."],
-      ],
-      good:["Prices from a list updated Oct 29, 2026; menus change.","Under 21? You can eat at casino restaurants, but you can’t hang around the casino floor."] },
-    zh:{ when:"圣诞晚餐，或任何一晚", name:"拉斯维加斯烤牛肋排", tagline:"经典的拉斯维加斯晚餐，市中心和大道外最划算。",
-      about:"以前赌场会亏本卖烤牛肋排，好让客人留在场内。$5的特价已经没有了，但市中心和本地人常去的赌场仍然有分量大、价格公道的牛肋排。节日营业时间可能变动，圣诞节当天先打电话确认。",
-      stops:[
-        ["The Cal — Market Street Cafe","$24.99","市中心；每天下午4点–晚上10点。"],
-        ["4 Queens — Magnolia’s","$29.99","市中心；10盎司，每天下午4点–午夜。"],
-        ["Jerry’s Nugget — Jerry’s Famous Coffee Shop","$22.99 / $46.99","北拉斯维加斯；英式薄切，或28–30盎司厚切。"],
-        ["Palace Station — The Brass Fork","$25.99","大道外；每晚4–10点。"],
-        ["Ellis Island — Village Pub & Cafe","$34.99","国王切；离大道最近。"],
-        ["South Point — Primarily Prime Rib","$29.95","大道以南；10盎司。"],
-        ["Downtown Grand — Freedom Beat","$19.99","无限量，仅周五周六下午5–10点。"],
-      ],
-      good:["价格来自2026年10月29日更新的清单；菜单会变。","未满21岁？可以在赌场餐厅吃饭，但不能在赌场区域逗留。"] } },
-
   { id:"nearby", cat:"flex", img:null,
     links:[["Valley of Fire","https://parks.nv.gov/parks/valley-of-fire"],["Red Rock Canyon","https://www.blm.gov/programs/national-conservation-lands/nevada/red-rock-canyon"]],
-    en:{ when:"Flex days (Dec 28, 30)", name:"Close to Vegas", tagline:"Easy half-day trips for the flex days.",
-      about:"Two red-rock landscapes within an hour of the Strip, for the days you’re not driving to a national park.",
+    en:{ when:"Dec 29, the last day · or a spare morning like Dec 24", name:"Close to Vegas", tagline:"Red Rock Canyon is the plan for the last day; Valley of Fire is another easy half-day trip.",
+      about:"Two red-rock landscapes within an hour of the Strip. Red Rock fills the last morning before the red-eye.",
       stops:[
         ["Valley of Fire State Park","~1 hr away","Nevada’s oldest state park: bright red sandstone, the Fire Wave and Elephant Rock, and ancient petroglyphs at Atlatl Rock. Per-car fee."],
-        ["Red Rock Canyon","~30 min away","A 13-mile scenic loop past red and cream cliffs, with short hikes. Timed-entry reservations are required for the drive in winter (recreation.gov)."],
+        ["Red Rock Canyon","~30 min away","A 13-mile scenic loop past red and cream cliffs, with short hikes. Timed entry is required for the drive 8 a.m. – 5 p.m. from October to May, and it closes at 5 p.m. in winter (recreation.gov)."],
         ["Ethel M cactus garden lights","~25 min away","A free holiday light display in a cactus garden at a chocolate factory in Henderson."],
       ],
       good:["Valley of Fire and Red Rock both close in the evening, so they’re daytime trips.","Neither sells national park stickers — Valley of Fire is a state park, Red Rock is federal (BLM) land."] },
-    zh:{ when:"机动日（12月28、30日）", name:"拉斯维加斯近郊", tagline:"机动日可以去的半日游。",
-      about:"距大道一小时以内的两处红岩风景，留给不去国家公园的日子。",
+    zh:{ when:"12月29日，最后一天 · 或空闲的上午，比如12月24日", name:"拉斯维加斯近郊", tagline:"最后一天去红岩峡谷；火焰谷也是轻松的半日游。",
+      about:"距大道一小时以内的两处红岩风景。红眼航班前的最后一个上午去红岩峡谷。",
       stops:[
         ["火焰谷州立公园","约1小时","内华达最早的州立公园：鲜红砂岩、火焰波浪和大象岩，以及阿特拉特岩的古代岩画。按车收费。"],
-        ["红岩峡谷","约30分钟","21公里的风景环线，经过红色和米色的崖壁，有短途步道。冬季开车进入需要预约时段（recreation.gov）。"],
+        ["红岩峡谷","约30分钟","21公里的风景环线，经过红色和米色的崖壁，有短途步道。10月至5月早8点到下午5点开车进入需要预约，冬季下午5点关门（recreation.gov）。"],
         ["Ethel M仙人掌花园灯光","约25分钟","亨德森一家巧克力工厂仙人掌花园里的免费节日灯光。"],
       ],
       good:["火焰谷和红岩峡谷傍晚都会关闭，只适合白天去。","这两处都不卖国家公园贴纸——火焰谷是州立公园，红岩峡谷属于联邦土地管理局（BLM）。"] } },
@@ -230,7 +178,7 @@ const PLACES = [
 const UI = {
   en: {
     docTitle: "Las Vegas Parks Guide",
-    eyebrow: "Death Valley · Zion · Hoover Dam · the Sphere · prime rib",
+    eyebrow: "Death Valley · Zion · the Sphere · Red Rock",
     h1: "Parks & sights",
     lede: "What each place is like, what’s worth your time, how long it takes, and what to know before you go — in the order of the trip.",
     jumpTitle: "Jump to",
@@ -239,7 +187,7 @@ const UI = {
   },
   zh: {
     docTitle: "拉斯维加斯公园指南",
-    eyebrow: "死亡谷 · 锡安 · 胡佛水坝 · Sphere球幕 · 烤牛肋排",
+    eyebrow: "死亡谷 · 锡安 · Sphere球幕 · 红岩峡谷",
     h1: "公园与景点",
     lede: "每个地方是什么样、哪些值得去、要花多久，以及出发前要知道的事——按行程顺序。",
     jumpTitle: "跳到",
@@ -247,7 +195,7 @@ const UI = {
     footer: "照片来自<a href=\"https://commons.wikimedia.org/\">维基共享资源</a>，按每张照片标注的知识共享许可使用。路况、开放时间和价格于2026年11月初查询，可能变化；出发那周请再确认。",
   },
 };
-const ORDER = ["mead","sphere","primerib","zion","dv","nearby"];
+const ORDER = ["sphere","zion","dv","nearby"];
 const esc = Site.esc;
 function render(t, lang) {
   const list = ORDER.map(id => PLACES.find(p => p.id === id));

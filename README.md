@@ -1,6 +1,6 @@
 # Las Vegas winter trip 2026
 
-Bilingual (English / 中文) trip site for Dec 23, 2026 – Jan 1, 2027: itinerary, flights, parks, a moon and stargazing planner with live cloud forecasts, a budget calculator, and an Ask tab where Claude answers questions about the trip.
+Bilingual (English / 中文) trip site for Dec 23 – 29, 2026: itinerary, flights, parks, a moon and stargazing planner with live cloud forecasts, a budget calculator, and an Ask tab where Claude answers questions about the trip.
 
 Live site: https://xmiao8.github.io/vegas-trip-2026/
 
@@ -9,8 +9,9 @@ Live site: https://xmiao8.github.io/vegas-trip-2026/
 | File | What it is |
 |---|---|
 | `index.html` | Day-by-day itinerary and checklist |
-| `flights.html` | Madison / Chicago flight options with round-trip prices |
-| `parks.html` | Death Valley, Zion, Lake Mead, the Sphere, prime rib |
+| `flights.html` | Flight options from Madison with round-trip prices |
+| `parks.html` | Death Valley, Zion, the Sphere, Red Rock |
+| `food.html` | Prime rib, Chinatown, cheap eats, buffets, food on park days |
 | `sky.html` | Moonrise times, dark-sky windows, live cloud forecast (Open-Meteo) |
 | `budget.html` | Per-person budget calculator |
 | `ask.html` | Chat with Claude about the trip |

@@ -9,6 +9,7 @@ const PAGES = [
   ["index.html", "Itinerary"],
   ["flights.html", "Flights"],
   ["parks.html", "Parks & sights"],
+  ["food.html", "Food"],
   ["sky.html", "Sky planner (moon, stars, cloud forecast)"],
   ["budget.html", "Budget"],
 ];

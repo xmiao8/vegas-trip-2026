@@ -44,6 +44,7 @@ ol.tips { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
     <a data-nav="index.html" href="index.html" data-i18n="navItin"></a>
     <a data-nav="flights.html" href="flights.html" data-i18n="navFlights"></a>
     <a data-nav="parks.html" href="parks.html" data-i18n="navParks"></a>
+    <a data-nav="food.html" href="food.html" data-i18n="navFood"></a>
     <a data-nav="sky.html" href="sky.html" aria-current="page" data-i18n="navSky"></a>
     <a data-nav="budget.html" href="budget.html" data-i18n="navBudget"></a>
     <a data-nav="ask.html" href="ask.html" data-i18n="navAsk"></a>
@@ -95,32 +96,26 @@ ol.tips { margin: 0; padding-left: 20px; display: flex; flex-direction: column; 
 </div>
 
 <script>
-const PTS = { vegas:[36.1147,-115.1728], mead:[36.0330,-114.8000], dv:[36.4618,-116.8650], zion:[37.1889,-112.9986] };
+const PTS = { vegas:[36.1147,-115.1728], dv:[36.4618,-116.8650], zion:[37.1889,-112.9986] };
 const API = "https://api.open-meteo.com/v1/forecast?latitude=" + Object.values(PTS).map(p => p[0]).join(",") + "&longitude=" + Object.values(PTS).map(p => p[1]).join(",") + "&hourly=cloud_cover,cloud_cover_high&timezone=America%2FLos_Angeles&forecast_days=16";
-const CACHE_KEY = "vegas-sky-cache-v2", CACHE_MS = 60 * 60 * 1000;
+const CACHE_KEY = "vegas-sky-cache-v3", CACHE_MS = 60 * 60 * 1000;
 
 // Calculated for Furnace Creek (Pacific Time), flat horizon.
 const MOON = [
-  ["2026-12-22","4:36","6:08","3:07 pm",98,0],
   ["2026-12-23","4:36","6:09","4:14 pm",100,0],
   ["2026-12-24","4:37","6:10","5:30 pm",98,0],
   ["2026-12-25","4:38","6:10","6:49 pm",94,0.6],
   ["2026-12-26","4:38","6:11","8:05 pm",86,1.9],
   ["2026-12-27","4:39","6:11","9:17 pm",77,3.1],
   ["2026-12-28","4:39","6:12","10:25 pm",66,4.2],
-  ["2026-12-29","4:40","6:13","11:30 pm",55,5.3],
-  ["2026-12-30","4:41","6:13","12:33 am",44,6.3],
-  ["2026-12-31","4:42","6:14","1:36 am",34,7.4],
-  ["2027-01-01","4:42","6:15","2:38 am",25,8.4],
 ];
 const NIGHTS = [
   { date:"2026-12-23", pt:"vegas", hours:[16,17,18], cat:"travel", kind:"moon" },
-  { date:"2026-12-24", pt:"mead",  hours:[17,18,19], cat:"mead", kind:"moon" },
+  { date:"2026-12-24", pt:"vegas", hours:[17,18,19], cat:"vegas", kind:"moon" },
   // Springdale is on Utah time; forecast hours are Pacific, so 18–19 PT = 7–9 p.m. Utah, between dark and moonrise.
   { date:"2026-12-26", pt:"zion", hours:[18,19], cat:"zion", kind:"zion" },
-  { date:"2026-12-28", pt:"dv", hours:[18,19,20,21,22], cat:"dv", kind:"stars", dark:4.2 },
-  { date:"2026-12-29", pt:"dv", hours:[18,19,20,21,22,23], cat:"dv", kind:"stars", dark:5.3 },
-  { date:"2026-12-30", pt:"dv", hours:[18,19,20,21,22,23], cat:"dv", kind:"stars", dark:6.3 },
+  // Stargazing from full dark until about 9:30 p.m., before driving back to Vegas.
+  { date:"2026-12-28", pt:"dv", hours:[18,19,20,21], cat:"dv", kind:"stars", dark:3.3 },
 ];
 
 const UI = {
@@ -128,18 +123,16 @@ const UI = {
     docTitle: "Las Vegas Sky Planner",
     eyebrow: "Moon, darkness and live cloud forecasts · Pacific Time",
     h1: "Sky planner",
-    lede: "The two moonrises at the start of the trip, a dark-sky night in Zion, the Death Valley stargazing window at the end, and a live cloud forecast for each — so you can pick the clearest night.",
+    lede: "The two moonrises at the start of the trip, a dark-sky night in Zion, a night of stars in Death Valley, and a live cloud forecast for each.",
     nightsTitle: "Your sky nights",
     loading: "Loading the live cloud forecast…",
     fail: "The live forecast couldn’t load here. Open the GitHub version of the site, or use the forecast links below.",
     updated: s => `Live forecast · updated ${s}`,
     nights: {
       "2026-12-23": { title:"Supermoon at sunset", place:"Las Vegas", rows:[["Moonrise","4:09 p.m. (100%)"],["Sunset","4:31 p.m."],["Watch","4:25–5:15 p.m."]] },
-      "2026-12-24": { title:"Christmas Eve moonrise", place:"Lake Mead", rows:[["Moonrise","~5:25 p.m. (98%)"],["Sunset","4:31 p.m."],["Watch","5:20–6:15 p.m."]] },
+      "2026-12-24": { title:"Christmas Eve moonrise", place:"Las Vegas", rows:[["Moonrise","5:24 p.m. (98%)"],["Sunset","4:31 p.m."],["Watch","5:20–6:15 p.m."]] },
       "2026-12-26": { title:"Zion dark-sky night", place:"Springdale · Utah time", rows:[["Dark","6:55 p.m."],["Moonrise","8:47 p.m. (86%)"],["Stars","~1.9 hours"]] },
-      "2026-12-28": { title:"Death Valley — option 1", place:"Furnace Creek", rows:[["Dark","6:12 p.m."],["Moonrise","10:25 p.m."],["Stars","~4.2 hours"]] },
-      "2026-12-29": { title:"Death Valley — option 2 (planned)", place:"Furnace Creek", rows:[["Dark","6:13 p.m."],["Moonrise","11:30 p.m."],["Stars","~5.3 hours"]] },
-      "2026-12-30": { title:"Death Valley — option 3 (darkest)", place:"Furnace Creek", rows:[["Dark","6:13 p.m."],["Moonrise","12:33 a.m."],["Stars","~6.3 hours"]] },
+      "2026-12-28": { title:"Death Valley stargazing night", place:"Furnace Creek", rows:[["Dark","6:12 p.m."],["Moonrise","10:25 p.m."],["Stars","~3.3 hours (until ~9:30)"]] },
     },
     dayLabel: d => new Date(d + "T12:00:00").toLocaleDateString("en-US", { weekday:"short", month:"short", day:"numeric" }),
     cloudLabel: "Cloud cover", highLabel: "high clouds",
@@ -149,7 +142,7 @@ const UI = {
     best: "Best bet",
     outlookTitle: "Death Valley, next 7 evenings",
     outlookLede: "Average cloud cover from 6 p.m. to midnight, live. This is the same check you’ll do before the trip.",
-    moonTitle: "Moon and darkness, Dec 22 – Jan 1",
+    moonTitle: "Moon and darkness, Dec 23 – 28",
     moonLede: "Calculated for Furnace Creek. “Dark sky” is the time between full darkness and moonrise. Mountains delay the moonrise you see by 10–30 minutes, which adds a little dark time.",
     moonHead: ["Night","Sunset","Fully dark","Moonrise","Moon lit","Dark sky"],
     seeTitle: "What you’ll see",
@@ -177,18 +170,16 @@ const UI = {
     docTitle: "拉斯维加斯星空计划",
     eyebrow: "月亮、天黑时间与实时云量预报 · 太平洋时间",
     h1: "星空计划",
-    lede: "行程开头的两次月出、锡安的暗夜星空、结尾的死亡谷观星窗口，以及每一晚的实时云量预报——帮你挑最晴的一晚。",
+    lede: "行程开头的两次月出、锡安的暗夜星空、死亡谷的观星夜，以及每一晚的实时云量预报。",
     nightsTitle: "你们的星空之夜",
     loading: "正在加载实时云量预报…",
     fail: "这里无法加载实时预报。请打开GitHub版本的网站，或使用下方的预报链接。",
     updated: s => `实时预报 · 更新于 ${s}`,
     nights: {
       "2026-12-23": { title:"日落时的超级月亮", place:"拉斯维加斯", rows:[["月出","下午4:09（100%）"],["日落","下午4:31"],["观看","下午4:25–5:15"]] },
-      "2026-12-24": { title:"平安夜月出", place:"米德湖", rows:[["月出","约下午5:25（98%）"],["日落","下午4:31"],["观看","下午5:20–6:15"]] },
+      "2026-12-24": { title:"平安夜月出", place:"拉斯维加斯", rows:[["月出","下午5:24（98%）"],["日落","下午4:31"],["观看","下午5:20–6:15"]] },
       "2026-12-26": { title:"锡安暗夜星空", place:"斯普林代尔 · 犹他州时间", rows:[["天黑","晚上6:55"],["月出","晚上8:47（86%）"],["星空","约1.9小时"]] },
-      "2026-12-28": { title:"死亡谷——选项1", place:"火炉溪", rows:[["天黑","晚上6:12"],["月出","晚上10:25"],["星空","约4.2小时"]] },
-      "2026-12-29": { title:"死亡谷——选项2（计划）", place:"火炉溪", rows:[["天黑","晚上6:13"],["月出","晚上11:30"],["星空","约5.3小时"]] },
-      "2026-12-30": { title:"死亡谷——选项3（最暗）", place:"火炉溪", rows:[["天黑","晚上6:13"],["月出","凌晨12:33"],["星空","约6.3小时"]] },
+      "2026-12-28": { title:"死亡谷观星夜", place:"火炉溪", rows:[["天黑","晚上6:12"],["月出","晚上10:25"],["星空","约3.3小时（到9:30左右）"]] },
     },
     dayLabel: d => new Date(d + "T12:00:00").toLocaleDateString("zh-CN", { weekday:"short", month:"long", day:"numeric" }),
     cloudLabel: "云量", highLabel: "高云",
@@ -198,7 +189,7 @@ const UI = {
     best: "最佳选择",
     outlookTitle: "死亡谷未来7个晚上",
     outlookLede: "晚上6点到午夜的平均云量，实时更新。出发前你们要做的就是这样的检查。",
-    moonTitle: "月亮与天黑时间，12月22日 – 1月1日",
+    moonTitle: "月亮与天黑时间，12月23–28日",
     moonLede: "按火炉溪计算。“暗夜时长”是从完全天黑到月出的时间。山会让实际看到的月出晚10–30分钟，暗夜时间会稍微多一点。",
     moonHead: ["日期","日落","完全天黑","月出","月亮亮度","暗夜时长"],
     seeTitle: "能看到什么",
@@ -255,7 +246,7 @@ function render(t, lang) {
   const today = todayPT();
   const dvAvgs = NIGHTS.filter(n => n.kind === "stars").map(n => ({ n, a: avgFor(n.pt, n.date, n.hours) })).filter(x => x.a);
   let best = null;
-  if (dvAvgs.length) best = dvAvgs.reduce((b, x) => (x.a.all < b.a.all - 5 || (Math.abs(x.a.all - b.a.all) <= 5 && x.n.dark > b.n.dark)) ? x : b).n.date;
+  if (dvAvgs.length > 1) best = dvAvgs.reduce((b, x) => (x.a.all < b.a.all - 5 || (Math.abs(x.a.all - b.a.all) <= 5 && x.n.dark > b.n.dark)) ? x : b).n.date;
 
   document.getElementById("nights").innerHTML = NIGHTS.map(n => {
     const c = t.nights[n.date], a = avgFor(n.pt, n.date, n.hours);
@@ -286,7 +277,7 @@ function render(t, lang) {
 
   document.getElementById("moon-head").innerHTML = t.moonHead.map(h => `<th>${esc(h)}</th>`).join("");
   document.getElementById("moon-rows").innerHTML = MOON.map(([d, ss, dk, mr, pct, hrs]) => {
-    const hl = ["2026-12-23","2026-12-24","2026-12-28","2026-12-29","2026-12-30"].includes(d);
+    const hl = ["2026-12-23","2026-12-24","2026-12-26","2026-12-28"].includes(d);
     return `<tr class="${hl ? "hl" : ""}"><td>${esc(t.dayLabel(d))}</td><td>${ss} pm</td><td>${dk} pm</td><td>${mr}</td><td>${pct}%</td><td>${hrs ? hrs.toFixed(1) + " h" : "—"}</td></tr>`;
   }).join("");
 

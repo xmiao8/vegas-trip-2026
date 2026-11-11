@@ -59,6 +59,7 @@ table.b tfoot td.r { font-family: var(--display); font-size: 20px; }
     <a data-nav="index.html" href="index.html" data-i18n="navItin"></a>
     <a data-nav="flights.html" href="flights.html" data-i18n="navFlights"></a>
     <a data-nav="parks.html" href="parks.html" data-i18n="navParks"></a>
+    <a data-nav="food.html" href="food.html" data-i18n="navFood"></a>
     <a data-nav="sky.html" href="sky.html" data-i18n="navSky"></a>
     <a data-nav="budget.html" href="budget.html" aria-current="page" data-i18n="navBudget"></a>
     <a data-nav="ask.html" href="ask.html" data-i18n="navAsk"></a>
@@ -98,9 +99,6 @@ table.b tfoot td.r { font-family: var(--display); font-size: 20px; }
         <span class="hint" data-i18n="hotelHint"></span>
       </div>
       <div class="field">
-        <label class="tog" for="o-dv"><input type="checkbox" id="o-dv"><span data-i18n="optDv"></span></label>
-      </div>
-      <div class="field">
         <label for="car" data-i18n="carLabel"></label>
         <div class="money"><input type="number" id="car" min="0" step="10" inputmode="numeric"></div>
       </div>
@@ -131,15 +129,15 @@ table.b tfoot td.r { font-family: var(--display); font-size: 20px; }
 </div>
 
 <script>
-const PEOPLE = 4, DAYS = 10, PARKING = 60, DV_ROOM = 450;
-// Hotel totals for 2 rooms with two beds each (Priceline, Nov 5, 2026): The D, Zion Park Motel, Sam's Town.
-const DEFAULTS = { fMsn: 496, h1: 379, hZ: 299, h2: 954, car: 925, entry: "have", food: 60, dv: false };
-const ENTRY = { have: 0, pay: 95, pass: 80 };
+const PEOPLE = 4, DAYS = 7, PARKING = 40;
+// Hotel totals for 2 rooms with two beds each (Priceline, Nov 10, 2026): The D, Zion Park Motel, Downtown Grand.
+const DEFAULTS = { fMsn: 463, h1: 379, hZ: 299, h2: 280, car: 729, entry: "have", food: 60 };
+const ENTRY = { have: 0, pay: 70, pass: 80 };
 const CATS = ["travel","stay","do","food"];
 const UI = {
   en: {
     docTitle: "Las Vegas Trip Budget",
-    eyebrow: "Dec 23, 2026 – Jan 1, 2027 · 9 nights · 4 travelers from Madison",
+    eyebrow: "Dec 23 – 29, 2026 · 6 nights · 4 travelers from Madison",
     h1: "Trip budget",
     lede: "Estimated cost per person for the essentials: getting there, hotels, the car, park entry and food. Shared costs are split four ways. Optional extras like shows, tours and souvenirs aren’t included. Change the choices and the totals update.",
     figMsn: "Per person", figGroup: "Whole group", figGroupSub: "4 travelers",
@@ -147,34 +145,32 @@ const UI = {
     cat: { travel:"Flights & car", stay:"Hotel", do:"Park entry", food:"Food" },
     barAria: "Share of the average per-person cost by category",
     cheaper: "cheaper", ctlTitle: "Your choices",
-    flightLabel: "Round-trip flight to Las Vegas", fMsn: "From Madison: United nonstop from O’Hare ($426) + Van Galder bus ($70)",
+    flightLabel: "Round-trip flight to Las Vegas", fMsn: "From Madison: United via O’Hare, 7:00 a.m. out and the 11:50 p.m. red-eye home ($463). The midday flight home is $516.",
     hotelLabel: "Hotels, 2 rooms, total per stay",
-    h1: "Dec 23–26 · Las Vegas (3 nights)", hZ: "Dec 26 · Springdale for Zion (1 night)", h2: "Dec 27 – Jan 1 · Las Vegas (5 nights)",
-    hotelHint: "Two rooms with two beds each and free parking. Suggested: The D downtown ($379), Zion Park Motel ($299) and Sam’s Town ($954), from Priceline on Nov 5. Check taxes and resort fees at checkout.",
-    optDv: "Stay a night in Death Valley (+ about $450 for two rooms, a rough estimate)",
+    h1: "Dec 23–26 · Las Vegas (3 nights)", hZ: "Dec 26 · Springdale for Zion (1 night)", h2: "Dec 27–28 · Las Vegas (2 nights)",
+    hotelHint: "Two rooms with two beds each and free parking. Suggested: The D downtown ($379), Zion Park Motel ($299) and the Downtown Grand ($280), from Priceline. Check taxes and resort fees at checkout.",
     carLabel: "Rental car + gas, whole group",
     entryLabel: "National park entry",
-    entryOpts: { have:"We have an America the Beautiful pass: $0", pay:"Pay at each park: $95 per car", pass:"Buy an America the Beautiful pass: $80" },
+    entryOpts: { have:"We have an America the Beautiful pass: $0", pay:"Pay at each park: $70 per car", pass:"Buy an America the Beautiful pass: $80" },
     foodLabel: "Food, per person per day",
     reset: "Reset to suggested values",
     itemsTitle: "Line by line", thItem: "Item", thPer: "Per person", footTotal: "Total per person",
     groups: { travel:"Getting there & around", stay:"Staying", do:"Parks", daily:"Day to day" },
     rows: {
-      flight: ["Flight + bus", "United nonstop O’Hare ⇄ Las Vegas, Dec 23 – Jan 1, plus the Van Galder bus from Madison"],
-      car: ["Rental car + gas", v => `${v} for the group, split 4 ways. Costco Travel quote: Alamo intermediate SUV (Nissan Rogue AWD or similar), $775 with taxes, unlimited miles, extra driver included; plus ~$150 gas for ~900 miles`],
-      parking: ["Parking", "Strip garages and the Hoover Dam garage, split 4 ways"],
-      hotel: ["Las Vegas hotels", (a, b, tot) => `Dec 23–26 ${a} + Dec 27 – Jan 1 ${b} = ${tot} for 2 rooms, split 4 ways`],
-      dv: ["Death Valley night", "2 refundable rooms, split 4 ways"],
+      flight: ["Flight", "United Madison ⇄ Las Vegas via O’Hare, Dec 23 – 29, red-eye home"],
+      car: ["Rental car + gas", v => `${v} for the group, split 4 ways. Costco Travel quote: Alamo intermediate SUV (Nissan Rogue AWD or similar), Dec 23 noon – Dec 29 10 p.m., $604 with taxes, unlimited miles, extra driver included; plus ~$125 gas for ~750 miles`],
+      parking: ["Parking", "Strip and Sphere garages, split 4 ways"],
+      hotel: ["Las Vegas hotels", (a, b, tot) => `Dec 23–26 ${a} + Dec 27–28 ${b} = ${tot} for 2 rooms, split 4 ways`],
       zion: ["Springdale hotel (Zion)", "Dec 26, 2 rooms near the park entrance, split 4 ways"],
-      entry: ["Park entry", "Death Valley, Zion and Lake Mead, split 4 ways"],
-      food: ["Food", v => `${v} a day × 10 days, prime rib included`],
+      entry: ["Park entry", "Death Valley and Zion, split 4 ways"],
+      food: ["Food", v => `${v} a day × 7 days, prime rib included`],
     },
     range: (a, b) => a === b ? a : `${a} – ${b}`,
-    footer: "Flights from Google Flights and hotels from Priceline, both checked Nov 5, 2026. Car from Costco Travel the same day; gas and food are estimates. Your choices are saved only in your own browser.",
+    footer: "Flights from Google Flights, hotels from Priceline and the car from Costco Travel, all checked Nov 10, 2026; gas and food are estimates. Your choices are saved only in your own browser.",
   },
   zh: {
     docTitle: "拉斯维加斯旅行预算",
-    eyebrow: "2026年12月23日 – 2027年1月1日 · 9晚 · 4人从麦迪逊出发",
+    eyebrow: "2026年12月23–29日 · 6晚 · 4人从麦迪逊出发",
     h1: "旅行预算",
     lede: "每人基本花费预估：交通、酒店、租车、公园门票和餐饮。共同费用四人平摊。演出、导览、纪念品等可选花费不计入。修改选项，总额会随之更新。",
     figMsn: "每人", figGroup: "四人合计", figGroupSub: "4人",
@@ -182,34 +178,32 @@ const UI = {
     cat: { travel:"机票和租车", stay:"酒店", do:"公园门票", food:"餐饮" },
     barAria: "人均花费按类别的占比",
     cheaper: "更便宜", ctlTitle: "你的选择",
-    flightLabel: "往返拉斯维加斯机票", fMsn: "从麦迪逊：奥黑尔美联航直飞（$426）+ Van Galder大巴（$70）",
+    flightLabel: "往返拉斯维加斯机票", fMsn: "从麦迪逊：美联航经奥黑尔转机，早上7:00去、晚上11:50红眼回（$463）。中午回程是$516。",
     hotelLabel: "酒店，两间房，每段合计",
-    h1: "12月23–26日 · 拉斯维加斯（3晚）", hZ: "12月26日 · 斯普林代尔（锡安，1晚）", h2: "12月27日 – 1月1日 · 拉斯维加斯（5晚）",
-    hotelHint: "两间房、每间两张床、免费停车。建议：市中心的The D（$379）、Zion Park Motel（$299）和Sam’s Town（$954），11月5日Priceline价格。结账时确认税费和度假村费。",
-    optDv: "在死亡谷住一晚（两间房约+$450，粗略估计）",
+    h1: "12月23–26日 · 拉斯维加斯（3晚）", hZ: "12月26日 · 斯普林代尔（锡安，1晚）", h2: "12月27–28日 · 拉斯维加斯（2晚）",
+    hotelHint: "两间房、每间两张床、免费停车。建议：市中心的The D（$379）、Zion Park Motel（$299）和Downtown Grand（$280），Priceline价格。结账时确认税费和度假村费。",
     carLabel: "租车 + 油费，四人合计",
     entryLabel: "国家公园门票",
-    entryOpts: { have:"已有美丽美国年票：$0", pay:"每个公园单独付：每车共$95", pass:"买一张美丽美国年票：$80" },
+    entryOpts: { have:"已有美丽美国年票：$0", pay:"每个公园单独付：每车共$70", pass:"买一张美丽美国年票：$80" },
     foodLabel: "餐饮，每人每天",
     reset: "恢复建议值",
     itemsTitle: "明细", thItem: "项目", thPer: "每人", footTotal: "每人合计",
     groups: { travel:"交通", stay:"住宿", do:"公园", daily:"日常" },
     rows: {
-      flight: ["机票 + 大巴", "美联航奥黑尔 ⇄ 拉斯维加斯直飞，12月23日 – 1月1日，加麦迪逊出发的Van Galder大巴"],
-      car: ["租车 + 油费", v => `四人合计 ${v}，平摊。Costco Travel报价：Alamo中型SUV（日产Rogue四驱或同级），含税$775，不限里程，含额外驾驶人；加约1,450公里油费约$150`],
-      parking: ["停车", "大道停车楼和胡佛水坝停车楼，四人平摊"],
-      hotel: ["拉斯维加斯酒店", (a, b, tot) => `12月23–26日 ${a} + 12月27日–1月1日 ${b} = ${tot}，两间房，四人平摊`],
-      dv: ["死亡谷住一晚", "两间可退款房间，四人平摊"],
+      flight: ["机票", "美联航麦迪逊 ⇄ 拉斯维加斯，经奥黑尔转机，12月23–29日，红眼回程"],
+      car: ["租车 + 油费", v => `四人合计 ${v}，平摊。Costco Travel报价：Alamo中型SUV（日产Rogue四驱或同级），12月23日中午–29日晚上10点，含税$604，不限里程，含额外驾驶人；加约1,200公里油费约$125`],
+      parking: ["停车", "大道和Sphere停车楼，四人平摊"],
+      hotel: ["拉斯维加斯酒店", (a, b, tot) => `12月23–26日 ${a} + 12月27–28日 ${b} = ${tot}，两间房，四人平摊`],
       zion: ["斯普林代尔酒店（锡安）", "12月26日，公园入口附近两间，四人平摊"],
-      entry: ["公园门票", "死亡谷、锡安和米德湖，四人平摊"],
-      food: ["餐饮", v => `每天 ${v} × 10天，含烤牛肋排`],
+      entry: ["公园门票", "死亡谷和锡安，四人平摊"],
+      food: ["餐饮", v => `每天 ${v} × 7天，含烤牛肋排`],
     },
     range: (a, b) => a === b ? a : `${a} – ${b}`,
-    footer: "机票价格来自Google Flights、酒店价格来自Priceline，均于2026年11月5日查询。租车价格为同日Costco Travel报价；油费和餐饮为估算。你的选择只保存在你自己的浏览器里。",
+    footer: "机票价格来自Google Flights、酒店价格来自Priceline、租车价格来自Costco Travel，均于2026年11月10日查询；油费和餐饮为估算。你的选择只保存在你自己的浏览器里。",
   },
 };
 
-const KEY = "vegas-trip-budget-v6"; // v5: essentials only (no shows, tours or souvenirs)
+const KEY = "vegas-trip-budget-v9"; // v9: red-eye home Dec 29, car to 10 p.m.
 let state = { ...DEFAULTS };
 try { const s = JSON.parse(Site.store.get(KEY) || "null"); if (s) state = { ...DEFAULTS, ...s }; } catch (e) {}
 const $ = id => document.getElementById(id);
@@ -223,14 +217,14 @@ function compute() {
   const hotelTotal = num(state.h1) + num(state.h2);
   const c = {
     car: num(state.car) / PEOPLE, parking: PARKING / PEOPLE,
-    hotel: hotelTotal / PEOPLE, dv: state.dv ? DV_ROOM / PEOPLE : 0, zion: num(state.hZ) / PEOPLE,
-    entry: (ENTRY[state.entry] ?? 95) / PEOPLE,
+    hotel: hotelTotal / PEOPLE, zion: num(state.hZ) / PEOPLE,
+    entry: (ENTRY[state.entry] ?? 70) / PEOPLE,
     food: num(state.food) * DAYS,
   };
   const sum = Object.values(c).reduce((a, b) => a + b, 0);
   const msn = sum + num(state.fMsn);
   const avgFlight = num(state.fMsn);
-  const cats = { travel: avgFlight + c.car + c.parking, stay: c.hotel + c.dv + c.zion, do: c.entry, food: c.food };
+  const cats = { travel: avgFlight + c.car + c.parking, stay: c.hotel + c.zion, do: c.entry, food: c.food };
   return { c, msn, group: Math.round(msn) * PEOPLE, cats, hotelTotal };
 }
 
@@ -253,7 +247,6 @@ function renderNumbers() {
     row("travel","parking", money(c.parking), R.parking[1]),
     g("stay"),
     row("stay","hotel", money(c.hotel), R.hotel[1](money(num(state.h1)), money(num(state.h2)), money(r.hotelTotal))),
-    state.dv ? row("stay","dv", money(c.dv), R.dv[1]) : "",
     row("stay","zion", money(c.zion), R.zion[1]),
     g("do"),
     row("do","entry", money(c.entry), `${t.entryOpts[state.entry]} · ${R.entry[1]}`),
@@ -265,7 +258,7 @@ function renderNumbers() {
 
 function renderControls() {
   INPUTS.forEach(([id, k]) => { if (document.activeElement !== $(id)) $(id).value = state[k]; });
-  $("entry").value = state.entry; $("o-dv").checked = state.dv;
+  $("entry").value = state.entry;
 }
 
 function render(t) {
@@ -280,7 +273,6 @@ INPUTS.forEach(([id, k]) => {
   $(id).addEventListener("blur", renderControls);
 });
 $("entry").addEventListener("change", e => { state.entry = e.target.value; save(); renderNumbers(); });
-[["o-dv","dv"]].forEach(([id, k]) => $(id).addEventListener("change", e => { state[k] = e.target.checked; save(); renderNumbers(); }));
 $("reset").addEventListener("click", () => { state = { ...DEFAULTS }; save(); renderControls(); renderNumbers(); });
 Site.init(UI, render);
 </script>

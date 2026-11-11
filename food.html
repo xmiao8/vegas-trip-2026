@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Las Vegas Food Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+<style>
+.jump { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr)); gap: 8px; }
+.jump a { display: flex; flex-direction: column; gap: 1px; text-decoration: none; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); border-left: 4px solid var(--c); }
+.jump a:hover { border-color: var(--c); }
+.jump .d { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.jump .n { font-weight: 600; font-size: 14.5px; line-height: 1.3; }
+.places { display: flex; flex-direction: column; gap: 56px; }
+.place { display: flex; flex-direction: column; gap: 18px; scroll-margin-top: 16px; }
+.place + .place { border-top: 1px solid var(--line); padding-top: 48px; }
+.phead { display: flex; flex-direction: column; gap: 6px; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.when { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.place h2 { font-size: clamp(26px, 4.4vw, 36px); line-height: 1.1; }
+.tagline { font-size: 17px; color: var(--muted); margin: 0; max-width: 60ch; }
+.about { margin: 0; max-width: 68ch; }
+.cols { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.stops { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.stops li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 10px 0; border-top: 1px solid var(--line); }
+.stops li:last-child { border-bottom: 1px solid var(--line); }
+.stops .sn { font-weight: 600; }
+.stops .st { font-family: var(--mono); font-size: 11.5px; color: var(--muted); white-space: nowrap; align-self: start; }
+.stops .sd { grid-column: 1 / -1; font-size: 13.5px; color: var(--muted); }
+.box section { display: flex; flex-direction: column; gap: 6px; }
+.extras { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px; }
+.extras h3 a { text-decoration: none; } .extras h3 a:hover { text-decoration: underline; }
+.top { font-size: 13px; color: var(--muted); }
+@media (max-width: 760px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body>
+<div class="wrap" id="top">
+  <nav class="pnav" data-i18n-aria="navAria">
+    <a data-nav="index.html" href="index.html" data-i18n="navItin"></a>
+    <a data-nav="flights.html" href="flights.html" data-i18n="navFlights"></a>
+    <a data-nav="parks.html" href="parks.html" data-i18n="navParks"></a>
+    <a data-nav="food.html" href="food.html" aria-current="page" data-i18n="navFood"></a>
+    <a data-nav="sky.html" href="sky.html" data-i18n="navSky"></a>
+    <a data-nav="budget.html" href="budget.html" data-i18n="navBudget"></a>
+    <a data-nav="ask.html" href="ask.html" data-i18n="navAsk"></a>
+  </nav>
+
+  <header class="top">
+    <div class="toprow">
+      <div class="eyebrow" data-i18n="eyebrow"></div>
+      <button class="lang" id="lang-toggle" type="button"></button>
+    </div>
+    <h1 data-i18n="h1"></h1>
+    <p class="lede" data-i18n="lede"></p>
+  </header>
+
+  <section aria-labelledby="jump-title">
+    <h2 id="jump-title" class="eyebrow" style="font-family:var(--mono);font-weight:500;font-size:12px;margin-bottom:10px" data-i18n="jumpTitle"></h2>
+    <ol class="jump" id="jump"></ol>
+  </section>
+
+  <div class="places" id="places"></div>
+
+  <footer class="foot" data-i18n-html="footer"></footer>
+</div>
+
+<script>
+const IMG = "";
+const PLACES = [
+  { id:"primerib", cat:"vegas", img:null,
+    links:[["Prime rib deals list (Oct 2026)","https://lasvegasthenandnow.com/where-to-find-cheap-prime-rib-in-las-vegas-deals-and-specials/"]],
+    en:{ when:"Christmas dinner, or any night", name:"Prime rib in Vegas", tagline:"The classic Vegas dinner, still best downtown and off the Strip.",
+      about:"Casinos once sold prime rib below cost to keep people in the building. The $5 specials are gone, but downtown and locals’ casinos still serve big cuts at fair prices. Holiday hours can change, so call ahead on Christmas.",
+      stops:[
+        ["The Cal — Market Street Cafe","$24.99","Downtown; daily 4–10 p.m."],
+        ["4 Queens — Magnolia’s","$29.99","Downtown; 10 oz, daily 4 p.m.–midnight."],
+        ["Jerry’s Nugget — Jerry’s Famous Coffee Shop","$22.99 / $46.99","North Las Vegas; English cut, or a 28–30 oz thick cut."],
+        ["Palace Station — The Brass Fork","$25.99","Off-Strip; nightly 4–10 p.m."],
+        ["Ellis Island — Village Pub & Cafe","$34.99","King cut; the closest to the Strip."],
+        ["South Point — Primarily Prime Rib","$29.95","South of the Strip; 10 oz."],
+        ["Downtown Grand — Freedom Beat","$19.99","All-you-can-eat, Fridays and Saturdays only, 5–10 p.m."],
+      ],
+      good:["Prices from a list updated Oct 29, 2026; menus change.","Under 21? You can eat at casino restaurants, but you can’t hang around the casino floor."] },
+    zh:{ when:"圣诞晚餐，或任何一晚", name:"拉斯维加斯烤牛肋排", tagline:"经典的拉斯维加斯晚餐，市中心和大道外最划算。",
+      about:"以前赌场会亏本卖烤牛肋排，好让客人留在场内。$5的特价已经没有了，但市中心和本地人常去的赌场仍然有分量大、价格公道的牛肋排。节日营业时间可能变动，圣诞节当天先打电话确认。",
+      stops:[
+        ["The Cal — Market Street Cafe","$24.99","市中心；每天下午4点–晚上10点。"],
+        ["4 Queens — Magnolia’s","$29.99","市中心；10盎司，每天下午4点–午夜。"],
+        ["Jerry’s Nugget — Jerry’s Famous Coffee Shop","$22.99 / $46.99","北拉斯维加斯；英式薄切，或28–30盎司厚切。"],
+        ["Palace Station — The Brass Fork","$25.99","大道外；每晚4–10点。"],
+        ["Ellis Island — Village Pub & Cafe","$34.99","国王切；离大道最近。"],
+        ["South Point — Primarily Prime Rib","$29.95","大道以南；10盎司。"],
+        ["Downtown Grand — Freedom Beat","$19.99","无限量，仅周五周六下午5–10点。"],
+      ],
+      good:["价格来自2026年10月29日更新的清单；菜单会变。","未满21岁？可以在赌场餐厅吃饭，但不能在赌场区域逗留。"] } },
+
+  { id:"chinatown", cat:"vegas", img:null,
+    links:[["About Chinatown (Visit Las Vegas)","https://www.visitlasvegas.com/experience/post/what-to-know-about-las-vegas-chinatown/"]],
+    en:{ when:"Any night · 5–10 min drive west of the Strip", name:"Chinatown on Spring Mountain Road", tagline:"The best value food in Vegas, with free parking.",
+      about:"A three-mile stretch of strip malls that starts just behind Treasure Island and the Venetian, with more than 200 restaurants: Chinese, Japanese, Korean, Thai, Vietnamese and more. Prices are far below the casinos, parking is free, and many places stay open late — handy after a show or a long drive.",
+      stops:[
+        ["Shanghai Taste","$$","Soup dumplings (xiao long bao) and Shanghai dishes. Shanghai Plaza."],
+        ["Chubby Cattle","$$","Conveyor-belt hot pot — a good group dinner on a cold night. Mountain View Plaza."],
+        ["Monta","$","Small ramen shop; expect a short line. Seoul Plaza."],
+        ["Kura","$$","Conveyor-belt sushi, quick and fun. Shanghai Plaza."],
+        ["Raku","$$$","Japanese robata grill, one of the most praised meals in town; reserve ahead. Seoul Plaza."],
+        ["Lamaii","$$","Modern Thai, open late. Shan Tua Square."],
+        ["Sparrow + Wolf","$$$","Creative American cooking if you want one nicer dinner. Shan Tua Square."],
+      ],
+      good:["Prices: $ is roughly under $20 a person, $$ about $20–40, $$$ more.","Drive or take a short rideshare: it’s a long, unpleasant walk from the Strip.","Popular spots fill up at dinner on holiday weekends; go early or reserve where you can."] },
+    zh:{ when:"任何一晚 · 大道以西车程5–10分钟", name:"春山路唐人街", tagline:"拉斯维加斯性价比最高的美食，免费停车。",
+      about:"从金银岛和威尼斯人背后开始、长约五公里的一串商业广场，有200多家餐厅：中餐、日料、韩餐、泰餐、越南菜等等。价格比赌场里便宜很多，停车免费，很多店开到很晚——看完演出或长途开车回来正好。",
+      stops:[
+        ["Shanghai Taste（上海滋味）","$$","小笼包和上海菜。上海广场。"],
+        ["Chubby Cattle（小肥牛）","$$","回转小火锅——冷天的团体晚餐。Mountain View广场。"],
+        ["Monta","$","小拉面店，通常要排一会儿。首尔广场。"],
+        ["Kura（藏寿司）","$$","回转寿司，快又好玩。上海广场。"],
+        ["Raku","$$$","日式炉端烧，城里口碑最好的餐厅之一；要提前订。首尔广场。"],
+        ["Lamaii","$$","新派泰餐，开到很晚。Shan Tua广场。"],
+        ["Sparrow + Wolf","$$$","创意美式，想吃一顿好的可以选。Shan Tua广场。"],
+      ],
+      good:["价格：$ 约每人$20以下，$$ 约$20–40，$$$ 更贵。","开车或打个短途车：从大道走过去很远也不好走。","节日周末晚餐时间热门的店会满；早点去，能订就订。"] } },
+
+  { id:"cheap", cat:"vegas", img:null,
+    links:[["Cheap places on the Strip (Feeling Vegas)","https://www.feelingvegas.com/cheap-places-to-eat-las-vegas-strip/"]],
+    en:{ when:"Lunches and late nights", name:"Quick & cheap", tagline:"Good food on the Strip and downtown without casino prices.",
+      about:"Strip restaurants are expensive, but there are well-loved cheap spots hidden in the resorts and along the boulevard. Most are counter service and many stay open late.",
+      stops:[
+        ["Tacos El Gordo","$","Tijuana-style street tacos; the adobada is the one to get. On the Strip just north of the Wynn."],
+        ["Secret Pizza","$","New York slices down an unmarked hallway on the Cosmopolitan’s third floor."],
+        ["Eggslut","$","Breakfast sandwiches at the Cosmopolitan; good before a day on the Strip."],
+        ["Earl of Sandwich","$","Hot sandwiches at the Fashion Show mall and Planet Hollywood."],
+        ["In-N-Out · Shake Shack","$","Burgers at the LINQ Promenade and New York-New York."],
+        ["The Peppermill","$$","A neon-lit 1970s diner on the Strip, open 24 hours, with huge portions."],
+        ["Container Park","$","Food stalls and outdoor seating on Fremont Street East, a short walk from the downtown hotels."],
+      ],
+      good:["Buy water and snacks at a CVS or Walgreens on the Strip instead of the hotel shops.","Most casino food courts stay open late, which helps after a show."] },
+    zh:{ when:"午餐和夜宵", name:"快捷便宜", tagline:"在大道和市中心吃得好，又不用付赌场的价钱。",
+      about:"大道上的餐厅都贵，但度假村里和大道边藏着一些很受欢迎的便宜小店。大多是柜台点餐，很多开到很晚。",
+      stops:[
+        ["Tacos El Gordo","$","提华纳风味街头塔可，招牌是adobada（腌烤猪肉）。在大道上永利北边。"],
+        ["Secret Pizza","$","纽约式披萨切片，在大都会酒店三楼一条没招牌的走廊尽头。"],
+        ["Eggslut","$","大都会酒店里的早餐三明治，逛大道前吃。"],
+        ["Earl of Sandwich","$","热三明治，在Fashion Show商场和星球好莱坞。"],
+        ["In-N-Out · Shake Shack","$","汉堡，在LINQ步行街和纽约纽约酒店。"],
+        ["The Peppermill","$$","大道上霓虹灯装饰的70年代风格餐厅，24小时营业，分量很大。"],
+        ["Container Park","$","弗里蒙特街东段的小吃摊和户外座位，从市中心酒店走过去很近。"],
+      ],
+      good:["在大道上的CVS或Walgreens买水和零食，比酒店商店便宜。","大多数赌场美食广场开到很晚，看完演出正好。"] } },
+
+  { id:"buffets", cat:"vegas", img:null,
+    links:[["Buffet prices (Las Vegas Advisor)","https://www.lasvegasadvisor.com/buffet-restaurants/"]],
+    en:{ when:"One big meal", name:"Buffets", tagline:"A Vegas classic — one splurge, or one bargain downtown.",
+      about:"The famous Strip buffets now cost close to a nice dinner, so pick one at most. The budget’s $60 a day for food won’t cover a Strip buffet on top of other meals.",
+      stops:[
+        ["Bacchanal Buffet · Caesars Palace","$87–92","The most famous one: about $87 for dinner Mon–Thu, $92 Fri–Sun."],
+        ["The Buffet · Wynn","~$80","Seafood dinner, about $80."],
+        ["Garden Court · Main Street Station","~$34","Downtown and much cheaper: dinner Fri–Sat (Dec 25–26 are a Friday and Saturday), brunch on weekends about $28."],
+      ],
+      good:["Prices from Las Vegas Advisor, updated Oct 30, 2026; holiday prices can be higher.","Book or join the online waitlist on Christmas week to avoid long lines.","Go mid-afternoon: you pay the lunch or early price and skip the dinner rush."] },
+    zh:{ when:"大吃一顿", name:"自助餐", tagline:"拉斯维加斯经典——大道上奢侈一次，或者市中心捡个便宜。",
+      about:"大道上有名的自助餐现在价格接近一顿高档晚餐，最多选一家。预算里每天$60的餐费，如果再加一顿大道自助餐就不够了。",
+      stops:[
+        ["Bacchanal自助 · 凯撒宫","$87–92","最有名的一家：晚餐周一到周四约$87，周五到周日约$92。"],
+        ["The Buffet · 永利","约$80","海鲜晚餐，约$80。"],
+        ["Garden Court · Main Street Station","约$34","在市中心，便宜很多：周五周六晚餐（12月25、26日正好是周五周六），周末早午餐约$28。"],
+      ],
+      good:["价格来自Las Vegas Advisor，2026年10月30日更新；节日期间可能更贵。","圣诞那周最好预订或在网上排队，避免长时间等位。","下午三四点去：付午餐或早场价，还能避开晚餐高峰。"] } },
+
+  { id:"road", cat:"travel", img:null,
+    links:[["Death Valley food & lodging (NPS)","https://www.nps.gov/deva/planyourvisit/lodging.htm"],["Zion food & lodging (NPS)","https://www.nps.gov/zion/planyourvisit/lodging.htm"]],
+    en:{ when:"Dec 26 – 28 · Zion and Death Valley", name:"Food on park days", tagline:"Plan ahead: options in and near the parks are few and pricey.",
+      about:"On the park days you’ll be far from cheap food for most of the day. Stock up in Las Vegas or Pahrump and carry lunch, snacks and plenty of water.",
+      stops:[
+        ["Pahrump","on the way","The last town before Death Valley: gas, grocery stores and fast food. Fill the tank and buy lunch here."],
+        ["Furnace Creek","in Death Valley","A general store and a few restaurants at the resort; fine for a hot drink or dinner before stargazing, but pricey."],
+        ["Zion Lodge","in Zion","The only place to buy food inside the park: Red Rock Grill is open year-round; the café is seasonal."],
+        ["Springdale","Zion gate","The town at Zion’s entrance has pizza, Mexican, cafés and a brewpub for dinner on Dec 26. Some places shorten hours in winter."],
+      ],
+      good:["Bring a small cooler and a reusable water bottle for each person.","Utah is an hour ahead of Nevada — check closing times in Springdale with that in mind.","Pack something warm to eat or drink for the Death Valley night."] },
+    zh:{ when:"12月26–28日 · 锡安和死亡谷", name:"公园日怎么吃", tagline:"提前准备：公园里和附近吃饭的地方少而且贵。",
+      about:"公园那几天，大部分时间离便宜的吃的都很远。在拉斯维加斯或帕朗提前买好，带上午饭、零食和足够的水。",
+      stops:[
+        ["帕朗（Pahrump）","路上","去死亡谷前最后一个镇：加油、超市和快餐。在这里加满油、买午饭。"],
+        ["火炉溪","死亡谷内","度假村里有杂货店和几家餐厅；喝点热的或观星前吃晚饭可以，但比较贵。"],
+        ["锡安小屋（Zion Lodge）","锡安内","公园里唯一能买吃的地方：Red Rock Grill全年营业，咖啡馆只在旺季开。"],
+        ["斯普林代尔","锡安入口","锡安门口的小镇有披萨、墨西哥菜、咖啡馆和精酿餐吧，12月26日晚饭在这里吃。冬天有些店营业时间会缩短。"],
+      ],
+      good:["带个小保温箱，每人一个水瓶。","犹他州比内华达早一小时——看斯普林代尔餐厅关门时间时要注意。","死亡谷看星星那晚带点热的吃的或喝的。"] } },
+];
+
+const UI = {
+  en: {
+    docTitle: "Las Vegas Food Guide",
+    eyebrow: "Prime rib · Chinatown · cheap eats · buffets",
+    h1: "Food",
+    lede: "Where to eat on the trip, from the classic prime rib dinner to Chinatown, cheap eats and one big buffet. The budget assumes about $60 a day each.",
+    jumpTitle: "Jump to",
+    hStops: "Where to go", hGood: "Good to know", photo: "Photo", top: "Back to top",
+    footer: "Prices and hours were checked in early November 2026 and can change, especially around Christmas; check each place the week you go.",
+  },
+  zh: {
+    docTitle: "拉斯维加斯美食指南",
+    eyebrow: "烤牛肋排 · 唐人街 · 平价美食 · 自助餐",
+    h1: "美食",
+    lede: "这次旅行在哪吃：从经典的烤牛肋排晚餐，到唐人街、平价小吃和一顿大自助餐。预算按每人每天约$60算。",
+    jumpTitle: "跳到",
+    hStops: "推荐去处", hGood: "须知", photo: "照片", top: "回到顶部",
+    footer: "价格和营业时间于2026年11月初查询，可能变化，圣诞前后尤其如此；出发那周请再确认。",
+  },
+};
+const ORDER = ["primerib","chinatown","cheap","buffets","road"];
+const esc = Site.esc;
+function render(t, lang) {
+  const list = ORDER.map(id => PLACES.find(p => p.id === id));
+  document.getElementById("jump").innerHTML = list.map(p => `<li class="c-${p.cat}"><a href="#${p.id}"><span class="d">${esc(p[lang].when)}</span><span class="n">${esc(p[lang].name)}</span></a></li>`).join("");
+  document.getElementById("places").innerHTML = list.map(p => {
+    const c = p[lang];
+    const photo = p.img ? `<figure class="photo"><div class="frame"><img src="${IMG + p.img}" alt="${esc(c.name)}" loading="lazy" style="object-position:${p.pos}" onerror="this.closest('figure').classList.add('noimg')"><div class="ph" aria-hidden="true">${esc(c.name)}</div></div><figcaption>${t.photo}: <a href="${p.credit.page}" target="_blank" rel="noopener">${esc(p.credit.by)}</a>, <a href="${p.credit.licUrl}" target="_blank" rel="noopener">${p.credit.lic}</a>, via Wikimedia Commons</figcaption></figure>` : "";
+    return `<article class="place c-${p.cat}" id="${p.id}" aria-labelledby="${p.id}-h">
+      ${photo}
+      <div class="phead"><div class="badges"><span class="tag">${esc(c.when)}</span></div><h2 id="${p.id}-h">${esc(c.name)}</h2><p class="tagline">${esc(c.tagline)}</p></div>
+      <p class="about">${esc(c.about)}</p>
+      <div class="cols">
+        <div class="col"><h3>${t.hStops}</h3><ul class="stops">${c.stops.map(([n, tm, d]) => `<li><span class="sn">${esc(n)}</span><span class="st">${esc(tm)}</span><span class="sd">${esc(d)}</span></li>`).join("")}</ul></div>
+        <div class="col">
+          <div class="box"><section><h3>${t.hGood}</h3><ul>${c.good.map(g => `<li>${esc(g)}</li>`).join("")}</ul></section>
+            <div class="links">${p.links.map(([l, u]) => `<a class="official" href="${u}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join("")}</div></div>
+          <a class="top" href="#top">↑ ${t.top}</a>
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+}
+Site.init(UI, render);
+const target = location.hash.slice(1);
+if (target && PLACES.some(p => p.id === target)) requestAnimationFrame(() => document.getElementById(target).scrollIntoView({ block: "start" }));
+</script>
+</body>
+</html>

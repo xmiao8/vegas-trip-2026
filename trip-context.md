@@ -1,24 +1,22 @@
 # Las Vegas winter trip 2026 — trip plan
 
-Generated from the trip website (https://xmiao8.github.io/vegas-trip-2026/) on 2026-11-05.
+Generated from the trip website (https://xmiao8.github.io/vegas-trip-2026/) on 2026-11-11.
 
 ## Itinerary page
 
-DEC 23, 2026 – JAN 1, 2027 · LAS VEGAS BASE · 4 TRAVELERS FROM MADISON
+DEC 23 – 29, 2026 · 6 NIGHTS · 4 TRAVELERS FROM MADISON
 Las Vegas Winter Trip ’26
 
-A hotel in Vegas, a night in Zion and day trips into the desert: a Christmas supermoon, the Sphere, prime rib, Hoover Dam, and one clear night of stars in Death Valley.
+Six nights: a Christmas supermoon, Christmas Eve, the Sphere and prime rib in Vegas, two days in Zion with a dark-sky night, a night of stars in Death Valley, and one last day at Red Rock before the red-eye home.
 
-4park days
+3park days
 2moonrises
 2nights of stars
 1Sphere show
 TRIP AT A GLANCE
 Las Vegas
-Hoover Dam & Lake Mead
 Zion
 Death Valley
-Flex day
 Travel
 Day by day
 Wed
@@ -29,24 +27,24 @@ Las Vegas · LAS
 ★ Supermoon
 Guide →
 Land in Vegas, watch the supermoon rise
-Flights land late morning (United from O’Hare gets in at 11:34 a.m.); pick up the rental car and check in
+Flights land late morning (United from Madison, via O’Hare, gets in at 11:34 a.m.); pick up the rental car and check in at The D downtown
 The full supermoon rises at 4:09 p.m., just before sunset (4:31). Find a spot with a clear view east, like a parking-garage roof
-Evening on the Strip: the Sphere lit up, Bellagio fountains
+Optional: The Nutcracker at 7:30 p.m. (Nevada Ballet Theatre at the Smith Center, 5 minutes from The D)
+Or an evening on the Strip: the Sphere lit up, Bellagio fountains
 The moon clears the mountains east of town around 4:25–4:40 p.m. — the classic huge orange moonrise.
 Thu
 24
 Dec
-LAKE MEAD
-Hoover Dam + Lake Mead · ~45 min
+VEGAS
+Las Vegas
 ★ Christmas Eve moonrise
 Guide →
-Hoover Dam, Lake Mead and a Christmas Eve moonrise
-Hoover Dam: walk across the top, then the bypass bridge for the classic view
-Lake Mead visitor center for the park sticker (go early; holiday hours may be short)
-Lunch in Boulder City
-The moon rises over the lake about 5:25 p.m. (98% full), in twilight, from Lakeview Overlook or the lakeshore
-The lake is near record lows, so you’ll see a huge white “bathtub ring” on the canyon walls.
-Driving: about 1.5 hr round trip
+Christmas Eve in Vegas
+Sleep in after the supermoon night
+Afternoon on the Strip: the Bellagio fountains, the Venetian’s canals and holiday decorations
+Christmas Eve moonrise at 5:24 p.m. (98% full), in twilight. Watch from a high spot facing east, like a parking-garage roof
+Evening on Fremont Street downtown, a short walk from The D
+The Nutcracker also has a 2 p.m. matinee today at the Smith Center, if you skipped it last night.
 Fri
 25
 Dec
@@ -87,389 +85,226 @@ If you won the lottery: take the first canyon shuttle (8 a.m.) to the Grotto for
 No permit: hike to Scout Lookout (no permit needed, same big view), or do the Canyon Overlook Trail and Lower Emerald Pools
 Get around on the shuttles: the Springdale shuttle to the park entrance, then the Zion Canyon shuttle (first one 8 a.m.; last one out of the canyon 5:45 p.m.). Canyon Overlook is on the highway through the tunnel, so drive there
 Leave by about 2 p.m. Utah time; you gain the hour back and reach Vegas around 4 p.m.
-Check back in to the Vegas hotel and take it easy — the Death Valley window starts tomorrow
+Check in at the Downtown Grand (one night). Optional: Cirque du Soleil’s Mystère at 9 p.m. at Treasure Island
 A permit is only needed for the chains section past Scout Lookout. If it’s icy, rangers may advise against the chains — Scout Lookout is a great turnaround. Sunrise is 7:40 a.m.
 Driving: about 2.5 hr one way
 Mon
 28
-Dec
-FLEX
-Valley of Fire · ~1 hr
-Guide →
-Easy day — or Death Valley if tonight looks clearest
-Valley of Fire State Park: red sandstone, petroglyphs, the Fire Wave hike
-Or a lazy Vegas day: pool, shopping, a buffet
-Death Valley backup night: dark from 6:12 to 10:25 p.m., about 4 hours of stars.
-Driving: about 2.5 hr round trip
-Tue
-29
 Dec
 DEATH VALLEY
 Death Valley National Park · ~2 hr each way
 ★ Stargazing night
 Guide →
 Death Valley: desert by day, stars by night
-Leave around 10:30 a.m.; fill up the tank in Pahrump
-Furnace Creek visitor center for stickers, then Badwater Basin and Artists Drive
-Sunset at the Mesquite Flat dunes or Zabriskie Point (~4:40 p.m.)
-Fully dark at 6:13 p.m.: about 5 hours of stars before the moon rises at 11:30 p.m. Saturn is high early; Jupiter rises in the east around 9–10 p.m.
-Drive back (~2 hr), or stay the night in the park
-The planned night — but go on whichever of Dec 28, 29 or 30 has the clearest forecast. The Sky page shows the live cloud outlook.
+Leave around 9:30 a.m.; fill up the tank in Pahrump
+Furnace Creek visitor center for stickers, then Zabriskie Point, Badwater Basin and Artists Drive
+Sunset about 4:40 p.m. at Zabriskie Point
+Fully dark at 6:12 p.m. and the moon doesn’t rise until 10:25: stargaze until about 9:30 near Badwater or Harmony Borax Works. Saturn is high early; Jupiter rises in the east around 9
+Drive back to the Downtown Grand (~2 hr)
+No flight to catch tonight, so take your time. Bring warm layers: desert nights drop into the 30s–40s °F.
 Driving: about 4.5 hr round trip
-Wed
-30
+Tue
+29
 Dec
-FLEX
-Las Vegas
-Guide →
-Easy day — or Death Valley if tonight looks clearest
-Rest up before New Year’s Eve
-Catch the Sphere again or another show
-Death Valley backup night, and the darkest of the trip: dark from 6:13 p.m. until moonrise at 12:33 a.m., about 6 hours.
-Thu
-31
-Dec
-VEGAS
-Las Vegas Strip
-★ New Year’s Eve
-New Year’s Eve on the Strip
-The Strip closes to cars around 6 p.m. and turns into a giant street party
-Midnight fireworks from about ten casino rooftops at once
-Buses were free last year; dress warm (40s–50s °F)
-Some casino viewing areas need a room key. Fremont Street’s party is ticketed and may be 21+.
-Fri
-1
-Jan
-TRAVEL
-Depart LAS
-Sleep in, then fly home
-Late checkout
-Return the rental car at the airport
-Fly to O’Hare and take the bus home to Madison
-Book afternoon flights after the late night.
+LAST DAY
+Red Rock Canyon · Las Vegas · red-eye home
+★ Red Rock Canyon
+One last day in Vegas, then the red-eye home
+Sleep in after Death Valley, then check out of the Downtown Grand. Bags ride in the car all day
+Late morning at Red Rock Canyon (~30 min): the 13-mile scenic drive and a short hike like Calico Tanks. Book a timed-entry slot
+Afternoon and evening in Vegas: Fremont Street, the Strip, a last buffet or show
+Return the rental car at the airport by about 9:30 p.m.
+United 11:50 p.m. to Madison via O’Hare
+You land in Madison at 9:56 a.m. on Dec 30 after a few hours at O’Hare, so sleep on the planes if you can. The midday flight home instead is $53 more each.
+Driving: about 1 hr round trip
 Dates that shape the plan
 Dec 23
 Full supermoon rises 4:09 p.m.
 Dec 24
-Moon rises ~5:25 p.m. over Lake Mead
+Christmas Eve moonrise 5:24 p.m.
 Dec 25
 Park visitor centers usually closed
 Dec 26–27
 Zion, overnight in Springdale
-Dec 28–30
-Death Valley window — go on the clearest night
-Dec 31
-Strip closes to cars around 6 p.m.
-Jan 19
-Spring classes start at UW–Madison
+Dec 28
+Death Valley: dark 6:12 p.m., moonrise 10:25 p.m.
+Dec 29
+Red Rock, then the 11:50 p.m. red-eye home
 To book
-0 of 10 booked
+0 of 9 booked
 Flights to Las Vegas (LAS)
-United nonstop from O’Hare, $426 round trip + $70 bus each, for all 4. See the Flights page
+United from Madison via O’Hare: 7:00 a.m. out Dec 23, 11:50 p.m. red-eye home Dec 29, $463 round trip each. The midday flight home is $516
 Las Vegas hotels: 2 rooms with two beds, free parking
-Dec 23–26 (e.g. The D downtown, ~$379) and Dec 27–Jan 1 (e.g. Sam’s Town, ~$954); Priceline totals for both rooms
+Dec 23–26 (e.g. The D downtown, ~$379) and Dec 27–29 (e.g. Downtown Grand, ~$280); Priceline totals for both rooms
 Springdale hotel for Dec 26
-2 rooms near Zion’s entrance, e.g. Zion Park Motel (~$299) or Driftwood Lodge (~$318); book refundable
+2 rooms near Zion’s entrance, e.g. Zion Park Motel (~$299) or Driftwood Lodge (~$358); book refundable
 Recreation.gov account for the Angels Landing lottery
 Set it up before the trip; apply Dec 26 by 3 p.m. Utah time for Dec 27
 Rental car
-Drivers under 25 usually pay a daily fee
+Costco Travel: Alamo intermediate SUV, Dec 23 noon – Dec 29 10 p.m., ~$604 (returning by 2 p.m. is $492, but then you have no car or place for bags on the last day). Drivers under 25 may pay a daily fee
 Sphere tickets: The Wizard of Oz
 Christmas Day or another evening
 Bring the America the Beautiful pass + photo ID
-The signed pass holder must be in the car; it covers everyone in it at Death Valley, Zion and Lake Mead
-Refundable Death Valley rooms (optional)
-Hold one of Dec 28–30 and move it once the forecast is clear
-Red Rock Canyon timed entry (optional)
-Reserve on recreation.gov
+The signed pass holder must be in the car; it covers everyone in it at Death Valley and Zion
+Red Rock Canyon timed entry for Dec 29
+Reserve on recreation.gov: needed for the scenic drive 8 a.m. – 5 p.m., Oct – May
 Warm layers + red flashlight
 Desert nights drop into the 30s–40s °F
-Moon and sunset times are calculated for Las Vegas and Furnace Creek (Pacific Time) and Springdale (Utah time) and assume a flat horizon; mountains delay what you see by 10–30 minutes. Prices were checked Nov 5, 2026. Checklist ticks are saved only in your own browser.
+Moon and sunset times are calculated for Las Vegas and Furnace Creek (Pacific Time) and Springdale (Utah time) and assume a flat horizon; mountains delay what you see by 10–30 minutes. Prices were checked Nov 10, 2026. Checklist ticks are saved only in your own browser.
 
 ## Flights page
 
-DEC 23, 2026 – JAN 1, 2027 · 4 TRAVELERS FROM MADISON
+DEC 23 – 29, 2026 · 4 TRAVELERS FROM MADISON
 Flights
 
-Round-trip prices from Google Flights for going out Dec 23 and coming home Jan 1, checked Nov 5, 2026. All prices are per person in economy and change daily. Nothing is booked.
+Round-trip prices from Madison for going out Wed Dec 23 and coming home Tue Dec 29, from Google Flights on Nov 10, 2026. Every Madison flight connects. All prices are per person in economy and change daily. Nothing is booked.
 
 The short version
 round trip, per person
-Chicago nonstop + bus
-Best
-$496
-United round trip $426 + bus $70 · group of 4: $1,984
-Out 9:15 a.m. from O’Hare, in time for the 4:09 p.m. moonrise
-Home 2:30 p.m. on New Year’s Day, so you can sleep in
-About 2.5 hours on the bus each way
-Madison (MSN)
-Only with an early flight home
-$453
-1 stop each way, no bus
-$453 only if you fly home at 7 a.m. on New Year’s Day
-An afternoon flight home costs $784–824
-Connects at O’Hare onto the same United 9:15 a.m. flight
+Red-eye home
+Our pick
+$463
+United via O’Hare · group of 4: $1,852
+Out 7:00 a.m., land in Vegas 11:34 a.m. for the moonrise
+A whole last day in Vegas on Dec 29
+Fly 11:50 p.m., land in Madison 9:56 a.m. on Dec 30
+Midday home
++$53 each
+$516
+Same flight out · group of 4: $2,064
+Sleep in on Dec 29, fly 12:45 p.m.
+Home around 9:40 p.m. the same day
+No night on planes
 Full round trips compared
-Dec 23 out · Jan 1 home
-GOING · DEC 23	COMING HOME · JAN 1	ROUND TRIP	WITH BUS
-
-United
-9:15 a.m. → 11:34 a.m.
-ORD → LAS
-United
-2:30 p.m. → 8:20 p.m.
-LAS → ORD	$426	$496	Our pick
-Catch the supermoon rise, sleep in on New Year’s Day
-
-United
-12:50 p.m. → 3:04 p.m.
-ORD → LAS
-United
-2:30 p.m. → 8:20 p.m.
-LAS → ORD	$431	$501	Works
-Later start, but a tighter rush to catch the moonrise
-
-Frontier
-7:35 a.m. → 10:02 a.m.
-ORD → LAS
-United
-2:30 p.m. → 8:20 p.m.
-LAS → ORD	$367
-2 tickets
-$437	Trade-off
-Frontier basic fare; a carry-on costs extra each way
-
-United
-9:15 a.m. → 11:34 a.m.
-ORD → LAS
-American
-8:18 a.m. → 2:01 p.m.
-LAS → ORD	$383
-2 tickets
-$453	Trade-off
-Early alarm the morning after New Year’s Eve
-
-United
-9:15 a.m. → 11:34 a.m.
-ORD → LAS
-United
-7:00 a.m. → 12:50 p.m.
-LAS → ORD	$332	$402	Trade-off
-Cheapest, but means a 7 a.m. flight after the New Year’s party
+Dec 23 out · Dec 29 home
+GOING · DEC 23	COMING HOME · DEC 29	ROUND TRIP	GROUP OF 4
 
 United
 7:00 a.m. → 11:34 a.m.
 MSN → LAS · via ORD
 United
-7:00 a.m. → 4:46 p.m.
-LAS → MSN · via ORD	$453	$453
-no bus
-Trade-off
-No bus, but a 7 a.m. flight home with a long layover at O’Hare
+11:50 p.m. → 9:56 a.m. +1 day
+LAS → MSN · via ORD	$463	$1,852	Our pick
+Cheapest, and a full last day in Vegas before the overnight flight
 
-“2 tickets” means Google sells it as two separate one-way tickets. If one flight is delayed or cancelled, the other airline doesn’t have to rebook you.
+United
+7:00 a.m. → 11:34 a.m.
+MSN → LAS · via ORD
+United
+12:45 p.m. → 9:40 p.m.
+LAS → MSN · via ORD	$516	$2,064	Works
+$53 more: relaxed last morning, home the same evening
 
-Going: Wed, Dec 23 · Chicago → Las Vegas
-nonstop
+United
+7:00 a.m. → 11:34 a.m.
+MSN → LAS · via ORD
+United
+10:35 a.m. → 7:22 p.m.
+LAS → MSN · via ORD	$517	$2,068	Works
+Earlier flight, home around 7:20 p.m.
+
+Both ways connect at O’Hare on one United ticket, so United rebooks you if a connection is missed. Going out, the connection is 52 minutes.
+
+Going: Wed, Dec 23 · Madison → Las Vegas
+1 stop
 
 Moonrise 4:09 p.m.
 The full supermoon comes up over the mountains east of Las Vegas just before sunset. Land by early afternoon to pick up the car and get to a viewpoint.
 
 FLIGHT	DEPARTS	ARRIVES	ROUND TRIP
 
-Southwest
-MDW → LAS	5:50 a.m.	7:50 a.m.	$353	Works
-Very early start from Madison: the bus would leave in the middle of the night
-
-Frontier
-ORD → LAS	7:35 a.m.	10:02 a.m.	$273
-$367 with 2:30 p.m. home
-Trade-off
-Basic fare: carry-on bag and seat choice cost extra
+United
+MSN → LAS · via ORD	5:00 a.m.	9:26 a.m.	$448	Works
+Very early start, but lands well before the moonrise
 
 United
-ORD → LAS	9:15 a.m.	11:34 a.m.	$332
-$426 with 2:30 p.m. home
-Our pick
+MSN → LAS · via ORD	7:00 a.m.	11:34 a.m.	$463	Our pick
 Lands late morning with time to get the car, check in and catch the moonrise
 
 United
-ORD → LAS	12:50 p.m.	3:04 p.m.	$337
-$431 with 2:30 p.m. home
-Works
-Lands about an hour before moonrise; tight with the rental car pickup
+MSN → LAS · via ORD	7:00 a.m.	1:22 p.m.	$452	Works
+Same price range but a 2 hr 43 min layover; still lands before moonrise
 
 American
-ORD → LAS	6:59 p.m.	9:15 p.m.	$308	Trade-off
+MSN → LAS · via PHX	2:43 p.m.	9:50 p.m.	$519	Trade-off
 Lands after moonrise. The full moon will be high in the sky, but you miss it rising
 
 United
-ORD → LAS	8:20 p.m.	10:38 p.m.	$307	Trade-off
+MSN → LAS · via ORD	3:47 p.m.	10:38 p.m.	$482	Trade-off
 Lands after moonrise. The full moon will be high in the sky, but you miss it rising
 
-American
-ORD → LAS	9:10 p.m.	11:21 p.m.	$308	Trade-off
-Lands after moonrise. The full moon will be high in the sky, but you miss it rising
+Each price is the cheapest round trip starting with that flight. For the 7:00 a.m. flight, that’s with the red-eye home.
 
-United
-ORD → LAS	9:47 p.m.	11:59 p.m.	$307	Trade-off
-Lands after moonrise. The full moon will be high in the sky, but you miss it rising
-
-The top price is the cheapest round trip starting with that flight, which usually means a 7 a.m. or after-midnight flight home. The second line is the round trip with the United 2:30 p.m. flight home on Jan 1.
-
-Coming home: Fri, Jan 1 · Las Vegas → Chicago
-nonstop · round trip with United 9:15 a.m. out
+Coming home: Tue, Dec 29 · Las Vegas → Madison
+1 stop · round trip with United 7:00 a.m. out
 FLIGHT	DEPARTS	ARRIVES	ROUND TRIP
 
-American
-LAS → ORD	12:25 a.m.	5:59 a.m.	$341
-2 tickets
-Not doable
-Leaves 25 minutes after the New Year’s fireworks, so not possible
-
-American
-LAS → ORD	6:51 a.m.	12:35 p.m.	$383
-2 tickets
-Trade-off
-Means going straight from the party to the airport
+United
+LAS → MSN · via DEN	5:15 a.m.	1:22 p.m.	$475	Trade-off
+Leaves before you’d want to be up after the Death Valley night
 
 United
-LAS → ORD	7:00 a.m.	12:50 p.m.	$332	Trade-off
-Means going straight from the party to the airport
-
-American
-LAS → ORD	8:18 a.m.	2:01 p.m.	$383
-2 tickets
-Trade-off
-Doable, but an early alarm after New Year’s Eve
+LAS → MSN · via ORD	7:00 a.m.	3:04 p.m.	$504	Trade-off
+Leaves before you’d want to be up after the Death Valley night
 
 United
-LAS → ORD	8:40 a.m.	2:29 p.m.	$462	Works
+LAS → MSN · via ORD	8:40 a.m.	7:22 p.m.	$463	Works
+Cheap, but a 3 hr 36 min layover at O’Hare
 
 United
-LAS → ORD	10:35 a.m.	4:25 p.m.	$482	Works
+LAS → MSN · via ORD	10:35 a.m.	7:22 p.m.	$517	Works
 
 United
-LAS → ORD	12:45 p.m.	6:35 p.m.	$482	Works
-Lands early evening, plenty of time for a bus to Madison
+LAS → MSN · via DEN	11:45 a.m.	8:38 p.m.	$522	Works
 
 United
-LAS → ORD	2:30 p.m.	8:20 p.m.	$426	Our pick
-Sleep in, check out at noon, and still get back to Chicago the same evening. Check the last bus to Madison
+LAS → MSN · via ORD	12:45 p.m.	9:40 p.m.	$516	Works
+Sleep in, home around 9:40 p.m., but you lose the last day
 
 United
-LAS → ORD	4:10 p.m.	10:00 p.m.	$462	Trade-off
-Lands late, so check that a bus to Madison still runs that night
+LAS → MSN · via DEN	1:46 p.m.	8:38 p.m.	$528	Works
 
-American
-LAS → ORD	6:00 p.m.	11:35 p.m.	$413
-2 tickets
-Trade-off
-Lands late, so check that a bus to Madison still runs that night
+United
+LAS → MSN · via ORD	11:50 p.m.	9:56 a.m.+1 day	$463	Our pick
+A full last day in Vegas; a few hours at O’Hare, then home mid-morning
 
-American
-LAS → ORD	11:28 p.m.	5:00 a.m.+1 day	$383
-2 tickets
-Trade-off
-Overnight flight: one more evening in Vegas, but no hotel room after checkout
+Las Vegas is 2 hours behind Madison, so arrival times are Madison time.
 
-Las Vegas is 2 hours behind Chicago, so the 2:30 p.m. flight lands at O’Hare at 8:20 p.m. Chicago time.
+Why not fly from Chicago?
 
-Flying from Madison
+O’Hare has nonstops for $358 round trip on these dates, but with the $70 Van Galder bus it saves only about $35–90 each, and adds two 2.5-hour bus rides and a midnight-or-later arrival home. Not worth it for this trip.
 
-Every Madison flight connects. United’s 7:00 a.m. from Madison connects at O’Hare onto the same 9:15 a.m. nonstop as above. Coming home, only the early flights are reasonably priced.
-
-United 7:00 a.m. out · United 7:00 a.m. home
-$453
-Home at 4:46 p.m. after a 2 hr 45 min layover at O’Hare
-United 7:00 a.m. out · United 7:00 a.m. home
-$484
-Shorter layover, home at 3:04 p.m.
-United 7:00 a.m. out · United 8:40 a.m. home
-$570
-Home at 4:46 p.m.
-United 7:00 a.m. out · United 1:46 p.m. home
-$824
-The only afternoon option on United: via Denver, home 8:38 p.m.
-American 2:43 p.m. out · American 4:44 p.m. home
-$784
-Via Phoenix both ways; lands 6:39 p.m., after moonrise, and gets home at midnight
-Van Galder bus
-About $70 round trip between Madison and O’Hare or Midway, roughly 2.5 hours each way
-Runs on the same schedule every day of the year, holidays included
-Book ahead for holiday travel days
-Aim to reach the airport 2 hours before your flight; holiday security lines are long
-Southwest flies from Midway (MDW), not O’Hare, so book the bus to the right airport
-Van Galder schedule & tickets ↗ (https://www.coachusa.com/van-galder-bus-company)
+O’Hare nonstop 9:15 a.m. out · 4:10 p.m. home + bus
+$428
+Lands at O’Hare 10 p.m.; check the last bus to Madison
+O’Hare nonstop 9:15 a.m. out · 11:50 p.m. red-eye + bus
+$428
+Lands 5:31 a.m., then the bus
 Before you book
 Book all 4 on one reservation. Basic economy doesn’t let you pick seats, so you may be split up; a standard economy fare lets you sit together.
-The cheapest United and Frontier fares are basic economy, which don’t include a full-size carry-on. Check the fare type and bag fees before you compare totals.
-Google’s price insights suggested booking by around Dec 11. Holiday fares tend to rise as the dates get close, so booking in November is safer.
-Turn on a Google Flights price alert for the Chicago search to see if the fare drops.
-Book the flight before the bus, then book 4 bus seats that get you to the airport 2 hours early.
+The cheapest United fares are basic economy, which don’t include a full-size carry-on. Check the fare type and bag fees before you compare totals.
+Holiday fares tend to rise as the dates get close, so booking soon is safer. Turn on a Google Flights price alert to see if the fare drops.
 Most US airlines let you cancel free within 24 hours of booking (when you book a week or more ahead), so you can lock in a fare and still change your mind.
 Search it yourself
-Chicago → Las Vegas, Dec 23 – Jan 1 ↗ (https://www.google.com/travel/flights?q=Flights%20from%20Chicago%20to%20LAS%20on%202026-12-23%20through%202027-01-01)
-Madison → Las Vegas, Dec 23 – Jan 1 ↗ (https://www.google.com/travel/flights?q=Flights%20from%20MSN%20to%20LAS%20on%202026-12-23%20through%202027-01-01)
-Van Galder bus ↗ (https://www.coachusa.com/van-galder-bus-company)
-Round-trip prices from Google Flights on Nov 5, 2026, and they change daily. The bus price is an approximate round-trip fare. Times are local: Chicago and Madison are Central time, Las Vegas is Pacific time (2 hours behind).
+Madison → Las Vegas, Dec 23 – 29 ↗ (https://www.google.com/travel/flights?q=Flights%20from%20MSN%20to%20LAS%20on%202026-12-23%20through%202026-12-29)
+Round-trip prices from Google Flights on Nov 10, 2026, and they change daily. Times are local: Madison and Chicago are Central time, Las Vegas is Pacific time (2 hours behind).
 
 ## Parks & sights page
 
-DEATH VALLEY · ZION · HOOVER DAM · THE SPHERE · PRIME RIB
+DEATH VALLEY · ZION · THE SPHERE · RED ROCK
 Parks & sights
 
 What each place is like, what’s worth your time, how long it takes, and what to know before you go — in the order of the trip.
 
 JUMP TO
-Dec 24 · ~45 min each way
-Hoover Dam & Lake Mead
 Dec 25 show · outside any night
 Sphere
-Christmas dinner, or any night
-Prime rib in Vegas
 Dec 26–27 · overnight in Springdale · ~2.5–3 hr from Vegas
 Zion National Park
-One of Dec 28–30 · ~2 hr each way
+Dec 28 · ~2 hr each way
 Death Valley National Park
-Flex days (Dec 28, 30)
+Dec 29, the last day · or a spare morning like Dec 24
 Close to Vegas
-Hoover Dam & Lake Mead
-Photo: Christian David (https://commons.wikimedia.org/wiki/File:Lake_Mead_and_its_bathtub_ring_upstream_of_Hoover_Dam,_Black_Canyon,_Arizona%E2%80%93Nevada.jpg), CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0), via Wikimedia Commons
-DEC 24 · ~45 MIN EACH WAY
-Hoover Dam & Lake Mead
-
-A 1930s concrete giant, the reservoir behind it, and a moonrise on Christmas Eve.
-
-Hoover Dam holds back the Colorado River to form Lake Mead, the largest reservoir in the US. The lake is now near record lows, so a band of bleached white rock — the “bathtub ring” — shows how far the water has dropped. The dam sits on the Nevada–Arizona line; in winter the Arizona side is an hour ahead.
-
-Worth your time
-Mike O’Callaghan–Pat Tillman Memorial Bridge
-30 min
-A walkway on the bypass bridge with the best full view of the dam, about 900 feet above the river.
-Top of Hoover Dam
-45 min
-Walk across the dam between Nevada and Arizona and look down the 726-foot face.
-Hoover Dam tours
-1 hr
-Paid guided tours of the power plant and the dam’s tunnels; check times on usbr.gov.
-Lake Mead visitor center
-30 min
-Near Boulder City: exhibits, views and your park sticker.
-Lakeview Overlook
-20 min
-A viewpoint over the lake and the bathtub ring; a good spot for the Christmas Eve moonrise.
-Boulder City
-1 hr
-A small historic town built for the dam workers; good for lunch.
-Good to know
-Driving to the dam and bridge doesn’t require the park fee; Lake Mead charges $25 per car for its scenic lakeshore roads (covered by your pass).
-The dam has a paid parking garage; free lots on the Arizona side fill up.
-Expect security screening for vehicles approaching the dam.
-Christmas Eve hours may be shorter — do the visitor center early.
-nps.gov/lake ↗ (https://www.nps.gov/lake/)
-Hoover Dam (usbr.gov) ↗ (https://www.usbr.gov/lc/hooverdam/)
-↑ Back to top
 Sphere
 Photo: Shelby L. Bell (https://commons.wikimedia.org/wiki/File:Sphere_-_Las_Vegas_(53685825749).jpg), CC BY 2.0 (https://creativecommons.org/licenses/by/2.0), via Wikimedia Commons
 DEC 25 SHOW · OUTSIDE ANY NIGHT
@@ -497,40 +332,6 @@ Seats in the 200 and 300 sections, near the center, usually give the fullest vie
 Popular holiday showtimes sell out — book early.
 Arrive 30–45 minutes early for security and the lobby displays.
 thesphere.com ↗ (https://www.thesphere.com/shows)
-↑ Back to top
-CHRISTMAS DINNER, OR ANY NIGHT
-Prime rib in Vegas
-
-The classic Vegas dinner, still best downtown and off the Strip.
-
-Casinos once sold prime rib below cost to keep people in the building. The $5 specials are gone, but downtown and locals’ casinos still serve big cuts at fair prices. Holiday hours can change, so call ahead on Christmas.
-
-Worth your time
-The Cal — Market Street Cafe
-$24.99
-Downtown; daily 4–10 p.m.
-4 Queens — Magnolia’s
-$29.99
-Downtown; 10 oz, daily 4 p.m.–midnight.
-Jerry’s Nugget — Jerry’s Famous Coffee Shop
-$22.99 / $46.99
-North Las Vegas; English cut, or a 28–30 oz thick cut.
-Palace Station — The Brass Fork
-$25.99
-Off-Strip; nightly 4–10 p.m.
-Ellis Island — Village Pub & Cafe
-$34.99
-King cut; the closest to the Strip.
-South Point — Primarily Prime Rib
-$29.95
-South of the Strip; 10 oz.
-Downtown Grand — Freedom Beat
-$19.99
-All-you-can-eat, Fridays and Saturdays only, 5–10 p.m.
-Good to know
-Prices from a list updated Oct 29, 2026; menus change.
-Under 21? You can eat at casino restaurants, but you can’t hang around the casino floor.
-Prime rib deals list (Oct 2026) ↗ (https://lasvegasthenandnow.com/where-to-find-cheap-prime-rib-in-las-vegas-deals-and-specials/)
 ↑ Back to top
 Zion National Park
 Photo: Jared (https://commons.wikimedia.org/wiki/File:Utah_-_Springdale_-_The_Watchman_-_Zion_Canyon_Views.jpg), CC BY 2.0 (https://creativecommons.org/licenses/by/2.0), via Wikimedia Commons
@@ -574,8 +375,9 @@ Staying in Springdale puts you minutes from the park entrance, so you can catch 
 nps.gov/zion ↗ (https://www.nps.gov/zion/)
 Conditions ↗ (https://www.nps.gov/zion/planyourvisit/conditions.htm)
 ↑ Back to top
+Death Valley National Park
 Photo: King of Hearts (https://commons.wikimedia.org/wiki/File:Zabriskie_Point_Death_Valley_December_2013_002.jpg), CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0), via Wikimedia Commons
-ONE OF DEC 28–30 · ~2 HR EACH WAY
+DEC 28 · ~2 HR EACH WAY
 Death Valley National Park
 
 Salt flats, badlands and dunes by day; one of the darkest skies in the country at night.
@@ -612,16 +414,16 @@ $35 per car for 7 days — covered by your America the Beautiful pass. Not one o
 Fill up in Pahrump on the way in; gas inside the park is expensive.
 Cell service is spotty — download offline maps.
 Closed right now: Scotty’s Castle, Titus Canyon Road and Darwin Falls (flood damage). The stops above are open.
-To stay the night: The Oasis at Death Valley (Inn or Ranch), Stovepipe Wells, or Panamint Springs. Book refundable.
+Stargaze from about 6:15 until 9:30 p.m., before the moon rises at 10:25, then drive back to Vegas. Badwater Basin and Harmony Borax Works are dark spots close to the road.
 nps.gov/deva ↗ (https://www.nps.gov/deva/)
 Alerts & road status ↗ (https://www.nps.gov/deva/planyourvisit/conditions.htm)
 ↑ Back to top
-FLEX DAYS (DEC 28, 30)
+DEC 29, THE LAST DAY · OR A SPARE MORNING LIKE DEC 24
 Close to Vegas
 
-Easy half-day trips for the flex days.
+Red Rock Canyon is the plan for the last day; Valley of Fire is another easy half-day trip.
 
-Two red-rock landscapes within an hour of the Strip, for the days you’re not driving to a national park.
+Two red-rock landscapes within an hour of the Strip. Red Rock fills the last morning before the red-eye.
 
 Worth your time
 Valley of Fire State Park
@@ -629,7 +431,7 @@ Valley of Fire State Park
 Nevada’s oldest state park: bright red sandstone, the Fire Wave and Elephant Rock, and ancient petroglyphs at Atlatl Rock. Per-car fee.
 Red Rock Canyon
 ~30 min away
-A 13-mile scenic loop past red and cream cliffs, with short hikes. Timed-entry reservations are required for the drive in winter (recreation.gov).
+A 13-mile scenic loop past red and cream cliffs, with short hikes. Timed entry is required for the drive 8 a.m. – 5 p.m. from October to May, and it closes at 5 p.m. in winter (recreation.gov).
 Ethel M cactus garden lights
 ~25 min away
 A free holiday light display in a cactus garden at a chocolate factory in Henderson.
@@ -641,12 +443,185 @@ Red Rock Canyon ↗ (https://www.blm.gov/programs/national-conservation-lands/ne
 ↑ Back to top
 Photos from Wikimedia Commons (https://commons.wikimedia.org/) under the Creative Commons licenses shown with each one. Conditions, hours and prices were checked in early November 2026 and can change; check each site the week you go.
 
+## Food page
+
+PRIME RIB · CHINATOWN · CHEAP EATS · BUFFETS
+Food
+
+Where to eat on the trip, from the classic prime rib dinner to Chinatown, cheap eats and one big buffet. The budget assumes about $60 a day each.
+
+JUMP TO
+Christmas dinner, or any night
+Prime rib in Vegas
+Any night · 5–10 min drive west of the Strip
+Chinatown on Spring Mountain Road
+Lunches and late nights
+Quick & cheap
+One big meal
+Buffets
+Dec 26 – 28 · Zion and Death Valley
+Food on park days
+CHRISTMAS DINNER, OR ANY NIGHT
+Prime rib in Vegas
+
+The classic Vegas dinner, still best downtown and off the Strip.
+
+Casinos once sold prime rib below cost to keep people in the building. The $5 specials are gone, but downtown and locals’ casinos still serve big cuts at fair prices. Holiday hours can change, so call ahead on Christmas.
+
+Where to go
+The Cal — Market Street Cafe
+$24.99
+Downtown; daily 4–10 p.m.
+4 Queens — Magnolia’s
+$29.99
+Downtown; 10 oz, daily 4 p.m.–midnight.
+Jerry’s Nugget — Jerry’s Famous Coffee Shop
+$22.99 / $46.99
+North Las Vegas; English cut, or a 28–30 oz thick cut.
+Palace Station — The Brass Fork
+$25.99
+Off-Strip; nightly 4–10 p.m.
+Ellis Island — Village Pub & Cafe
+$34.99
+King cut; the closest to the Strip.
+South Point — Primarily Prime Rib
+$29.95
+South of the Strip; 10 oz.
+Downtown Grand — Freedom Beat
+$19.99
+All-you-can-eat, Fridays and Saturdays only, 5–10 p.m.
+Good to know
+Prices from a list updated Oct 29, 2026; menus change.
+Under 21? You can eat at casino restaurants, but you can’t hang around the casino floor.
+Prime rib deals list (Oct 2026) ↗ (https://lasvegasthenandnow.com/where-to-find-cheap-prime-rib-in-las-vegas-deals-and-specials/)
+↑ Back to top
+ANY NIGHT · 5–10 MIN DRIVE WEST OF THE STRIP
+Chinatown on Spring Mountain Road
+
+The best value food in Vegas, with free parking.
+
+A three-mile stretch of strip malls that starts just behind Treasure Island and the Venetian, with more than 200 restaurants: Chinese, Japanese, Korean, Thai, Vietnamese and more. Prices are far below the casinos, parking is free, and many places stay open late — handy after a show or a long drive.
+
+Where to go
+Shanghai Taste
+$$
+Soup dumplings (xiao long bao) and Shanghai dishes. Shanghai Plaza.
+Chubby Cattle
+$$
+Conveyor-belt hot pot — a good group dinner on a cold night. Mountain View Plaza.
+Monta
+$
+Small ramen shop; expect a short line. Seoul Plaza.
+Kura
+$$
+Conveyor-belt sushi, quick and fun. Shanghai Plaza.
+Raku
+$$$
+Japanese robata grill, one of the most praised meals in town; reserve ahead. Seoul Plaza.
+Lamaii
+$$
+Modern Thai, open late. Shan Tua Square.
+Sparrow + Wolf
+$$$
+Creative American cooking if you want one nicer dinner. Shan Tua Square.
+Good to know
+Prices: $ is roughly under $20 a person, $$ about $20–40, $$$ more.
+Drive or take a short rideshare: it’s a long, unpleasant walk from the Strip.
+Popular spots fill up at dinner on holiday weekends; go early or reserve where you can.
+About Chinatown (Visit Las Vegas) ↗ (https://www.visitlasvegas.com/experience/post/what-to-know-about-las-vegas-chinatown/)
+↑ Back to top
+LUNCHES AND LATE NIGHTS
+Quick & cheap
+
+Good food on the Strip and downtown without casino prices.
+
+Strip restaurants are expensive, but there are well-loved cheap spots hidden in the resorts and along the boulevard. Most are counter service and many stay open late.
+
+Where to go
+Tacos El Gordo
+$
+Tijuana-style street tacos; the adobada is the one to get. On the Strip just north of the Wynn.
+Secret Pizza
+$
+New York slices down an unmarked hallway on the Cosmopolitan’s third floor.
+Eggslut
+$
+Breakfast sandwiches at the Cosmopolitan; good before a day on the Strip.
+Earl of Sandwich
+$
+Hot sandwiches at the Fashion Show mall and Planet Hollywood.
+In-N-Out · Shake Shack
+$
+Burgers at the LINQ Promenade and New York-New York.
+The Peppermill
+$$
+A neon-lit 1970s diner on the Strip, open 24 hours, with huge portions.
+Container Park
+$
+Food stalls and outdoor seating on Fremont Street East, a short walk from the downtown hotels.
+Good to know
+Buy water and snacks at a CVS or Walgreens on the Strip instead of the hotel shops.
+Most casino food courts stay open late, which helps after a show.
+Cheap places on the Strip (Feeling Vegas) ↗ (https://www.feelingvegas.com/cheap-places-to-eat-las-vegas-strip/)
+↑ Back to top
+ONE BIG MEAL
+Buffets
+
+A Vegas classic — one splurge, or one bargain downtown.
+
+The famous Strip buffets now cost close to a nice dinner, so pick one at most. The budget’s $60 a day for food won’t cover a Strip buffet on top of other meals.
+
+Where to go
+Bacchanal Buffet · Caesars Palace
+$87–92
+The most famous one: about $87 for dinner Mon–Thu, $92 Fri–Sun.
+The Buffet · Wynn
+~$80
+Seafood dinner, about $80.
+Garden Court · Main Street Station
+~$34
+Downtown and much cheaper: dinner Fri–Sat (Dec 25–26 are a Friday and Saturday), brunch on weekends about $28.
+Good to know
+Prices from Las Vegas Advisor, updated Oct 30, 2026; holiday prices can be higher.
+Book or join the online waitlist on Christmas week to avoid long lines.
+Go mid-afternoon: you pay the lunch or early price and skip the dinner rush.
+Buffet prices (Las Vegas Advisor) ↗ (https://www.lasvegasadvisor.com/buffet-restaurants/)
+↑ Back to top
+DEC 26 – 28 · ZION AND DEATH VALLEY
+Food on park days
+
+Plan ahead: options in and near the parks are few and pricey.
+
+On the park days you’ll be far from cheap food for most of the day. Stock up in Las Vegas or Pahrump and carry lunch, snacks and plenty of water.
+
+Where to go
+Pahrump
+on the way
+The last town before Death Valley: gas, grocery stores and fast food. Fill the tank and buy lunch here.
+Furnace Creek
+in Death Valley
+A general store and a few restaurants at the resort; fine for a hot drink or dinner before stargazing, but pricey.
+Zion Lodge
+in Zion
+The only place to buy food inside the park: Red Rock Grill is open year-round; the café is seasonal.
+Springdale
+Zion gate
+The town at Zion’s entrance has pizza, Mexican, cafés and a brewpub for dinner on Dec 26. Some places shorten hours in winter.
+Good to know
+Bring a small cooler and a reusable water bottle for each person.
+Utah is an hour ahead of Nevada — check closing times in Springdale with that in mind.
+Pack something warm to eat or drink for the Death Valley night.
+Death Valley food & lodging (NPS) ↗ (https://www.nps.gov/deva/planyourvisit/lodging.htm)
+Zion food & lodging (NPS) ↗ (https://www.nps.gov/zion/planyourvisit/lodging.htm)
+↑ Back to top
+Prices and hours were checked in early November 2026 and can change, especially around Christmas; check each place the week you go.
+
 ## Sky planner (moon, stars, cloud forecast) page
 
 MOON, DARKNESS AND LIVE CLOUD FORECASTS · PACIFIC TIME
 Sky planner
 
-The two moonrises at the start of the trip, a dark-sky night in Zion, the Death Valley stargazing window at the end, and a live cloud forecast for each — so you can pick the clearest night.
+The two moonrises at the start of the trip, a dark-sky night in Zion, a night of stars in Death Valley, and a live cloud forecast for each.
 
 Your sky nights
 
@@ -659,10 +634,10 @@ Sunset
 Watch
 4:25–5:15 p.m.
 Forecast opens around Tue, Dec 8
-Thu, Dec 24 · Lake Mead
+Thu, Dec 24 · Las Vegas
 Christmas Eve moonrise
 Moonrise
-~5:25 p.m. (98%)
+5:24 p.m. (98%)
 Sunset
 4:31 p.m.
 Watch
@@ -678,52 +653,29 @@ Stars
 ~1.9 hours
 Forecast opens around Fri, Dec 11
 Mon, Dec 28 · Furnace Creek
-Death Valley — option 1
+Death Valley stargazing night
 Dark
 6:12 p.m.
 Moonrise
 10:25 p.m.
 Stars
-~4.2 hours
+~3.3 hours (until ~9:30)
 Forecast opens around Sun, Dec 13
-Tue, Dec 29 · Furnace Creek
-Death Valley — option 2 (planned)
-Dark
-6:13 p.m.
-Moonrise
-11:30 p.m.
-Stars
-~5.3 hours
-Forecast opens around Mon, Dec 14
-Wed, Dec 30 · Furnace Creek
-Death Valley — option 3 (darkest)
-Dark
-6:13 p.m.
-Moonrise
-12:33 a.m.
-Stars
-~6.3 hours
-Forecast opens around Tue, Dec 15
 Death Valley, next 7 evenings
 
 Average cloud cover from 6 p.m. to midnight, live. This is the same check you’ll do before the trip.
 
-Moon and darkness, Dec 22 – Jan 1
+Moon and darkness, Dec 23 – 28
 
 Calculated for Furnace Creek. “Dark sky” is the time between full darkness and moonrise. Mountains delay the moonrise you see by 10–30 minutes, which adds a little dark time.
 
 NIGHT	SUNSET	FULLY DARK	MOONRISE	MOON LIT	DARK SKY
-Tue, Dec 22	4:36 pm	6:08 pm	3:07 pm	98%	—
 Wed, Dec 23	4:36 pm	6:09 pm	4:14 pm	100%	—
 Thu, Dec 24	4:37 pm	6:10 pm	5:30 pm	98%	—
 Fri, Dec 25	4:38 pm	6:10 pm	6:49 pm	94%	0.6 h
 Sat, Dec 26	4:38 pm	6:11 pm	8:05 pm	86%	1.9 h
 Sun, Dec 27	4:39 pm	6:11 pm	9:17 pm	77%	3.1 h
 Mon, Dec 28	4:39 pm	6:12 pm	10:25 pm	66%	4.2 h
-Tue, Dec 29	4:40 pm	6:13 pm	11:30 pm	55%	5.3 h
-Wed, Dec 30	4:41 pm	6:13 pm	12:33 am	44%	6.3 h
-Thu, Dec 31	4:42 pm	6:14 pm	1:36 am	34%	7.4 h
-Fri, Jan 1	4:42 pm	6:15 pm	2:38 am	25%	8.4 h
 What you’ll see
 Saturn
 High in the south-southwest after dark
@@ -771,58 +723,57 @@ Live cloud data from Open-Meteo (https://open-meteo.com/). Moon and sun times we
 
 ## Budget page
 
-DEC 23, 2026 – JAN 1, 2027 · 9 NIGHTS · 4 TRAVELERS FROM MADISON
+DEC 23 – 29, 2026 · 6 NIGHTS · 4 TRAVELERS FROM MADISON
 Dec 23–26 · Las Vegas (3 nights)
 
 Estimated cost per person for the essentials: getting there, hotels, the car, park entry and food. Shared costs are split four ways. Optional extras like shows, tours and souvenirs aren’t included. Change the choices and the totals update.
 
 Per person
-$1,750
-about $175 per day
+$1,315
+about $188 per day
 Whole group
-$7,000
+$5,260
 4 travelers
-Flights & car 42%
-Hotel 23%
-Food 34%
+Flights & car 50%
+Hotel 18%
+Food 32%
 Your choices
 Round-trip flight to Las Vegas
-From Madison: United nonstop from O’Hare ($426) + Van Galder bus ($70)
+From Madison: United via O’Hare, 7:00 a.m. out and the 11:50 p.m. red-eye home ($463). The midday flight home is $516.
 Hotels, 2 rooms, total per stay
 Dec 23–26 · Las Vegas (3 nights)
 Dec 26 · Springdale for Zion (1 night)
-Dec 27 – Jan 1 · Las Vegas (5 nights)
-Two rooms with two beds each and free parking. Suggested: The D downtown ($379), Zion Park Motel ($299) and Sam’s Town ($954), from Priceline on Nov 5. Check taxes and resort fees at checkout.
-Stay a night in Death Valley (+ about $450 for two rooms, a rough estimate)
+Dec 27–28 · Las Vegas (2 nights)
+Two rooms with two beds each and free parking. Suggested: The D downtown ($379), Zion Park Motel ($299) and the Downtown Grand ($280), from Priceline. Check taxes and resort fees at checkout.
 Rental car + gas, whole group
 National park entry
 Food, per person per day
 Line by line
 ITEM	PER PERSON
 GETTING THERE & AROUND
-Flight + bus
-United nonstop O’Hare ⇄ Las Vegas, Dec 23 – Jan 1, plus the Van Galder bus from Madison
-$496
+Flight
+United Madison ⇄ Las Vegas via O’Hare, Dec 23 – 29, red-eye home
+$463
 Rental car + gas
-$925 for the group, split 4 ways. Costco Travel quote: Alamo intermediate SUV (Nissan Rogue AWD or similar), $775 with taxes, unlimited miles, extra driver included; plus ~$150 gas for ~900 miles
-$231
+$729 for the group, split 4 ways. Costco Travel quote: Alamo intermediate SUV (Nissan Rogue AWD or similar), Dec 23 noon – Dec 29 10 p.m., $604 with taxes, unlimited miles, extra driver included; plus ~$125 gas for ~750 miles
+$182
 Parking
-Strip garages and the Hoover Dam garage, split 4 ways
-$15
+Strip and Sphere garages, split 4 ways
+$10
 STAYING
 Las Vegas hotels
-Dec 23–26 $379 + Dec 27 – Jan 1 $954 = $1,333 for 2 rooms, split 4 ways
-$333
+Dec 23–26 $379 + Dec 27–28 $280 = $659 for 2 rooms, split 4 ways
+$165
 Springdale hotel (Zion)
 Dec 26, 2 rooms near the park entrance, split 4 ways
 $75
 PARKS
 Park entry
-We have an America the Beautiful pass: $0 · Death Valley, Zion and Lake Mead, split 4 ways
+We have an America the Beautiful pass: $0 · Death Valley and Zion, split 4 ways
 $0
 DAY TO DAY
 Food
-$60 a day × 10 days, prime rib included
-$600
-Total per person	$1,750
-Flights from Google Flights and hotels from Priceline, both checked Nov 5, 2026. Car from Costco Travel the same day; gas and food are estimates. Your choices are saved only in your own browser.
+$60 a day × 7 days, prime rib included
+$420
+Total per person	$1,315
+Flights from Google Flights, hotels from Priceline and the car from Costco Travel, all checked Nov 10, 2026; gas and food are estimates. Your choices are saved only in your own browser.
